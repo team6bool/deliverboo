@@ -1,5 +1,6 @@
 <?php
 
+use App\Category;
 use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
@@ -14,73 +15,71 @@ class CategorySeeder extends Seeder
         $myCategories = [
             [
                 "Categoria" => "Sushi",
-                "Immagine" => "",
+                "Immagine" => "sushi.png",
             ],
             [
                 "Categoria" => "Kebab",
-                "Immagine" => "",
+                "Immagine" => "kebab.png",
             ],
             [
                 "Categoria" => "Pizza",
-                "Immagine" => "",
+                "Immagine" => "pizza.png",
             ],
             [
                 "Categoria" => "Poke",
-                "Immagine" => "",
+                "Immagine" => "poke.png",
             ],
             [
                 "Categoria" => "Burger",
-                "Immagine" => "",
+                "Immagine" => "burger.png",
             ],
             [
                 "Categoria" => "Veg",
-                "Immagine" => "",
+                "Immagine" => "veg.png",
             ],
             [
                 "Categoria" => "Carne",
-                "Immagine" => "",
+                "Immagine" => "carne.png",
             ],
             [
                 "Categoria" => "Pesce",
-                "Immagine" => "",
+                "Immagine" => "pesce.png",
             ],
             [
                 "Categoria" => "Glutenfree",
-                "Immagine" => "",
+                "Immagine" => "gluten-free.png",
             ],
             [
                 "Categoria" => "Pasta",
-                "Immagine" => "",
+                "Immagine" => "pasta.png",
             ],
             [
                 "Categoria" => "Thai",
-                "Immagine" => "",
+                "Immagine" => "thai.png",
             ],
             [
                 "Categoria" => "Indiano",
-                "Immagine" => "",
+                "Immagine" => "indiano.png",
             ],
             [
                 "Categoria" => "Gourmet",
-                "Immagine" => "",
+                "Immagine" => "gourmet.png",
             ],
             [
                 "Categoria" => "Torte",
-                "Immagine" => "",
+                "Immagine" => "torte.png",
             ],
             [
                 "Categoria" => "Gelato",
-                "Immagine" => "",
+                "Immagine" => "gelato.png",
             ],
         ];
 
         foreach ($myCategories as $category) {
-            $data = new Category();
-
-            $data->Categoria = $category["Categoria"];
-            $data->Immagine = $category["Immagine"];
-
-            $data->save();
+            Category::create([
+                "name" => $category["Categoria"],
+                "img" => $category["Immagine"],
+            ]);
         }
     }
 }
