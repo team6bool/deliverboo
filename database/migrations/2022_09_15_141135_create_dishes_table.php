@@ -16,9 +16,9 @@ class CreateDishesTable extends Migration
         Schema::create('dishes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->string('name', 50);
-            $table->string('img', 50)->nullable();
-            $table->double('price', 5,2)->unsigned();
+            $table->string('name', 200);
+            $table->string('img', 200)->nullable();
+            $table->double('price', 5, 2)->unsigned();
             $table->text('description', 2000)->nullable();
             $table->boolean('visible');
             $table->timestamps();
