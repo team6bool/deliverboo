@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
@@ -41,6 +42,12 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function showRegistrationForm()
+    {
+        $categories = Category::all();
+        return view('auth.register', compact('categories'));
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -50,9 +57,18 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'name' => ['required', 'string', 'max:50'],
+            'slug' => ['required', 'string', 'max:100'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
+            'address' => ['required', 'string', 'max:100'],
+            'phone' => ['nullable', 'string', 'max:15'],
+            'website' => ['nullable', 'string', 'max:200'],
+            'img' => ['required', 'string', 'max:200'],
+            'description' => ['nullable', 'string', 'max:2000'],
+            'p_iva' => ['required', 'string', 'min:11', 'max:11'],
+            'delivery_price' => ['required', 'numeric', 'between:0,99.99'],
+            'category_id' => ['required', 'exists:categories,id'],
         ]);
     }
 
@@ -64,10 +80,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'address' => $data['address'],
+            'phone' => $data['phone'],
+            'website' => $data['website'],
+            'img' => $data['img'],
+            'description' => $data['description'],
+            'p_iva' => $data['p_iva'],
+            'delivery_price' => $data['delivery_price'],
+            'category_id' => $data['category_id']
         ]);
+
+        return $user;
     }
 }

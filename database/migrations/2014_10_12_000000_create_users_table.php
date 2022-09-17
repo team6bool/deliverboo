@@ -23,9 +23,9 @@ class CreateUsersTable extends Migration
             $table->string('address', 100);
             $table->string('phone', 15)->nullable();
             $table->string('website', 200)->nullable();
-            $table->string('img', 50);
+            $table->string('img', 200);
             $table->text('description', 2000)->nullable();
-            $table->char('p_iva', 11);
+            $table->string('p_iva', 11);
             $table->double('delivery_price', 4, 2);
             $table->rememberToken();
             $table->timestamps();
