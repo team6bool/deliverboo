@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
@@ -22,6 +23,12 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
+
+    public function showRegistrationForm()
+    {
+        $categories = Category::all();
+        return view('auth.register', compact('categories'));
+    }
 
     private function findBySlug($slug)
     {
@@ -133,6 +140,8 @@ class RegisterController extends Controller
             $fileToStore = $fileName . '_' . time() . '.' . $fileExtension;
             $path = $file->storeAs('public/img', $fileToStore);
         }
+
+        $user->categories()->attach($data['categories']);
 
         return $user;
     }
