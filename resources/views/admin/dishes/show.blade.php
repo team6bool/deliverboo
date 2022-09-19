@@ -8,9 +8,7 @@
                 <p>Descrizione: {{ $dish->description }}</p>
                 <p>Ristorante: {{ $dish->user->name }}</p>
                 <p>Prezzo: {{ $dish->price }}</p>
-                @dd($dish->img);
-                <img src="<?php echo asset("storage/public/images/dishes$dish->image"); ?>" alt="{{ $dish->slug }}">
+                <img src="{{ asset('/storage/public/images/dishes/' . $dish->img) }}" alt="{{ $dish->name }}">
             </div>
         </div>
-    </div>
-@endsection
+    @endsection

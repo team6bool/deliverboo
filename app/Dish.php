@@ -11,7 +11,7 @@ class Dish extends Model
         "slug",
         "description",
         "price",
-        "image",
+        "img",
         "visible",
         "user_id",
     ];

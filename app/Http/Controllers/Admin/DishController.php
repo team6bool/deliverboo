@@ -91,15 +91,17 @@ class DishController extends Controller
         ]);
 
         //save img into public/imeges/dishes folder
-        $img_path = Storage::put("public/images/dishes", $request->file("img"));
-
+        if (request()->hasFile("img")) {
+            $file = request()->file('img');
+            $fileName = $file->getClientOriginalName();
+            $fileExtension = $file->getClientOriginalExtension();
+            $fileToStore = $fileName . '_' . time() . '.' . $fileExtension;
+            $path = $file->storeAs('public/images/dishes', $fileToStore);
+        }
 
         $dish = new Dish();
-
-        //save img path into db
-        $dish->img =  $validatedData["img"];
-
         $dish->fill($validatedData);
+        $dish->img = $validatedData["img"] ? $fileToStore : null;
         $dish->user_id = Auth::user()->id;
 
         $dish->slug = $this->generateSlug($validatedData["name"]);
@@ -117,7 +119,6 @@ class DishController extends Controller
      */
     public function show($slug)
     {
-        $user = Auth::user();
         $dish = $this->findBySlug($slug);
 
         return view("admin.dishes.show", compact("dish"));
