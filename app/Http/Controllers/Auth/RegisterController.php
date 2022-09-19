@@ -138,7 +138,7 @@ class RegisterController extends Controller
             $fileName = $file->getClientOriginalName();
             $fileExtension = $file->getClientOriginalExtension();
             $fileToStore = $fileName . '_' . time() . '.' . $fileExtension;
-            $path = $file->storeAs('public/img', $fileToStore);
+            $path = $file->storeAs('public/images/restaurants', $fileToStore);
         }
 
         $user->categories()->attach($data['categories']);
