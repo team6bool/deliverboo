@@ -24,3 +24,14 @@ Route::get('/', function () {
 
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::middleware("auth")
+    ->namespace("Admin")
+    ->name("admin.")
+    ->prefix("admin")
+    ->group(function () {
+        Route::get('/', 'OrderController@index')->name('orders.home');
+        Route::get('/create', 'OrderController@create')->name('orders.create');
+        Route::get('/orders/{order}', 'OrderController@show')->name('orders.show');
+        Route::resource("orders", "OrderController");
+    });
