@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -55,11 +56,10 @@ class DishController extends Controller
     public function index()
     {
         $user = Auth::user();
-        if ($user->role == "admin") {
-            $dishes = Dish::orderBy("name", "asc")->paginate(10);
-        } else {
-            return;
-        }
+
+        //implementare la logica per mostrare solo i piatti dell'utente loggato
+
+        $dishes = Dish::orderBy("name", "asc")->where('user_id', Auth::id())->get();;
 
         return view("admin.dishes.index", compact("dishes", "user"));
     }
