@@ -17,7 +17,7 @@
                         </div>
                     @endif
                     <div class="card-body">
-                        <form method="POST" action="{{ route('register') }}">
+                        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group row">
@@ -168,25 +168,13 @@
                                 </div>
                             </div>
 
-                            {{-- <div class="form-group">
-                                <label for="cover_img_file" class="form-label">Immagine ristorante</label>
-
-                                <div class="d-flex">
-                                    <input type="file" name="img"
-                                        class="form-control-file @error('img') is-invalid @enderror" id="cover_img_file"
-                                        value="{{ old('img') }}">
-                                </div>
-                                @error('img')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div> --}}
-
-                            <div class="form-group row">
+                            <div class="form-group row" action="{{ url('form') }}">
                                 <label for="cover_img_file"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Cover img') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="cover_img_file" type="text"
+
+                                    <input id="cover_img_file" type="file" name="img"
                                         class="form-control @error('cover_img_file') is-invalid @enderror" name="img"
                                         value="{{ old('cover_img_file') }}" required autocomplete="cover_img_file"
                                         autofocus>
@@ -215,16 +203,6 @@
                                     @enderror
                                 </div>
                             </div>
-
-                            {{-- @foreach ($categories as $category)
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="{{ $category->id }}"
-                                        id="category_{{ $category->id }}" name="categories[]">
-                                    <label class="form-check-label" for="category_{{ $category->id }}">
-                                        {{ $category->name }}
-                                    </label>
-                                </div>
-                            @endforeach --}}
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">

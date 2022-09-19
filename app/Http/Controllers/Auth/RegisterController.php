@@ -97,7 +97,7 @@ class RegisterController extends Controller
             'phone' => ['nullable', 'string', 'min:8', 'max:15'],
             'website' => ['nullable', 'string', 'min:8', 'max:200'],
             'address' => ['required', 'string', 'max:100'],
-            'img' => ['required', 'string', 'max:50'],
+            'img' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:3000'],
             'description' => ['nullable', 'string', 'max:2000'],
             'p_iva' => ['required', 'string', 'min:11', 'max:11'],
             'delivery_price' => ['required', 'numeric', 'min:0', 'max:99.99'],
@@ -112,7 +112,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -125,5 +125,15 @@ class RegisterController extends Controller
             'delivery_price' => $data['delivery_price'],
             'slug' => $this->generateSlug($data['name']),
         ]);
+
+        if (request()->hasFile('img')) {
+            $file = request()->file('img');
+            $fileName = $file->getClientOriginalName();
+            $fileExtension = $file->getClientOriginalExtension();
+            $fileToStore = $fileName . '_' . time() . '.' . $fileExtension;
+            $path = $file->storeAs('public/img', $fileToStore);
+        }
+
+        return $user;
     }
 }

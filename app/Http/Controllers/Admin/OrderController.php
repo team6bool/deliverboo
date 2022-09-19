@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Dish;
+use App\Http\Controllers\Controller;
+use App\Order;
 use Illuminate\Http\Request;
 
-class DishController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +42,10 @@ class DishController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Dish  $dish
+     * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Dish $dish)
+    public function show(Order $order)
     {
         //
     }
@@ -52,10 +53,10 @@ class DishController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Dish  $dish
+     * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function edit(Dish $dish)
+    public function edit(Order $order)
     {
         //
     }
@@ -64,10 +65,10 @@ class DishController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Dish  $dish
+     * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Dish $dish)
+    public function update(Request $request, Order $order)
     {
         //
     }
@@ -75,10 +76,10 @@ class DishController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Dish  $dish
+     * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Dish $dish)
+    public function destroy(Order $order)
     {
         //
     }
