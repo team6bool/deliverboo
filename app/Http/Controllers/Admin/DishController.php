@@ -86,18 +86,16 @@ class DishController extends Controller
             "name" => "required|max:255",
             "description" => "required",
             "price" => "required|numeric",
-            "image" => "image|mimes:jpeg,png,jpg,gif,svg|max:3000",
+            "img" => "image|mimes:jpeg,png,jpg,gif,svg|max:3000",
             "visible" => "boolean",
         ]);
+
+        //save img into storage/imeges/dishes folder
+        $img_path = Storage::put("public/images/dishes", $request->file("img"));
 
         $dish = new Dish();
         $dish->fill($validatedData);
         $dish->user_id = Auth::user()->id;
-
-        if (array_key_exists("image", $validatedData)) {
-            $path = Storage::put("dishes", $validatedData["image"]);
-            $dish->image = $path;
-        }
 
         $dish->slug = $this->generateSlug($validatedData["name"]);
 
