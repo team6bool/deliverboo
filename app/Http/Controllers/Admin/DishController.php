@@ -17,6 +17,16 @@ class DishController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private function findBySlug($slug)
+    {
+        $dish = Dish::where("slug", $slug)->first();
+
+        if (!$dish) {
+            abort(404);
+        }
+
+        return $dish;
+    }
 
     public function index()
     {
@@ -84,9 +94,10 @@ class DishController extends Controller
      * @param  \App\Dish  $dish
      * @return \Illuminate\Http\Response
      */
-    public function show(Dish $dish)
+    public function show($slug)
     {
-        $dish = Dish::where("slug", $dish->slug)->first();
+        $user = Auth::user();
+        $dish = $this->findBySlug($slug);
 
         return view("admin.dishes.show", compact("dish"));
     }
