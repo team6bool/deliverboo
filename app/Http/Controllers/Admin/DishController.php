@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Dish;
-use App\Http\Controllers\Controller;
 use App\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,6 +17,7 @@ class DishController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $user = Auth::user();
@@ -50,21 +52,26 @@ class DishController extends Controller
             "name" => "required|max:255",
             "description" => "required",
             "price" => "required|numeric",
-            "image" => "nullable|image",
-            "visible" => "nullable|boolean",
+            "image" => "image|mimes:jpeg,png,jpg,gif,svg|max:3000",
+            "visible" => "boolean",
         ]);
 
         $dish = new Dish();
-
         $dish->fill($validatedData);
-
         $dish->user_id = Auth::user()->id;
 
-        $img = Storage::put("/post_covers", $validatedData["cover_img"]);
+        if (array_key_exists("image", $validatedData)) {
+            $path = Storage::put("dishes", $validatedData["image"]);
+            $dish->image = $path;
+        }
 
-        $dish->cover_img = $img;
+        $slug = Str::slug($validatedData["name"]);
 
-        $dish->slug = $this->generateSlug($dish->title);
+        if ($slug == Dish::where("slug", $slug)->first()) {
+            $slug = $slug . "-" . rand(1, 1000);
+        } else {
+            $dish->slug = $slug;
+        }
 
         $dish->save();
 
@@ -79,7 +86,9 @@ class DishController extends Controller
      */
     public function show(Dish $dish)
     {
-        //
+        $dish = Dish::where("slug", $dish->slug)->first();
+
+        return view("admin.dishes.show", compact("dish"));
     }
 
     /**
