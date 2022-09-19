@@ -21,7 +21,7 @@ class CreateDishesTable extends Migration
             $table->string('img', 200)->nullable();
             $table->double('price', 5, 2)->unsigned();
             $table->text('description', 2000)->nullable();
-            $table->boolean('visible');
+            $table->boolean('visible')->default(0);
             $table->timestamps();
         });
     }

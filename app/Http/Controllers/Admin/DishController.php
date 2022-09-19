@@ -90,10 +90,15 @@ class DishController extends Controller
             "visible" => "boolean",
         ]);
 
-        //save img into storage/imeges/dishes folder
+        //save img into public/imeges/dishes folder
         $img_path = Storage::put("public/images/dishes", $request->file("img"));
 
+
         $dish = new Dish();
+
+        //save img path into db
+        $dish->img =  $validatedData["img"];
+
         $dish->fill($validatedData);
         $dish->user_id = Auth::user()->id;
 

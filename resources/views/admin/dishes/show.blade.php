@@ -8,7 +8,8 @@
                 <p>Descrizione: {{ $dish->description }}</p>
                 <p>Ristorante: {{ $dish->user->name }}</p>
                 <p>Prezzo: {{ $dish->price }}</p>
-                <img src="{{ Storage::url($dish->image) }}" alt="{{ $dish->slug }}">
+                @dd($dish->img);
+                <img src="<?php echo asset("storage/public/images/dishes$dish->image"); ?>" alt="{{ $dish->slug }}">
             </div>
         </div>
     </div>
