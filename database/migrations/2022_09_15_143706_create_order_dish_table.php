@@ -16,7 +16,6 @@ class CreateOrderDishTable extends Migration
         Schema::create('order_dish', function (Blueprint $table) {
             $table->id();
             $table->foreignId("order_id")->constrained();
-            $table->string('slug')->unique();
             $table->foreignId("dish_id")->constrained();
             $table->tinyInteger('quantity')->unsigned();
             $table->double('subtotal', 5, 2)->unsigned();
