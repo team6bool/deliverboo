@@ -129,9 +129,11 @@ class DishController extends Controller
      * @param  \App\Dish  $dish
      * @return \Illuminate\Http\Response
      */
-    public function edit(Dish $dish)
+    public function edit($slug)
     {
-        //
+        $dishes = $this->findBySlug($slug);
+
+        return view("admin.dishes.edit", compact("dishes"));
     }
 
     /**
