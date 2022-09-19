@@ -3,7 +3,7 @@
 @section('content')
     @foreach ($dishes as $dish)
         <div class="card" style="width: 18rem;">
-            <img src="{{ Storage::url($dish->img) }}" class="card-img-top" alt="...">
+            <img src="{{ asset('/storage/public/images/dishes/' . $dish->img) }}" alt="{{ $dish->name }}">
             <div class="card-body">
                 <h5 class="card-title">{{ $dish->name }}</h5>
                 <p class="card-text">{{ $dish->description }}</p>

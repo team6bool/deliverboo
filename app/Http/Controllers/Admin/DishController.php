@@ -57,8 +57,7 @@ class DishController extends Controller
     {
         $user = Auth::user();
 
-        //implementare la logica per mostrare solo i piatti dell'utente loggato
-
+        //shows only the dishes of the logged user
         $dishes = Dish::orderBy("name", "asc")->where('user_id', Auth::id())->get();;
 
         return view("admin.dishes.index", compact("dishes", "user"));
