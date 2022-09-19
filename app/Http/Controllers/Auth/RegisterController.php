@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Category;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -22,6 +22,46 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
+
+    private function findBySlug($slug)
+    {
+        $post = User::where("slug", $slug)->first();
+
+        if (!$post) {
+            abort(404);
+        }
+
+        return $post;
+    }
+
+    private function generateSlug($text)
+    {
+        $toReturn = null;
+        $counter = 0;
+
+        do {
+            // generiamo uno slug partendo dal titolo
+            $slug = Str::slug($text);
+
+            // se il counter é maggiore di 0, concateno il suo valore allo slug
+            if ($counter > 0) {
+                $slug .= "-" . $counter;
+            }
+
+            // controllo a db se esiste già uno slug uguale
+            $slug_esiste = User::where("slug", $slug)->first();
+
+            if ($slug_esiste) {
+                // se esiste, incremento il contatore per il ciclo successivo
+                $counter++;
+            } else {
+                // Altrimenti salvo lo slug nei dati del nuovo post
+                $toReturn = $slug;
+            }
+        } while ($slug_esiste);
+
+        return $toReturn;
+    }
 
     use RegistersUsers;
 
@@ -42,12 +82,6 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    public function showRegistrationForm()
-    {
-        $categories = Category::all();
-        return view('auth.register', compact('categories'));
-    }
-
     /**
      * Get a validator for an incoming registration request.
      *
@@ -57,18 +91,16 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:50'],
-            'slug' => ['required', 'string', 'max:100'],
-            'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed'],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'phone' => ['nullable', 'string', 'min:8', 'max:15'],
+            'website' => ['nullable', 'string', 'min:8', 'max:200'],
             'address' => ['required', 'string', 'max:100'],
-            'phone' => ['nullable', 'string', 'max:15'],
-            'website' => ['nullable', 'string', 'max:200'],
-            'img' => ['required', 'string', 'max:200'],
+            'img' => ['required', 'string', 'max:50'],
             'description' => ['nullable', 'string', 'max:2000'],
             'p_iva' => ['required', 'string', 'min:11', 'max:11'],
-            'delivery_price' => ['required', 'numeric', 'between:0,99.99'],
-            'category_id' => ['required', 'exists:categories,id'],
+            'delivery_price' => ['required', 'numeric', 'min:0', 'max:99.99'],
         ]);
     }
 
@@ -80,20 +112,18 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user = User::create([
+        return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'address' => $data['address'],
             'phone' => $data['phone'],
             'website' => $data['website'],
+            'address' => $data['address'],
             'img' => $data['img'],
             'description' => $data['description'],
             'p_iva' => $data['p_iva'],
             'delivery_price' => $data['delivery_price'],
-            'category_id' => $data['category_id']
+            'slug' => $this->generateSlug($data['name']),
         ]);
-
-        return $user;
     }
 }

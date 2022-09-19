@@ -7,6 +7,15 @@
                 <div class="card">
                     <div class="card-header">{{ __('Register') }}</div>
 
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="card-body">
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
@@ -25,6 +34,7 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+
                                 </div>
                             </div>
 
@@ -129,7 +139,7 @@
                                     class="col-md-4 col-form-label text-md-right">{{ __('Numero di telefono') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="phone" type="number"
+                                    <input id="phone" type="text"
                                         class="form-control @error('phone') is-invalid @enderror" name="phone"
                                         value="{{ old('phone') }}" required autocomplete="phone" autofocus>
 
@@ -158,7 +168,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label for="cover_img_file" class="form-label">Immagine ristorante</label>
 
                                 <div class="d-flex">
@@ -169,9 +179,44 @@
                                 @error('img')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
+                            </div> --}}
+
+                            <div class="form-group row">
+                                <label for="cover_img_file"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Cover img') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="cover_img_file" type="text"
+                                        class="form-control @error('cover_img_file') is-invalid @enderror" name="img"
+                                        value="{{ old('cover_img_file') }}" required autocomplete="cover_img_file"
+                                        autofocus>
+
+                                    @error('cover_img_file')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
 
-                            @foreach ($categories as $category)
+                            <div class="form-group row">
+                                <label for="description"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Descrizione') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="description" type="text"
+                                        class="form-control @error('description') is-invalid @enderror" name="description"
+                                        value="{{ old('description') }}" required autocomplete="description" autofocus>
+
+                                    @error('description')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            {{-- @foreach ($categories as $category)
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="{{ $category->id }}"
                                         id="category_{{ $category->id }}" name="categories[]">
@@ -179,7 +224,7 @@
                                         {{ $category->name }}
                                     </label>
                                 </div>
-                            @endforeach
+                            @endforeach --}}
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
