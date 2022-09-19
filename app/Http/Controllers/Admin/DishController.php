@@ -28,6 +28,30 @@ class DishController extends Controller
         return $dish;
     }
 
+    private function generateSlug($text)
+    {
+        $toReturn = null;
+        $counter = 0;
+
+        do {
+            $slug = Str::slug($text);
+
+            if ($counter > 0) {
+                $slug .= "-" . $counter;
+            }
+
+            $slug_esiste = Dish::where("slug", $slug)->first();
+
+            if ($slug_esiste) {
+                $counter++;
+            } else {
+                $toReturn = $slug;
+            }
+        } while ($slug_esiste);
+
+        return $toReturn;
+    }
+
     public function index()
     {
         $user = Auth::user();
@@ -75,13 +99,7 @@ class DishController extends Controller
             $dish->image = $path;
         }
 
-        $slug = Str::slug($validatedData["name"]);
-
-        if ($slug == Dish::where("slug", $slug)->first()) {
-            $slug = $slug . "-" . rand(1, 1000);
-        } else {
-            $dish->slug = $slug;
-        }
+        $dish->slug = $this->generateSlug($validatedData["name"]);
 
         $dish->save();
 
