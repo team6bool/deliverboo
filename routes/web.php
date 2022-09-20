@@ -30,5 +30,6 @@ Route::middleware("auth")
     ->name("admin.")
     ->prefix("admin")
     ->group(function () {
+        Route::resource("orders", "OrderController");
         Route::resource("dishes", "DishController");
     });
