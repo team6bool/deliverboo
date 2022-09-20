@@ -30,8 +30,8 @@ Route::middleware("auth")
     ->name("admin.")
     ->prefix("admin")
     ->group(function () {
-        Route::get('/', 'OrderController@index')->name('orders.home');
-        Route::get('/create', 'OrderController@create')->name('orders.create');
+        Route::get('/orders', 'OrderController@index')->name('orders.index');
+        Route::get('/orders/create', 'OrderController@create')->name('orders.create');
         Route::get('/orders/{order}', 'OrderController@show')->name('orders.show');
         Route::resource("dishes", "DishController");
     });
