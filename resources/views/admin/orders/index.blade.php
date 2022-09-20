@@ -25,7 +25,8 @@
                 <td>{{ $order->address }}</td>
                 <td>{{ $order->email }}</td>
                 <td>{{ $order->phone }}</td>
-                <td>{{ $order->total }}</td>
+                <td>{{ number_format($order->total, 2, '.', '') }}</td>
+                
                 <td>
                     <div class="text-center">
                         <a href="{{ route('admin.orders.show', $order->id) }}" class="btn btn-primary">Mostra</a>

@@ -31,7 +31,7 @@
                         <div>39,00€</div>
                 </div>
             </dd>
-            <dd class="fs-3">Totale: {{ $order->total }}€</dd>
+            <dd class="fs-3">Totale: {{ number_format($order->total, 2, '.', '') }}€</dd>
 
 
         </div>
