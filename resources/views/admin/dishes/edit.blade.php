@@ -83,8 +83,8 @@
                                             class="card-img-top" alt="{{ $dishes->name }}">
                                     </div>
                                     <input id="img" type="file"
-                                        class="form-control @error('img') is-invalid @enderror" name="img" required
-                                        autocomplete="img" autofocus>
+                                        class="form-control @error('img') is-invalid @enderror" name="img"
+                                        value="{{ old($dishes->img) }}" required autocomplete="img" autofocus>
 
                                     @error('img')
                                         <span class="invalid-feedback" role="alert">
