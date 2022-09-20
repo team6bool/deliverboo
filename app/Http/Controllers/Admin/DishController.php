@@ -165,10 +165,10 @@ class DishController extends Controller
             $fileExtension = $file->getClientOriginalExtension();
             $fileToStore = $fileName . '_' . time() . '.' . $fileExtension;
             $path = $file->storeAs('public/images/dishes', $fileToStore);
+            $dish->img = $validatedData["img"] ? $fileToStore : null;
         }
 
         $dish->fill($validatedData);
-        $dish->img = $validatedData["img"] ? $fileToStore : null;
         $dish->user_id = Auth::user()->id;
 
         $dish->slug = $this->generateSlug($validatedData["name"]);
