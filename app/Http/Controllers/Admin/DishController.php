@@ -120,6 +120,10 @@ class DishController extends Controller
     {
         $dish = $this->findBySlug($slug);
 
+        if ($dish->user_id != auth()->id()) {
+            abort(403, 'Questo non è un tuo piatto!');
+        }
+
         return view("admin.dishes.show", compact("dish"));
     }
 
@@ -132,6 +136,10 @@ class DishController extends Controller
     public function edit($slug)
     {
         $dishes = $this->findBySlug($slug);
+
+        if ($dishes->user_id != auth()->id()) {
+            abort(403, 'Questo non è un tuo piatto!');
+        }
 
         return view("admin.dishes.edit", compact("dishes"));
     }
