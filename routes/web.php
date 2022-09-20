@@ -33,6 +33,5 @@ Route::middleware("auth")
         Route::get('/', 'OrderController@index')->name('orders.home');
         Route::get('/create', 'OrderController@create')->name('orders.create');
         Route::get('/orders/{order}', 'OrderController@show')->name('orders.show');
-        Route::resource("orders", "OrderController");
         Route::resource("dishes", "DishController");
     });
