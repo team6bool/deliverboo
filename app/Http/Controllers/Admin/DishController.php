@@ -143,9 +143,39 @@ class DishController extends Controller
      * @param  \App\Dish  $dish
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Dish $dish)
+    public function update(Request $request, $slug)
     {
-        //
+        $validatedData = $request->validate([
+            "name" => "required|max:255",
+            "description" => "required",
+            "price" => "required|numeric",
+            "img" => "image|mimes:jpeg,png,jpg,gif,svg|max:3000",
+            "visible" => "boolean",
+        ]);
+
+        $dish = $this->findBySlug($slug);
+
+        //save img into public/imeges/dishes folder
+        //check if img file already exists and delete the previous one
+
+        if (request()->hasFile("img")) {
+            Storage::delete("public/images/dishes/" . $dish->img);
+            $file = request()->file('img');
+            $fileName = $file->getClientOriginalName();
+            $fileExtension = $file->getClientOriginalExtension();
+            $fileToStore = $fileName . '_' . time() . '.' . $fileExtension;
+            $path = $file->storeAs('public/images/dishes', $fileToStore);
+        }
+
+        $dish->fill($validatedData);
+        $dish->img = $validatedData["img"] ? $fileToStore : null;
+        $dish->user_id = Auth::user()->id;
+
+        $dish->slug = $this->generateSlug($validatedData["name"]);
+
+        $dish->save();
+
+        return redirect()->route("admin.dishes.show", $dish->slug);
     }
 
     /**

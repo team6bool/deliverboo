@@ -16,9 +16,11 @@
                 @endif
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.dishes.update', $dishes->slug) }}"
+                    <form method="post" action="{{ route('admin.dishes.update', $dishes->slug) }}"
                         enctype="multipart/form-data">
+
                         @csrf
+                        @method('PUT')
 
                         <div class="form-group row">
                             <label for="name"
