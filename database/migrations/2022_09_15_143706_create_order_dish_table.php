@@ -18,7 +18,7 @@ class CreateOrderDishTable extends Migration
             $table->foreignId("order_id")->constrained();
             $table->foreignId("dish_id")->constrained();
             $table->tinyInteger('quantity')->unsigned();
-            $table->double('subtotal', 5,2)->unsigned();
+            $table->double('subtotal', 5, 2)->unsigned();
             $table->timestamps();
         });
     }
