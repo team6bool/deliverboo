@@ -184,8 +184,12 @@ class DishController extends Controller
      * @param  \App\Dish  $dish
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Dish $dish)
+    public function destroy($slug)
     {
-        //
+        $dish = $this->findBySlug($slug);
+
+        $dish->delete();
+
+        return redirect()->route("admin.dishes.index");
     }
 }

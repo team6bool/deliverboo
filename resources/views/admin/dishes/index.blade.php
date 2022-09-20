@@ -13,6 +13,11 @@
                             <p class="card-text">{{ $dish->user->name }}</p>
                             <p class="card-text">{{ $dish->price }}</p>
                             <a href="{{ route('admin.dishes.edit', $dish->slug) }}" class="btn btn-primary">Edit</a>
+                            <form action="{{ route('admin.dishes.destroy', $dish->slug) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
                         </div>
                     </div>
                 </div>
