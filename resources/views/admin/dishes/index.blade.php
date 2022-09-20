@@ -12,7 +12,7 @@
                             <p class="card-text">{{ $dish->description }}</p>
                             <p class="card-text">{{ $dish->user->name }}</p>
                             <p class="card-text">{{ $dish->price }}</p>
-                            <a href="#" class="btn btn-primary">Edit</a>
+                            <a href="{{ route('admin.dishes.edit', $dish->slug) }}" class="btn btn-primary">Edit</a>
                         </div>
                     </div>
                 </div>
