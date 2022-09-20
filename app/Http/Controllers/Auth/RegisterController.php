@@ -32,13 +32,13 @@ class RegisterController extends Controller
 
     private function findBySlug($slug)
     {
-        $post = User::where("slug", $slug)->first();
+        $user = User::where("slug", $slug)->first();
 
-        if (!$post) {
+        if (!$user) {
             abort(404);
         }
 
-        return $post;
+        return $user;
     }
 
     private function generateSlug($text)

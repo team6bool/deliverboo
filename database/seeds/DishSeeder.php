@@ -16,6 +16,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 5,
                 'name' => 'Plateau di pesce crudo',
+                'slug' => 'plateau-di-pesce-crudo',
                 'price' =>  35,
                 'img' => 'Plateau+de+fruits+de+mer+royal3.png',
                 'visible' => true,
@@ -24,6 +25,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 5,
                 'name' => 'Tavolozza di polpo alla luciana',
+                'slug' => 'tavolozza-di-polpo-alla-luciana',
                 'price' =>  19,
                 'img' => 'polipetti-alla-luciana.jpg',
                 'visible' => true,
@@ -32,6 +34,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 5,
                 'name' => 'Tartare di tonno rosso alla soia con crema di avocato e granella di pistacchio',
+                'slug' => 'tartare-di-tonno-rosso-alla-soia-con-crema-di-avocato-e-granella-di-pistacchio',
                 'price' =>  20,
                 'img' => 'SH_tartare_di_tonno_avocado-640x350.jpg.webp',
                 'visible' => true,
@@ -40,6 +43,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 5,
                 'name' => 'Scialatielli fatti a mano con vongole veraci, zucchine fritte e provolone dei monti lattari',
+                'slug' => 'scialatielli-fatti-a-mano-con-vongole-veraci-zucchine-fritte-e-provolone-dei-monti-lattari',
                 'price' =>  20,
                 'img' => '210817288_333672255137206_810797552045552304_n.jpg',
                 'visible' => true,
@@ -48,6 +52,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 5,
                 'name' => 'Gnocchi al nero di seppia fatti a mano con totano, pecorino e basilico',
+                'slug' => 'gnocchi-al-nero-di-seppia-fatti-a-mano-con-totano-pecorino-e-basilico',
                 'price' =>  20,
                 'img' => 'Gnocchetti-al-nero-di-seppia-con-salsa-di-spigola-e-zafferano_650x433_wm.jpg',
                 'visible' => true,
@@ -56,6 +61,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 5,
                 'name' => 'Calamarata di grano duro alla carbonara di mare con ricciola e pomodorini gialli',
+                'slug' => 'calamarata-di-grano-duro-alla-carbonara-di-mare-con-ricciola-e-pomodorini-gialli',
                 'price' =>  25,
                 'img' => 'Calamarata-alla-Carbonara-pesce.jpeg',
                 'visible' => true,
@@ -64,6 +70,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 5,
                 'name' => 'Frittura di pesce con mayo allo yogurt e agrumi',
+                'slug' => 'frittura-di-pesce-con-mayo-allo-yogurt-e-agrumi',
                 'price' =>  24,
                 'img' => 'Fritto-misto-di-pesce-e-maionese-al-limone_780x520_wm.jpg',
                 'visible' => true,
@@ -72,6 +79,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 5,
                 'name' => 'Polpo stufato al rosmarino su crema di patate',
+                'slug' => 'polpo-stufato-al-rosmarino-su-crema-di-patate',
                 'price' =>  20,
                 'img' => '4.jpg',
                 'visible' => true,
@@ -80,6 +88,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 5,
                 'name' => 'Acqua minerale naturale',
+                'slug' => 'acqua-minerale-naturale',
                 'price' =>  2,
                 'img' => 'are_water.jpg',
                 'visible' => true,
@@ -88,6 +97,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 5,
                 'name' => 'FIENO DI PONZA 2021 Migliaccio',
+                'slug' => 'fieno-di-ponza-2021-migliaccio',
                 'price' =>  40,
                 'img' => 'fieno-di-ponza-lazio-bianco-igt-2021-antiche-cantine-migliaccio.webp',
                 'visible' => true,
@@ -96,6 +106,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 6,
                 'name' => 'Zannone',
+                'slug' => 'zannone',
                 'price' =>  7,
                 'img' => 'baguette-con-provola-720x480.jpg',
                 'visible' => true,
@@ -104,6 +115,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 6,
                 'name' => 'Frontone',
+                'slug' => 'frontone',
                 'price' =>  6,
                 'img' => 'panino-mortadella-primosale-b-445.jpg',
                 'visible' => true,
@@ -112,6 +124,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 6,
                 'name' => 'Cala Gaetano',
+                'slug' => 'cala-gaetano',
                 'price' =>  8,
                 'img' => 'ricetta_pate_sandwich_madama_oliva.jpg',
                 'visible' => true,
@@ -120,6 +133,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 6,
                 'name' => 'Hamburger 100 gr',
+                'slug' => 'hamburger-100-gr',
                 'price' =>  6,
                 'img' => 'hamburger2.jpg',
                 'visible' => true,
@@ -128,6 +142,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 6,
                 'name' => 'Hamburger 226 gr.',
+                'slug' => 'hamburger-226-gr',
                 'price' =>  8,
                 'img' => '5-hamburger_rid.jpg',
                 'visible' => true,
@@ -136,6 +151,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 6,
                 'name' => 'Chicken Burger',
+                'slug' => 'chicken-burger',
                 'price' =>  7, 50,
                 'img' => 'SH_hamburger_pollo.jpg',
                 'visible' => true,
@@ -144,6 +160,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 6,
                 'name' => 'Cous Cous di Mare',
+                'slug' => 'cous-cous-di-mare',
                 'price' =>  8, 50,
                 'img' => '32092-cous-cous-ai-frutti-di-mare.jpg',
                 'visible' => true,
@@ -152,6 +169,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 6,
                 'name' => 'Frittura Mista',
+                'slug' => 'frittura-mista',
                 'price' =>  13,
                 'img' => 'hd650x433_wm.jpg',
                 'visible' => true,
@@ -160,6 +178,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 6,
                 'name' => 'Acqua Naturale ml. 1500',
+                'slug' => 'acqua-naturale-ml-1500',
                 'price' =>  2,
                 'img' => '',
                 'visible' => true,
@@ -168,6 +187,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 6,
                 'name' => 'Noam 0,34',
+                'slug' => 'noam-0-34',
                 'price' =>  4,
                 'img' => 'NOAMBierNOAMBeer_design_compressed_grande.webp',
                 'visible' => true,
@@ -176,6 +196,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 1,
                 'name' => 'Insalata di mare',
+                'slug' => 'insalata-di-mare',
                 'price' => 18.99,
                 'description' => 'Insalata di mare con gamberi, cozze, vongole, calamari e polpo',
                 'img' => 'Insalata-di-mare.jpg',
@@ -184,6 +205,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 1,
                 'name' => 'Catalana di gamberi',
+                'slug' => 'catalana-di-gamberi',
                 'price' => 12.79,
                 'description' => 'La Catalana di gamberi è un piatto tipico della cucina catalana, che si prepara con gamberi, pomodori, cipolle, aglio, peperoncino, vino bianco, olio d\'oliva e sale.',
                 'img' => 'catalana-di-crostacei.jpg',
@@ -192,6 +214,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 1,
                 'name' => 'Schiacciata di gambero rosso con emulsione',
+                'slug' => 'schiacciata-di-gambero-rosso-con-emulsione',
                 'price' => 21.99,
                 'description' => 'Questo piatto tipico della cucina pugliese è un vero e proprio concentrato di sapori e profumi. Il gambero rosso viene cotto in padella con olio, aglio, peperoncino e prezzemolo, poi viene schiacciato con un mestolo di legno e servito con un’emulsione di pomodoro, aglio, olio e basilico.',
                 'img' => 'schiacciata-di-gamberi.jpg',
@@ -200,6 +223,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 1,
                 'name' => 'Tartara scomposta con pescato del giorno',
+                'slug' => 'tartara-scomposta-con-pescato-del-giorno',
                 'price' => 34.99,
                 'description' => 'Tartara scomposta con pescato del giorno, pomodoro, aglio, olio e basilico',
                 'img' => 'tartara-di-tonno.jpg',
@@ -208,6 +232,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 1,
                 'name' => 'Spaghettoni con alici, finocchietto selvatico, pangrattato',
+                'slug' => 'spaghettoni-con-alici-finocchietto-selvatico-pangrattato',
                 'price' => 14.69,
                 'description' => 'Spaghetti conditi con sugo di alici sott\'olio e abbondante finocchietto. Con briciole di pane croccante e pomodori secchi per donare un po\'di dolcezza.',
                 'img' => 'spaghettoni-con-alici.jpg',
@@ -216,6 +241,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 1,
                 'name' => 'Tagliatelle fatte in casa con scampi',
+                'slug' => 'tagliatelle-fatte-in-casa-con-scampi',
                 'price' => 13.69,
                 'description' => "Il loro sapore, che ben si sposa anche con il cognac, è per i palati davvero sopraffini che ne apprezzeranno sicuramente il gusto delicato, fresco e con leggerissime note tendenti al dolce. Ma anche i palati curiosi si appassioneranno moltissimo alla ricetta delle linguine agli scampi anche per variare un po' rispetto alle versioni con crema di zucchine o con crema di scampi e gamberi. ",
                 'img' => 'tagliatelle-agli-scampi.jpg',
@@ -224,6 +250,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 1,
                 'name' => 'Gnocchi al nero di seppia',
+                'slug' => 'gnocchi-al-nero-di-seppia',
                 'price' => 24.89,
                 'description' => 'Gli gnocchi al nero di seppia sono conditi con un delizioso sughetto a base di calameretti, seppie e passata di pomodoro. Gli gnocchi, ovviamente sono fatti a mano, tuffati in acqua e poi mantecati in un delizioso ragù di pesce. ',
                 'img' => 'gnocchi-nero-di-seppia-con-calamari.jpg',
@@ -232,6 +259,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 1,
                 'name' => 'Calamari ripieno al guazzetto profumato all’alloro',
+                'slug' => 'calamari-ripieno-al-guazzetto-profumato-allalloro',
                 'price' => 34.69,
                 'description' => 'I calamari sono farciti con un ripieno di tonno e un pochino di pane raffermo,insaporiti da un buon guazzetto di pommarola e aromi,dove non può mancare la scarpetta finale fatta col pane...',
                 'img' => 'calamaro-ripieno-al-guazzetto.jpg',
@@ -240,6 +268,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 1,
                 'name' => 'Pesce spada alla griglia',
+                'slug' => 'pesce-spada-alla-griglia',
                 'price' => 14.99,
                 'description' => 'Cotto su una piastra in ghisa, e condito con un’emulsione di olio, sale, limone e rosmarino fresco.',
                 'img' => 'pesce-spada-alla-griglia.jpeg',
@@ -248,6 +277,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 1,
                 'name' => 'Dolce del giorno',
+                'slug' => 'dolce-del-giorno',
                 'price' => 14.99,
                 'description' => 'Il dolce del giorno è un dolce che cambia ogni giorno, in base alla stagione e alla disponibilità di ingredienti freschi.',
                 'img' => 'dolce-del-giorno.jpg',
@@ -256,6 +286,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 1,
                 'name' => 'Acqua minerale',
+                'slug' => 'acqua-minerale',
                 'price' => 2.69,
                 'description' => 'Acqua',
                 'img' => 'acqua-minerale.jpg',
@@ -264,6 +295,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 1,
                 'name' => 'Vino della casa',
+                'slug' => 'vino-della-casa',
                 'price' => 12.69,
                 'description' => 'Vino di produzione propria',
                 'img' => 'vino-della-casa.jpg',
@@ -272,6 +304,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 2,
                 'name' => 'Parmigiana di melanzane',
+                'slug' => 'parmigiana-di-melanzane',
                 'price' => 14.69,
                 'description' => 'La parmigiana di melanzane è un piatto tipico della cucina italiana, originario della Campania. Si tratta di un piatto a base di melanzane, pomodoro, mozzarella e parmigiano reggiano.',
                 'img' => 'parmigiana-di-melanzane.jpg',
@@ -280,6 +313,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 2,
                 'name' => 'Aliciotti ripieni',
+                'slug' => 'aliciotti-ripieni',
                 'price' => 9.69,
                 'description' => 'Aliciotti ripieni, piatto tipico della cucina pugliese, con alici sott’olio, farina, uova, parmigiano, sale e pepe. ',
                 'img' => 'alici-ripiene.jpg',
@@ -288,6 +322,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 2,
                 'name' => 'Capasanta al burro',
+                'slug' => 'capasanta-al-burro',
                 'price' => 29.69,
                 'description' => "Capesante al burro, limone e prezzemolo con sabbia all'aglio. Una pietanza che gioca su un equilibrio sfizioso tra consistenze e sapori.",
                 'img' => 'capesante-al-burro.jpg',
@@ -296,6 +331,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 2,
                 'name' => 'Linguine alla puttanesca',
+                'slug' => 'linguine-alla-puttanesca',
                 'price' => 24.89,
                 'description' => "Linguine alla puttanesca, piatto tipico della cucina napoletana, con pomodoro, olive nere, capperi, aglio, olio d'oliva e origano. ",
                 'img' => 'linguine-alla-puttanesca.webp',
@@ -304,6 +340,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 2,
                 'name' => 'Mezzo pacchero di ricciola e crema di zucchine',
+                'slug' => 'mezzo-pacchero-di-ricciola-e-crema-di-zucchine',
                 'price' => 17.89,
                 'description' => "I paccheri di ricciola e crema di zucchine costituiscono un invitante primo con la ricciola che utilizza pochissimi ingredienti per valorizzare il gusto delicato del pesce.",
                 'img' => 'mezzo-pacchero-di-ricciola.webp',
@@ -312,6 +349,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 2,
                 'name' => 'Ravioli ai gamberi e burrata',
+                'slug' => 'ravioli-ai-gamberi-e-burrata',
                 'price' => 15.90,
                 'description' => "Ravioli gamberi e burrata ricchi e gustosi, con una base di pasta fresca all’uovo arricchita da concentrato di pomodoro, e farcita con un ripieno cremoso e sfizioso a base di gamberi e burrata.",
                 'img' => 'ravioli-ai-gamberi.jpg',
@@ -320,6 +358,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 2,
                 'name' => 'Risotto all\'ostrica',
+                'slug' => 'risotto-all-ostrica',
                 'price' => 14.65,
                 'description' => "In questo piatto l'ostrica la accompagniamo ad un risotto alla stracciatella, quindi con dei sentori abbastanza “grassi”. La sua naturale salinità creerà un abbinamento a dir poco esplosivo per il nostro palato!",
                 'img' => 'risotto-ostrica.jpg',
@@ -328,6 +367,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 2,
                 'name' => 'Tempura di gamberi e calamari',
+                'slug' => 'tempura-di-gamberi-e-calamari',
                 'price' => 18.25,
                 'description' => "Tempura di gamberi e calamari, piatto tipico della cucina giapponese, con gamberi e calamari, farina, uova, sale e olio di semi di girasole. ",
                 'img' => 'tempura-gamberi-calamari.jpg',
@@ -335,15 +375,17 @@ class DishSeeder extends Seeder
             ],
             [
                 'user_id' => 2,
-                'name' => 'Acqua minerale',
+                'name' => 'Acqua minerale leggermente frizzante',
+                'slug' => 'acqua-minerale-leggermente-frizzante',
                 'price' => 3.65,
-                'description' => "Acqua minerale naturale",
+                'description' => "Acqua minerale leggermente frizzante",
                 'img' => 'acqua-minerale-san-benedetto.jpg',
                 'visible' => true,
             ],
             [
                 'user_id' => 2,
                 'name' => 'Vino rosso Chianti',
+                'slug' => 'vino-rosso-chianti',
                 'price' => 28.65,
                 'description' => "Il Chianti è un vino rosso italiano DOCG prodotto nella regione Toscana. Il nome deriva dalla città di Chianti, in provincia di Firenze, dove si trova la zona di produzione.",
                 'img' => 'vino-rosso-chianti.jpg',
@@ -352,6 +394,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 3,
                 'name' => 'Mix di antipasti',
+                'slug' => 'mix-di-antipasti',
                 'price' =>  18, 60,
                 'img' => 'mix-antipasti.jpg',
                 'visible' => true,
@@ -360,6 +403,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 3,
                 'name' => 'Battuta di gamberi',
+                'slug' => 'battuta-di-gamberi',
                 'price' =>  12, 50,
                 'img' => 'battuta-gamberi.jpg',
                 'visible' => true,
@@ -368,6 +412,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 3,
                 'name' => 'Paccheri con aragosta',
+                'slug' => 'paccheri-con-aragosta',
                 'price' =>  16, 20,
                 'img' => 'paccheri.jpg',
                 'visible' => true,
@@ -376,6 +421,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 3,
                 'name' => 'Risotto nero di seppia',
+                'slug' => 'risotto-nero-di-seppia',
                 'price' =>  13, 70,
                 'img' => 'risotto.jpg',
                 'visible' => true,
@@ -384,6 +430,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 3,
                 'name' => 'Ricciola scottata',
+                'slug' => 'ricciola-scottata',
                 'price' =>  12, 20,
                 'img' => 'ricciola.jpg',
                 'visible' => true,
@@ -392,6 +439,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 3,
                 'name' => 'Ostriche e Gamberi crudi',
+                'slug' => 'ostriche-e-gamberi-crudi',
                 'price' =>  17, 50,
                 'img' => 'ostriche.jpg',
                 'visible' => true,
@@ -400,6 +448,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 3,
                 'name' => 'Spaghetto con granseola',
+                'slug' => 'spaghetto-con-granseola',
                 'price' =>  13, 90,
                 'img' => 'granseola.jpg',
                 'visible' => true,
@@ -408,6 +457,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 3,
                 'name' => 'Gamberi e capperi',
+                'slug' => 'gamberi-e-capperi',
                 'price' =>  15, 90,
                 'img' => 'gc.jpg',
                 'visible' => true,
@@ -416,6 +466,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 3,
                 'name' => 'Acqua',
+                'slug' => 'acqua',
                 'price' =>  4, 00,
                 'img' => 'acqua-frizzante.jpg',
                 'visible' => true,
@@ -424,6 +475,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 3,
                 'name' => 'Vino bianco',
+                'slug' => 'vino-bianco',
                 'price' =>  15, 00,
                 'img' => 'vino-bianco.jpg',
                 'visible' => true,
@@ -432,6 +484,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 4,
                 'name' => 'Antipasti di Ponza',
+                'slug' => 'antipasti-di-ponza',
                 'price' =>  17, 50,
                 'img' => 'antipasti-ponza.jpg',
                 'visible' => true,
@@ -440,6 +493,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 4,
                 'name' => 'Tagliatelle di calamaro su letto di zucchine',
+                'slug' => 'tagliatelle-di-calamaro-su-letto-di-zucchine',
                 'price' =>  13, 50,
                 'img' => 'tagliatelle-calamaro.jpg',
                 'visible' => true,
@@ -448,6 +502,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 4,
                 'name' => 'Crudità di gamberi in salsa di limone',
+                'slug' => 'crudita-di-gamberi-in-salsa-di-limone',
                 'price' =>  14, 40,
                 'img' => 'crudità-gamberi.jpg',
                 'visible' => true,
@@ -456,6 +511,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 4,
                 'name' => 'Gnocchetti mare chiaro',
+                'slug' => 'gnocchetti-mare-chiaro',
                 'price' =>  12, 70,
                 'img' => 'gnocchetti.jpg',
                 'visible' => true,
@@ -464,6 +520,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 4,
                 'name' => 'Paccheri al sapore di mare',
+                'slug' => 'paccheri-al-sapore-di-mare',
                 'price' =>  12, 90,
                 'img' => 'paccheri-sapore.jpg',
                 'visible' => true,
@@ -472,6 +529,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 4,
                 'name' => 'Pesce sciabola al pistacchio',
+                'slug' => 'pesce-sciabola-al-pistacchio',
                 'price' =>  14, 50,
                 'img' => 'pesce-sciabola.jpg',
                 'visible' => true,
@@ -480,6 +538,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 4,
                 'name' => 'Spaghetti alle vongole',
+                'slug' => 'spaghetti-alle-vongole',
                 'price' =>  13, 80,
                 'img' => 'spaghetto-vongole.jpg',
                 'visible' => true,
@@ -488,6 +547,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 4,
                 'name' => 'Choconut',
+                'slug' => 'choconut',
                 'price' =>  6, 90,
                 'img' => 'choconut.jpg',
                 'visible' => true,
@@ -495,7 +555,8 @@ class DishSeeder extends Seeder
             ],
             [
                 'user_id' => 4,
-                'name' => 'Acqua',
+                'name' => 'Acqua licia',
+                'slug' => 'acqua-licia',
                 'price' =>  3, 50,
                 'img' => 'acqua-liscia.jpg',
                 'visible' => true,
@@ -504,6 +565,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => 4,
                 'name' => 'Vino rosè',
+                'slug' => 'vino-rose',
                 'price' =>  12, 00,
                 'img' => 'vino-rose.jpg',
                 'visible' => true,
@@ -512,6 +574,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => '7',
                 'name' => 'Brioche vuota',
+                'slug' => 'brioche-vuota',
                 'price' =>  1, 80,
                 'img' => 'f36d7a42-5850-48ee-95c5-f387143d6db9.jpg',
                 'visible' => true,
@@ -520,6 +583,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => '7',
                 'name' => 'Brioche vegana',
+                'slug' => 'brioche-vegana',
                 'price' =>  1, 80,
                 'img' => 'SH_brioche_vegane.webp',
                 'visible' => true,
@@ -528,6 +592,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => '7',
                 'name' => 'Brioche farcita',
+                'slug' => 'brioche-farcita',
                 'price' =>  2, 00,
                 'img' => 'Cornetti-brioche-fatti-in-casa-come-al-Bar-soffici-e-gustosi-passo-a-passo.jpg.webp',
                 'visible' => true,
@@ -536,6 +601,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => '7',
                 'name' => 'Kraphen con crema pasticciera',
+                'slug' => 'kraphen-con-crema-pasticciera',
                 'price' =>  2, 00,
                 'img' => '1600427035079.jpg',
                 'visible' => true,
@@ -544,6 +610,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => '7',
                 'name' => 'Budino di riso',
+                'slug' => 'budino-di-riso',
                 'price' =>  3, 00,
                 'img' => 'Budini-di-riso-fiorentini.webp',
                 'visible' => true,
@@ -552,6 +619,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => '7',
                 'name' => 'Strudel di mela',
+                'slug' => 'strudel-di-mela',
                 'price' =>  3, 00,
                 'img' => 'Strudel-di-mele_650x433_wm.jpg',
                 'visible' => true,
@@ -560,6 +628,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => '7',
                 'name' => 'Charlotte di mela',
+                'slug' => 'charlotte-di-mela',
                 'price' =>  3, 00,
                 'img' => 'charlotte-senza-glutine-mele.jpg',
                 'visible' => true,
@@ -568,6 +637,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => '7',
                 'name' => 'Crostata di frolla con confettura albicocca',
+                'slug' => 'crostata-di-frolla-con-confettura-albicocca',
                 'price' =>  3, 50,
                 'img' => 'crostata-confettura-albicocche-vid-720x460.jpg',
                 'visible' => true,
@@ -577,6 +647,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => '7',
                 'name' => 'Spremuta di arancia',
+                'slug' => 'spremuta-di-arancia',
                 'price' =>  3, 00,
                 'img' => 'spremuta-d-arancia.webp',
                 'visible' => true,
@@ -585,6 +656,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => '7',
                 'name' => 'Capuccino',
+                'slug' => 'capuccino',
                 'price' =>  2, 50,
                 'img' => 'SH_cappuccino.jpg.webp',
                 'visible' => true,
@@ -593,6 +665,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => '8',
                 'name' => 'Gelato al cioccolato',
+                'slug' => 'gelato-al-cioccolato',
                 'price' =>  3, 00,
                 'img' => 'IMG_6986-scaled.jpg',
                 'visible' => true,
@@ -601,6 +674,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => '8',
                 'name' => 'Gelato alla fragola',
+                'slug' => 'gelato-alla-fragola',
                 'price' =>  3, 00,
                 'img' => 'SH_gelato_fragola.jpg',
                 'visible' => true,
@@ -609,6 +683,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => '8',
                 'name' => 'Gelato al limone',
+                'slug' => 'gelato-al-limone',
                 'price' =>  3, 00,
                 'img' => 'gelato-al-limone.jpg',
                 'visible' => true,
@@ -617,6 +692,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => '8',
                 'name' => 'Gelato al pistacchio',
+                'slug' => 'gelato-al-pistacchio',
                 'price' =>  3, 00,
                 'img' => 'gelato_pistacchio.jpg',
                 'visible' => true,
@@ -625,6 +701,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => '8',
                 'name' => 'Gelato al gusto crema',
+                'slug' => 'gelato-al-gusto-crema',
                 'price' =>  3, 00,
                 'img' => '1622822986075.jpg',
                 'visible' => true,
@@ -633,6 +710,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => '8',
                 'name' => 'Crepes alla Nutella',
+                'slug' => 'crepes-alla-nutella',
                 'price' =>  3, 50,
                 'img' => 'crepes-alla-nutella-misya.jpg',
                 'visible' => true,
@@ -641,6 +719,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => '8',
                 'name' => 'Pancakes',
+                'slug' => 'pancakes',
                 'price' =>  3, 50,
                 'img' => 'pancakes.jpg',
                 'visible' => true,
@@ -649,6 +728,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => '8',
                 'name' => 'Tiramisù',
+                'slug' => 'tiramisù',
                 'price' =>  3, 50,
                 'img' => 'SH_tiramisu.jpg',
                 'visible' => true,
@@ -657,6 +737,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => '8',
                 'name' => 'Cioccolata calda',
+                'slug' => 'cioccolata-calda',
                 'price' =>  3, 00,
                 'img' => 'Cioccolata-calda_450x300.jpg',
                 'visible' => true,
@@ -665,6 +746,7 @@ class DishSeeder extends Seeder
             [
                 'user_id' => '8',
                 'name' => 'Frappè alla banana',
+                'slug' => 'frappe-alla-banana',
                 'price' =>  3, 00,
                 'img' => 'Frappe-alla-banana_780x520_wm.jpg',
                 'visible' => true,
@@ -676,6 +758,7 @@ class DishSeeder extends Seeder
             Dish::create([
                 'user_id' => $dish['user_id'],
                 'name' => $dish['name'],
+                'slug' => $dish['slug'],
                 'price' => $dish['price'],
                 'img' => $dish['img'],
                 'visible' => $dish['visible'],
