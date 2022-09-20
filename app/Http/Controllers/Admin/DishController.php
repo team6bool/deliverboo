@@ -58,7 +58,7 @@ class DishController extends Controller
         $user = Auth::user();
 
         //shows only the dishes of the logged user
-        $dishes = Dish::orderBy("name", "asc")->where('user_id', Auth::id())->get();;
+        $dishes = Dish::orderBy("name", "asc")->where('user_id', Auth::id())->get();
 
         return view("admin.dishes.index", compact("dishes", "user"));
     }
@@ -100,7 +100,9 @@ class DishController extends Controller
 
         $dish = new Dish();
         $dish->fill($validatedData);
-        $dish->img = $validatedData["img"] ? $fileToStore : null;
+        if (isset($fileToStore)) {
+            $dish->img = $validatedData["img"] ? $fileToStore : null;
+        }
         $dish->user_id = Auth::user()->id;
 
         $dish->slug = $this->generateSlug($validatedData["name"]);

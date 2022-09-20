@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Dish;
 use App\Http\Controllers\Controller;
 use App\Order;
 use Illuminate\Http\Request;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +30,12 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return view("admin.orders.create");
+        $user = Auth::user();
+
+        //shows only the dishes of the logged user
+        $dishes = Dish::orderBy("name", "asc")->where('user_id', Auth::id())->get();
+
+        return view("admin.orders.create", compact("dishes"));
     }
 
     /**
@@ -39,7 +46,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-         $validatedData = $request->validate([
+        $validatedData = $request->validate([
             "name" => "required|min:3",
             "lastname" => "required|min:3",
             "address" => "required",

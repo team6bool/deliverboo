@@ -76,7 +76,7 @@
                                 <div class="col-md-6">
                                     <input id="img" type="file"
                                         class="form-control @error('img') is-invalid @enderror" name="img"
-                                        value="{{ old('img') }}" required autocomplete="img" autofocus>
+                                        value="{{ old('img') }}" autocomplete="img" autofocus>
 
                                     @error('img')
                                         <span class="invalid-feedback" role="alert">

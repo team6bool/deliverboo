@@ -111,6 +111,24 @@
                                         @enderror
                                     </div>
 
+                                    <div class="form-group row">
+                                        <label for="dishes"
+                                            class="col-md-4 col-form-label text-md-right">{{ __('Nome del piatto') }}</label>
+
+                                        <div class="col-md-6">
+                                            <input id="dishes" type="text"
+                                                class="form-control @error('dishes') is-invalid @enderror" dishes="dishes"
+                                                value="{{ old('dishes', $dishes->dishes) }}" required autocomplete="dishes"
+                                                autofocus>
+
+                                            @error('dishes')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
                                     <div class="form-group row mb-0">
                                         <div class="col-md-6 offset-md-4">
                                             <button type="submit" class="btn btn-primary">
