@@ -16,11 +16,12 @@ class CreateDishesTable extends Migration
         Schema::create('dishes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
+            $table->string('slug')->unique();
             $table->string('name', 200);
             $table->string('img', 200)->nullable();
             $table->double('price', 5, 2)->unsigned();
             $table->text('description', 2000)->nullable();
-            $table->boolean('visible');
+            $table->boolean('visible')->default(0);
             $table->timestamps();
         });
     }
