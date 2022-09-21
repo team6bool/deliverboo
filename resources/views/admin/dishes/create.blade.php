@@ -103,6 +103,7 @@
                                 <button type="submit" class="btn btn-primary" onclick="onSubmit()">
                                     {{ __('Aggiungi') }}
                                 </button>
+                                <button class="btn btn-secondary" type="button" onclick="window.location=`{{ route('admin.dishes.index') }}`">Indietro</button>
                             </div>
                         </div>
                 </div>
