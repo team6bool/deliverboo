@@ -46,7 +46,7 @@
                     </svg>
                   </a>
                   <form class="d-inline-block" action="{{ route('admin.dishes.destroy', ['dish' => $dish->slug]) }}"
-                    method="dish">
+                    method="post">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-primary btn-sm">
