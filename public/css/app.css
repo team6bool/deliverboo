@@ -12748,6 +12748,7 @@ button:focus-visible,
 .btn-cart:hover,
 .btn-cart:active {
   color: var(--yellow);
+  background: white !important;
 }
 
 h1,
