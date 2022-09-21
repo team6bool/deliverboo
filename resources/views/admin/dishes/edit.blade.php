@@ -76,11 +76,11 @@
                                 <div class="col-md-6">
                                     <div class="card" style="width: 18rem;">
                                         <img src="{{ asset('/storage/public/images/dishes/' . $dishes->img) }}"
-                                            class="card-img-top" alt="{{ $dishes->name }}">
+                                            class="card-img-top" alt="{{ $dishes->name }}" onerror="this.onerror=null;this.src='{{asset('/storage/public/images/placeholder.jpg')}}';">
                                     </div>
                                     <input id="img" type="file"
                                         class="form-control @error('img') is-invalid @enderror" name="img"
-                                        value="{{ old($dishes->img) }}" autocomplete="img" autofocus>
+                                        autocomplete="img" autofocus>
 
                                     @error('img')
                                         <span class="invalid-feedback" role="alert">

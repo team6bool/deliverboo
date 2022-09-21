@@ -18,7 +18,7 @@
 
         <div class="row">
           <div class="col">
-            <img src="{{ asset('/storage/public/images/dishes/' . $dish->img) }}" alt="{{ $dish->name }}" class="mb-3 img-fluid">
+            <img src="{{ asset('/storage/public/images/dishes/' . $dish->img) }}" alt="{{ $dish->name }}" class="mb-3 img-fluid" onerror="this.onerror=null;this.src='{{asset('/storage/public/images/placeholder.jpg')}}';">
           </div>
           <div class="col">
             <dl>
