@@ -46,35 +46,27 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        /* $validatedData = $request->validate([
+        $validatedData = $request->validate([
             "name" => "required|min:3",
             "lastname" => "required|min:3",
             "address" => "required",
             "email" => "required",
             "phone" => "required|min:8",
             "total" => "required",
-            "subtotals" => "required",
             "dishes" => "required",
         ]);
- */
-        $data = $request->all();
-
 
         $order = new Order();
-        $order->fill($data);
+        $order->fill($validatedData);
 
         $order->user_id = Auth::id();
 
         $order->save();
 
         //attach dishes to order
-
         foreach ($request->dishes as $dish) {
-
             $order->dishes()->attach($dish, ['quantity' => $dish, 'subtotal' => $dish]);
         }
-
-
 
         return redirect()->route("admin.orders.show", $order->id);
     }
