@@ -43,9 +43,9 @@
                                     class="form-control @error('description') is-invalid @enderror" name="description"
                                     value="{{ old('description') }}" autocomplete="description" autofocus>
 
-                                    <div class="invalid-tooltip text-light">
-                                        Inserisci una descrizione valida!
-                                    </div>
+                                <div class="invalid-tooltip text-light">
+                                    Inserisci una descrizione valida!
+                                </div>
                             </div>
                         </div>
 
@@ -58,9 +58,9 @@
                                     class="form-control @error('price') is-invalid @enderror" name="price"
                                     value="{{ old('price') }}" required autocomplete="price" autofocus>
 
-                                    <div class="invalid-tooltip text-light">
-                                        Inserisci un prezzo valido! es. 19,50
-                                    </div>
+                                <div class="invalid-tooltip text-light">
+                                    Inserisci un prezzo valido! es. 19,50
+                                </div>
                             </div>
                         </div>
 
@@ -72,9 +72,9 @@
                                 <input id="img" type="file" class="form-control @error('img') is-invalid @enderror"
                                     name="img" value="{{ old('img') }}" autocomplete="img" autofocus>
 
-                                    <div class="invalid-tooltip text-light">
-                                        Inserisci un'immagine valida! (jpeg, png, jpg, gif, svg)
-                                    </div>
+                                <div class="invalid-tooltip text-light">
+                                    Inserisci un'immagine valida! (jpeg, png, jpg, gif, svg)
+                                </div>
                             </div>
                         </div>
 
@@ -85,6 +85,8 @@
                             <div id="visible" class="col-md-6">
                                 <div class="form-check">
                                     <label for="visible" class="pe-1">Sì</label>
+
+                                    <input type="hidden" name="visible" value="0">
                                     <input type="checkbox" name="visible" class="switch-input" value="1"
                                         {{ old('visible') ? 'checked="checked"' : '' }} />
 
@@ -103,7 +105,8 @@
                                 <button type="submit" class="btn btn-primary" onclick="onSubmit()">
                                     {{ __('Aggiungi') }}
                                 </button>
-                                <button class="btn btn-secondary" type="button" onclick="window.location=`{{ route('admin.dishes.index') }}`">Indietro</button>
+                                <button class="btn btn-secondary" type="button"
+                                    onclick="window.location=`{{ route('admin.dishes.index') }}`">Indietro</button>
                             </div>
                         </div>
                 </div>

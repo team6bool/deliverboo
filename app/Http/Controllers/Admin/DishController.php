@@ -176,8 +176,11 @@ class DishController extends Controller
             $fileToStore = $fileName . '_' . time() . '.' . $fileExtension;
             $path = $file->storeAs('public/images/dishes', $fileToStore);
         }
+
         $dish->fill($validatedData);
-        $dish->img = $validatedData["img"] ? $fileToStore : null;
+        if (isset($fileToStore)) {
+            $dish->img = $validatedData["img"] ? $fileToStore : null;
+        }
 
         $dish->user_id = Auth::user()->id;
 
