@@ -51,17 +51,27 @@ class OrderController extends Controller
             "lastname" => "required|min:3",
             "address" => "required",
             "email" => "required",
-            "phone" => "required|min:10",
+            "phone" => "required|min:8",
             "total" => "required",
+            "dishes" => "required",
         ]);
 
         $order = new Order();
         $order->fill($validatedData);
-        $order->user_id = Auth::user()->id;
 
-
+        $order->user_id = Auth::id();
 
         $order->save();
+
+        //attach dishes to order
+        foreach ($request->dishes as $dish) {
+            $order->dishes()->attach($dish, [
+                "quantity" => $dish["quantity"],
+                "subtotal" => $dish["subtotal"]
+            ]);
+        }
+
+
 
         return redirect()->route("admin.orders.show", $order->id);
     }

@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 
+Route::get('/cart/items', 'CartController@allItems')->name('cart.all-items')->middleware('auth');
+
 Auth::routes();
 
 Route::get('/', function () {
