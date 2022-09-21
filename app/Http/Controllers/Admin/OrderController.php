@@ -59,6 +59,8 @@ class OrderController extends Controller
         $order->fill($validatedData);
         $order->user_id = Auth::user()->id;
 
+
+
         $order->save();
 
         return redirect()->route("admin.orders.show", $order->id);

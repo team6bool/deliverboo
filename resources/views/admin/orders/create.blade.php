@@ -71,38 +71,27 @@
 
                     <div class="form-group position-relative row">
                         <label for="dish"
-                            class="col-md-4 col-form-label text-md-right">{{ __('Seleziona categorie') }}</label>
+                            class="col-md-4 col-form-label text-md-right">{{ __('Seleziona piatto') }}</label>
 
-                        <div id="dish" class="col-md-6 position-relative">
+                        <div id="dish" class="col-md-6 position-relative d-flex flex-column">
                             @foreach ($dishes as $dish)
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="dish[]" id="{{ $dish->id }}"
-                                        value="{{ $dish->id }}">
-                                    <label class="form-check-label" for="{{ $dish->id }}">
+                                    <div class="fw-bold">
                                         {{ $dish->name }}
+                                    </div>
+                                    <input type="text" name="dish[]" id="{{ $dish->id }}">
+
+                                    <label class="form-check-label" for="{{ $dish->id }}">
+                                        <p class="ps-4"> € {{ $dish->price }}</p>
                                     </label>
                                 </div>
                             @endforeach
 
-                            <div class="if-invalid fw-semibold text-danger d-none">Seleziona almeno una categoria!
+
+                            <div class="if-invalid fw-semibold text-danger d-none">Seleziona almeno un piatto!
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="total" class="col col-form-label text-md-right">{{ __('Totale') }}</label>
-
-                            <div class="col">
-                                <input id="total" type="number" step=".01"
-                                    class="form-control @error('total') is-invalid @enderror" name="total"
-                                    value="{{ old('total') }}" required autocomplete="total" autofocus>
-
-                                @error('total')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
 
                         <div class="form-group mt-3">
                             <button type="submit" class="btn btn-success">
