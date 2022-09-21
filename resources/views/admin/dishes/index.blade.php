@@ -6,7 +6,12 @@
       <div class="col-12">
         <div class="d-flex justify-content-between align-items-center">
           <h1>Tutti i piatti</h1>
-          <a href="{{ route('admin.dishes.create') }}" class="btn btn-primary">Aggiungi piatto</a>
+          <div>
+            <a href="{{ route('home') }}" class="btn btn-cart mb-2 fs-4">
+              <i class="fa-solid fa-house"></i>
+            </a>
+            <a href="{{ route('admin.dishes.create') }}" class="btn btn-primary">Aggiungi piatto</a>
+          </div>
         </div>
         
         <table class="table">
@@ -25,7 +30,7 @@
                 <td class="align-middle">{{ $dish->name }}</td>
                 <td>
                     <div class="h-50">
-                        <img src="{{ asset('/storage/public/images/dishes/' . $dish->img) }}" alt="{{ $dish->name }}" class="" width="70" style="height:50px; object-fit: cover" onerror="this.onerror=null;this.src='{{asset('/storage/public/images/placeholder.jpg')}}';">
+                        <img src="{{ asset('/storage/public/images/dishes/' . $dish->img) }}" alt="{{ $dish->name }}" class="" width="70" style="height:50px; object-fit: cover">
                     </div>
                 </td>
                 <td class="text-center align-middle">

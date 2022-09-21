@@ -92,7 +92,7 @@
 
                                 <div class="form-group row position-relative">
                                     <label for="visible"
-                                        class="col-md-4 col-form-label text-md-right">{{ __('E\' disponibile?') }}</label>
+                                        class="col-md-4 col-form-label text-md-right">{{ __('È disponibile?') }}</label>
 
                                     <div id="visible" class="col-md-6">
                                         <div class="form-check">
@@ -113,7 +113,7 @@
                                         <div class="col-md-6 offset-md-4">
                                             <button type="submit" class="btn btn-primary" onclick="onSubmit()">
                                                 {{ __('Aggiorna') }}
-                                            </button>
+                                            <button class="btn btn-secondary" type="button" onclick="window.location=`{{ route('admin.dishes.index') }}`">Indietro</button>
                                         </div>
                                     </div>
                                 </div>
