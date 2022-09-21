@@ -79,9 +79,13 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        return view('admin.orders.show', [
-            'order' => Order::findOrFail($id)
-        ]);
+        $order = Order::findOrFail($id);
+
+        if ($order->user_id != auth()->id()) {
+            abort(403, 'Questo non è un tuo piatto!');
+        }
+
+        return view("admin.orders.show", compact("order"));
     }
 
     /**
