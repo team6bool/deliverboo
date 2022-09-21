@@ -83,10 +83,10 @@ class DishController extends Controller
     {
         $validatedData = $request->validate([
             "name" => "required|max:255",
-            "description" => "required",
+            "description" => "",
             "price" => "required|numeric",
             "img" => "image|mimes:jpeg,png,jpg,gif,svg|max:3000",
-            "visible" => "boolean",
+            "visible" => "boolean|required",
         ]);
 
         //save img into public/imeges/dishes folder
@@ -157,10 +157,10 @@ class DishController extends Controller
     {
         $validatedData = $request->validate([
             "name" => "required|max:255",
-            "description" => "required",
+            "description" => "",
             "price" => "required|numeric",
             "img" => "image|mimes:jpeg,png,jpg,gif,svg|max:3000",
-            "visible" => "boolean",
+            "visible" => "boolean|required",
         ]);
 
         $dish = $this->findBySlug($slug);
