@@ -127,6 +127,7 @@ button,
     &:hover,
     &:active {
         color: var(--yellow);
+        background: white !important;
     }
 }
 
