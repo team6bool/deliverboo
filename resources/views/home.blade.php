@@ -16,7 +16,7 @@
 
                         {{ __('You are logged in!') }}
                     </div>
-                    <div class="d-flex gap-4">
+                    <div class="d-flex gap-4 pb-3 ps-3">
                         <button class="btn btn-warning" type="button"
                             onclick="window.location=`{{ url('admin/dishes') }}`">Piatti</button>
                         <button class="btn btn-warning" type="button"
