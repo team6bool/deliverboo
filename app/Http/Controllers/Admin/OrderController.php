@@ -82,7 +82,7 @@ class OrderController extends Controller
         $order = Order::findOrFail($id);
 
         if ($order->user_id != auth()->id()) {
-            abort(403, 'Questo non è un tuo piatto!');
+            abort(403, 'Questo non è un tuo ordine!');
         }
 
         return view("admin.orders.show", compact("order"));
