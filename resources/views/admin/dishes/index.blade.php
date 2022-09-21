@@ -25,7 +25,7 @@
                 <td class="align-middle">{{ $dish->name }}</td>
                 <td>
                     <div class="h-50">
-                        <img src="{{ asset('/storage/public/images/dishes/' . $dish->img) }}" alt="{{ $dish->name }}" class="" width="70" style="height:50px; object-fit: cover">
+                        <img src="{{ asset('/storage/public/images/dishes/' . $dish->img) }}" alt="{{ $dish->name }}" class="" width="70" style="height:50px; object-fit: cover" onerror="this.onerror=null;this.src='{{asset('/storage/public/images/placeholder.jpg')}}';">
                     </div>
                 </td>
                 <td class="text-center align-middle">
