@@ -39,12 +39,12 @@ class User extends Authenticatable
 
     public function dishes()
     {
-        return $this->belongsToMany('App\Dish');
+        return $this->hasMany('App\Dish');
     }
 
     public function orders()
     {
-        return $this->belongsToMany('App\Order');
+        return $this->hasMany('App\Order');
     }
 
     public function categories()
