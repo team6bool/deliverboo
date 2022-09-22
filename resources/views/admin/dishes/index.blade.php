@@ -1,5 +1,44 @@
 @extends('layouts.app')
 
+@section('script')
+  function showModal(id){
+    const modal = document.getElementById("modal-" + id);
+    modal.classList.replace("d-none", "d-flex");
+  }
+
+  function hideModal(id){
+    const modal = document.getElementById("modal-" + id);
+    modal.classList.replace("d-flex","d-none");
+  }
+
+  function showSuccess(){
+    const form = document.getElementById("form-delete");
+    const modal = document.getElementById("success-modal");
+    modal.classList.replace("d-none", "d-flex");
+    setTimeout(function (){
+      form.submit();
+    },1000);
+  }
+@endsection
+
+@section('style')
+  .fa-check{
+    animation: push 1s linear
+  }
+
+  @keyframes push{
+    from, to {
+      transform: scale(100%);
+    }
+    30%{
+      transform: scale(120%);
+    }
+    50%{
+      transform: scale(80%);
+    }
+  }
+@endsection
+
 @section('content')
   <div class="container">
     <div class="row justify-content-center">
@@ -50,11 +89,7 @@
                       <line x1="3" y1="22" x2="21" y2="22"></line>
                     </svg>
                   </a>
-                  <form class="d-inline-block" action="{{ route('admin.dishes.destroy', ['dish' => $dish->slug]) }}"
-                    method="post">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-primary btn-sm">
+                    <button class="btn btn-primary btn-sm" onclick="showModal({{$dish->id}})">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round" class="feather feather-activity">
@@ -64,12 +99,27 @@
                         <line x1="14" y1="11" x2="14" y2="17"></line>
                       </svg>
                     </button>
-                  </form>
 
-                  <crud-delete-btn action="{{ route('admin.dishes.destroy', ['dish' => $dish->slug]) }}">
-                    @csrf
-                    @method('DELETE')
-                  </crud-delete-btn>
+                  <div class="position-fixed top-0 bottom-0 start-0 end-0 w-100 d-none align-items-center justify-content-center" style="background: rgba(0,0,0,0.5)" id="{{ "modal-" . $dish->id}}">
+                    <div class="bg-white rounded p-4">
+                      <h4 class="pb-4">Sicuro di voler eliminare "{{$dish->name}}"?</h4>
+  
+                      <button class="btn btn-secondary me-3" onclick="hideModal({{$dish->id}})">No, indietro</button>
+                      <button class="btn btn-primary" type="submit" onclick="hideModal({{$dish->id}}),showSuccess()">Sì, elimina</button>
+                      <form id="form-delete" class="d-inline-block" action="{{ route('admin.dishes.destroy', ['dish' => $dish->slug]) }}"
+                        method="post">
+                        @csrf
+                        @method('DELETE')
+                      </form>
+                    </div>
+                  </div>
+
+                  <div class="position-fixed top-0 bottom-0 start-0 end-0 w-100 d-none align-items-center justify-content-center" style="background: rgba(0,0,0,0.5)" id="success-modal">
+                    <div class="bg-white rounded p-4">
+                      <h4>"{{$dish->name}}" eliminato correttamente! <i class="fa-solid fa-check text-success position-relative ms-3 fs-4"></i></h4>
+                    </div>
+                  </div>
+
                 </td>
               </tr>
             @endforeach
