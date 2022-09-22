@@ -1,103 +1,108 @@
 <template>
     <div id="app">
-      <NavBar />
-      <Main />
-      <TheFooter />
+        <NavBar />
+        <router-view></router-view>
+        <TheFooter />
     </div>
-  </template>
-  
-  <script>
-  import NavBar from '../components/NavBar.vue';
-  import Main from '../components/TheMain.vue';
-  import TheFooter from '../components/TheFooter.vue';
-  
-  export default {
-    name: 'App',
+</template>
+
+<script>
+import NavBar from "../components/NavBar.vue";
+import Main from "../pages/TheMain.vue";
+import TheFooter from "../components/TheFooter.vue";
+
+export default {
+    name: "App",
     components: {
-      NavBar,
-      Main,
-      TheFooter
-    }
-  }
-  </script>
-  
-  <style lang="scss">
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
-  
-  :root {
-    --yellow: #FFC244;
-    --orange: #FD5F25;
+        NavBar,
+        Main,
+        TheFooter,
+    },
+    data() {
+        return {
+            page: "home",
+        };
+    },
+};
+</script>
+
+<style lang="scss">
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+:root {
+    --yellow: #ffc244;
+    --orange: #fd5f25;
     --dark-orange: #e83e00;
     --black: #1d1d1d;
-    --soft-yellow: #FFDC95;
-    --sand: #C7A58B;
-  }
-  
-  #app {
-    font-family: 'Inter', Avenir, Helvetica, Arial, sans-serif;
+    --soft-yellow: #ffdc95;
+    --sand: #c7a58b;
+}
+
+#app {
+    font-family: "Inter", Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: var(--black);
     min-width: 320px;
-  }
-  
-  #app * {
+}
+
+#app * {
     &:focus {
-      border: none;
-      outline: none;
-      border-bottom: 2px solid var(--orange);
-      margin-bottom: -2px;
+        border: none;
+        outline: none;
+        border-bottom: 2px solid var(--orange);
+        margin-bottom: -2px;
     }
-  }
-  
-  .bg-primary {
+}
+
+.bg-primary {
     background-color: var(--yellow) !important;
-  }
-  
-  .bg-dark {
+}
+
+.bg-dark {
     background-color: var(--black) !important;
-  }
-  
-  .bg-light {
+}
+
+.bg-light {
     background-color: white !important;
-  }
-  
-  .bg-soft {
+}
+
+.bg-soft {
     background: var(--soft-yellow);
-  }
-  
-  .bg-sand {
+}
+
+.bg-sand {
     background: var(--sand);
-  }
-  
-  .shadow {
+}
+
+.shadow {
     box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.25);
-  }
-  
-  a {
+}
+
+a {
     text-decoration: none;
     color: inherit;
-  
+
     &:hover {
-      text-decoration: underline;
-      color: inherit;
+        text-decoration: underline;
+        color: inherit;
     }
-  }
-  
-  .link {
+}
+
+.link {
     border-bottom: 2px solid var(--sand);
     color: var(--sand);
     cursor: pointer;
     width: max-content;
-  
+
     &:hover {
-      opacity: 0.8;
+        opacity: 0.8;
     }
-  }
-  
-  button,
-  .btn {
+}
+
+button,
+.btn {
     text-align: center;
     text-decoration: none;
     padding: 0.5rem 1.5rem;
@@ -107,85 +112,84 @@
     border-radius: 28px;
     font-weight: bold;
     transition: 200ms ease-out;
-  
+
     &:hover {
-      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
-      text-decoration: none;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+        text-decoration: none;
     }
-  
+
     &:active {
-      box-shadow: inset 0px 4px 7px rgba(0, 0, 0, 0.25);
-      text-decoration: none;
+        box-shadow: inset 0px 4px 7px rgba(0, 0, 0, 0.25);
+        text-decoration: none;
     }
-  
+
     &:focus-visible {
-      text-decoration: none;
-      color: white !important;
-      background-color: var(--orange) !important;
-      border: 4px solid var(--soft-yellow) !important;
-      box-shadow: none !important;
+        text-decoration: none;
+        color: white !important;
+        background-color: var(--orange) !important;
+        border: 4px solid var(--soft-yellow) !important;
+        box-shadow: none !important;
     }
-  }
-  
-  .large {
+}
+
+.large {
     padding: 0.5rem 3.5rem;
-  }
-  
-  .btn-primary {
+}
+
+.btn-primary {
     background: var(--orange);
     color: white;
-  
+
     &:hover,
     &:active {
-      background: var(--dark-orange) !important;
+        background: var(--dark-orange) !important;
     }
-  }
-  
-  .btn-secondary {
+}
+
+.btn-secondary {
     background: var(--soft-yellow);
     color: var(--orange);
-  
+
     &:hover,
     &:active {
-      background: var(--yellow);
-      color: white;
+        background: var(--yellow);
+        color: white;
     }
-  }
-  
-  .btn-cart {
+}
+
+.btn-cart {
     background: white;
     color: var(--orange);
     padding: 0.5rem 0.8rem;
     aspect-ratio: 1/1 !important;
-  
+
     &:hover,
     &:active {
-      color: var(--yellow);
-      background: white;
+        color: var(--yellow);
+        background: white;
     }
-  }
-  
-  h1 {
+}
+
+h1 {
     font-size: 2rem;
     font-weight: 800;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     padding-bottom: 1rem;
-  }
-  
-  p {
+}
+
+p {
     font-weight: 600;
     padding-bottom: 1rem;
     margin-bottom: 0;
-  }
-  
-  @media screen and (min-width: 1200px){
-    h1{
-      font-size: 3rem;
+}
+
+@media screen and (min-width: 1200px) {
+    h1 {
+        font-size: 3rem;
     }
-  
-    p{
-      font-size: 1.2rem;
+
+    p {
+        font-size: 1.2rem;
     }
-  }
-  </style>
-  
+}
+</style>
