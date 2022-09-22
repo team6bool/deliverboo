@@ -40,7 +40,7 @@
             <line x1="3" y1="22" x2="21" y2="22"></line>
           </svg> Edit
         </a>
-        <form class="d-inline-block" action="{{ route('admin.dishes.destroy', ['dish' => $dish->slug]) }}" method="dish">
+        <form class="d-inline-block" action="{{ route('admin.dishes.destroy', ['dish' => $dish->slug]) }}" method="post">
           @csrf
           @method('DELETE')
           <button type="submit" class="btn btn-primary">

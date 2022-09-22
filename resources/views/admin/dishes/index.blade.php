@@ -6,7 +6,12 @@
       <div class="col-12">
         <div class="d-flex justify-content-between align-items-center">
           <h1>Tutti i piatti</h1>
-          <a href="{{ route('admin.dishes.create') }}" class="btn btn-primary">Aggiungi piatto</a>
+          <div>
+            <a href="{{ route('home') }}" class="btn btn-cart mb-2 fs-4">
+              <i class="fa-solid fa-house"></i>
+            </a>
+            <a href="{{ route('admin.dishes.create') }}" class="btn btn-primary">Aggiungi piatto</a>
+          </div>
         </div>
         
         <table class="table">
