@@ -124,7 +124,7 @@
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary" onclick="onSubmit()">
                                     {{ __('Aggiorna') }}
-                                    <button class="btn btn-secondary" type="button"
+                                    <button class="btn btn-secondary ms-2" type="button"
                                         onclick="window.location=`{{ route('admin.dishes.index') }}`">Indietro</button>
                             </div>
                         </div>

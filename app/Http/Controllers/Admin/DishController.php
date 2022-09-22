@@ -201,8 +201,6 @@ class DishController extends Controller
     {
         $dish = $this->findBySlug($slug);
 
-        Storage::delete("public/images/dishes/" . $dish->img);
-
         $dish->delete();
 
         return redirect()->route("admin.dishes.index");
