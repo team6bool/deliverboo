@@ -11,8 +11,8 @@
     modal.classList.replace("d-flex","d-none");
   }
 
-  function showSuccess(){
-    const form = document.getElementById("form-delete");
+  function showSuccess(id){
+    const form = document.getElementById("form-delete-" + id);
     const modal = document.getElementById("success-modal");
     modal.classList.replace("d-none", "d-flex");
     setTimeout(function (){
@@ -105,8 +105,8 @@
                       <h4 class="pb-4">Sicuro di voler eliminare "{{$dish->name}}"?</h4>
   
                       <button class="btn btn-secondary me-3" onclick="hideModal({{$dish->id}})">No, indietro</button>
-                      <button class="btn btn-primary" type="submit" onclick="hideModal({{$dish->id}}),showSuccess()">Sì, elimina</button>
-                      <form id="form-delete" class="d-inline-block" action="{{ route('admin.dishes.destroy', ['dish' => $dish->slug]) }}"
+                      <button class="btn btn-primary" type="submit" onclick="hideModal({{$dish->id}}),showSuccess({{$dish->id}})">Sì, elimina</button>
+                      <form id="{{"form-delete-" . $dish->id }}" class="d-inline-block" action="{{ route('admin.dishes.destroy', ['dish' => $dish->slug]) }}"
                         method="post">
                         @csrf
                         @method('DELETE')
