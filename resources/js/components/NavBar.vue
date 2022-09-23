@@ -1,5 +1,5 @@
 <template>
-    <header class="bg-primary">
+    <header class="bg-primary position-sticky top-0 start-0 end-0">
         <div class="container d-flex justify-content-between align-items-center py-3">
             <a class="logo" href="#">
                 <img src="/images/DeliveBooLogoSmallWhite.png" alt="DeliveBoo Logo">
@@ -19,6 +19,7 @@ export default {
 
 <style scoped lang="scss">
 header{
+    z-index: 9;
     .logo{
         img{
             max-height: 35px;
