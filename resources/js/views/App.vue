@@ -9,6 +9,7 @@
 <script>
 import NavBar from "../components/NavBar.vue";
 import Main from "../pages/TheMain.vue";
+import Restaurant from "../pages/TheRestaurant.vue";
 import TheFooter from "../components/TheFooter.vue";
 
 export default {
@@ -16,6 +17,7 @@ export default {
     components: {
         NavBar,
         Main,
+        Restaurant,
         TheFooter,
     },
     data() {
@@ -76,8 +78,20 @@ export default {
     background: var(--sand);
 }
 
+.text-orange{
+    color: var(--orange) !important;
+}
+
 .shadow {
     box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.25);
+}
+
+.text-shadow {
+    text-shadow: 0px 4px 7px rgba(0, 0, 0, 0.25);
+}
+
+.drop-shadow {
+    filter: drop-shadow(0px 4px 7px rgba(0, 0, 0, 0.25));
 }
 
 a {
