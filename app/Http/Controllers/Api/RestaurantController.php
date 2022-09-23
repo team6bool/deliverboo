@@ -16,7 +16,7 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurants = User::with(['categories'])->orderByDesc('id')->paginate(15);
+        $restaurants = User::with(['categories'])->orderByDesc('id')->get();
 
         return response()->json($restaurants);
     }
