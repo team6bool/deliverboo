@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import Restaurant from "./pages/TheRestaurant.vue";
 import Home from "./pages/TheMain.vue";
 
 //put all the different pages below
@@ -22,6 +23,14 @@ const routes = [
             title: "Deliveboo Homepage",
         },
     },
+    {
+        path: "/restaurant",
+        component: Restaurant,
+        name: "restaurant.index",
+        meta: {
+            title: "Deliveboo Restaurant",
+        },
+    }
 ];
 
 const router = new VueRouter({
