@@ -2245,7 +2245,11 @@ var staticRenderFns = [function () {
     staticClass: "nav-buttons"
   }, [_c("button", {
     staticClass: "btn-secondary"
-  }, [_vm._v("Accedi")]), _vm._v(" "), _c("button", {
+  }, [_c("a", {
+    attrs: {
+      href: "/register"
+    }
+  }, [_vm._v("Accedi")])]), _vm._v(" "), _c("button", {
     staticClass: "btn-cart"
   }, [_c("i", {
     staticClass: "fa fa-solid fa-cart-shopping"
@@ -2297,7 +2301,7 @@ var staticRenderFns = [function () {
   }, [_c("h1", [_vm._v("Sei un ristoratore?")]), _vm._v(" "), _c("p", [_vm._v("Unisciti alla famiglia DeliveBoo, potrai gestire i tuoi ordini, modificare i tuoi prodotti e tanto altro!")]), _vm._v(" "), _c("a", {
     staticClass: "btn btn-primary large",
     attrs: {
-      href: "#"
+      href: "/register"
     }
   }, [_vm._v("Registrati")])])])])]);
 }];

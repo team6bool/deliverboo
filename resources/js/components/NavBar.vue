@@ -5,7 +5,7 @@
                 <img src="/images/DeliveBooLogoSmallWhite.png" alt="DeliveBoo Logo">
             </a>
             <div class="nav-buttons">
-                <button class="btn-secondary">Accedi</button>
+                <button class="btn-secondary"><a href="/register">Accedi</a></button>
                 <button class="btn-cart"><i class="fa fa-solid fa-cart-shopping"></i></button>
             </div>
         </div>
