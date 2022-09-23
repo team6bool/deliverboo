@@ -8,7 +8,7 @@
                 />
             </a>
             <div class="nav-buttons">
-                <button class="btn-secondary">Accedi</button>
+                <button class="btn-secondary"><a href="/login">Accedi</a></button>
                 <router-link :to="{ name: 'cart.index' }"
                     ><button class="btn-cart">
                         <i class="fa fa-solid fa-cart-shopping"></i></button

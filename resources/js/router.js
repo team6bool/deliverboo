@@ -25,19 +25,19 @@ const routes = [
         },
     },
     {
-        path: "/restaurant",
-        component: Restaurant,
-        name: "restaurant.index",
-        meta: {
-            title: "Deliveboo Restaurant",
-        },
-    },
-    {
         path: "/cart",
         component: Cart,
         name: "cart.index",
         meta: {
             title: "Deliveboo Cart",
+        },
+    },
+    {
+        path: "/:slug",
+        component: Restaurant,
+        name: "restaurant.index",
+        meta: {
+            title: "Deliveboo Restaurant",
         },
     },
 ];
