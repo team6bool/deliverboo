@@ -78,8 +78,20 @@ export default {
     background: var(--sand);
 }
 
+.text-orange{
+    color: var(--orange) !important;
+}
+
 .shadow {
     box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.25);
+}
+
+.text-shadow {
+    text-shadow: 0px 4px 7px rgba(0, 0, 0, 0.25);
+}
+
+.drop-shadow {
+    filter: drop-shadow(0px 4px 7px rgba(0, 0, 0, 0.25));
 }
 
 a {
