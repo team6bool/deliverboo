@@ -70,11 +70,10 @@
 
 <script>
 import JumboTron from "../components/JumboTron.vue";
-import SearchBar from "../components/SearchBar.vue";
 import CategoriesSection from "../components/CategoriesSection.vue";
 import RestSection from "../components/RestSection.vue";
 export default {
-    components: { JumboTron, SearchBar, CategoriesSection, RestSection },
+    components: { JumboTron, CategoriesSection, RestSection },
 };
 </script>
 
