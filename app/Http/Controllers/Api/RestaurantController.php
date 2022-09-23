@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\User;
+use App\Dish;
 use App\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -17,6 +18,9 @@ class RestaurantController extends Controller
     public function index()
     {
         $restaurants = User::with(['categories'])->orderByDesc('id')->get();
+        foreach ($restaurants as $restaurant) {
+            $restaurant->dishes = Dish::where('user_id', $restaurant->id)->get();
+        }
 
         return response()->json($restaurants);
     }
@@ -48,9 +52,17 @@ class RestaurantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        //search for the restaurant with the given slug
+        $restaurant = User::where('slug', $slug)->first();
+
+        $restaurant->dishes = Dish::where('user_id', $restaurant->id)->get();
+
+
+        //return the restaurant
+
+        return response()->json($restaurant);
     }
 
     /**
