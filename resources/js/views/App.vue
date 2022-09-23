@@ -76,8 +76,20 @@ export default {
     background: var(--sand);
 }
 
+.text-orange{
+    color: var(--orange) !important;
+}
+
 .shadow {
     box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.25);
+}
+
+.text-shadow {
+    text-shadow: 0px 4px 7px rgba(0, 0, 0, 0.25);
+}
+
+.drop-shadow {
+    filter: drop-shadow(0px 4px 7px rgba(0, 0, 0, 0.25));
 }
 
 a {
@@ -88,6 +100,10 @@ a {
         text-decoration: underline;
         color: inherit;
     }
+}
+
+.no-decoration:hover{
+    text-decoration: none;
 }
 
 .link {
@@ -115,7 +131,7 @@ button,
 
     &:hover {
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
-        text-decoration: none;
+        text-decoration: none !important;
     }
 
     &:active {
@@ -137,23 +153,24 @@ button,
 }
 
 .btn-primary {
-    background: var(--orange);
-    color: white;
+    background: var(--orange) !important;
+    color: white !important;
 
     &:hover,
     &:active {
         background: var(--dark-orange) !important;
+        color: white !important;
     }
 }
 
 .btn-secondary {
-    background: var(--soft-yellow);
-    color: var(--orange);
+    background: var(--soft-yellow) !important;
+    color: var(--orange) !important;
 
     &:hover,
     &:active {
-        background: var(--yellow);
-        color: white;
+        background: var(--yellow) !important;
+        color: white !important;
     }
 }
 
