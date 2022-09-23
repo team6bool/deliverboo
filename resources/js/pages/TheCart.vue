@@ -60,9 +60,9 @@
         </div>
 
         <div class="checkout-section bg-soft">
-            <!-- <div>
-                <img class="bg-image" src="storage/public/images/checkout-bg.svg" alt="checkout-bg"/>
-            </div> -->
+            <div class="bg-image">
+                <img src="/images/checkout-bg.svg" alt="checkout-bg"/>
+            </div>
             
             <!--
             Structure:
@@ -209,9 +209,13 @@ export default {
     }
 
     .checkout-section {
+        position: relative;
+        margin-top: 2.5rem;
+        padding-top: 1rem;
+        
             .bg-image {
                 position: absolute;
-                right: -10px;
+                top: -15px;
             }
 
             .text-checkout-start {
