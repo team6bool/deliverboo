@@ -31,7 +31,7 @@ const routes = [
         meta: {
             title: "Deliveboo Restaurant",
         },
-    }
+    },
     {
         path: "/cart",
         component: Cart,
