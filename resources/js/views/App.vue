@@ -9,6 +9,7 @@
 <script>
 import NavBar from "../components/NavBar.vue";
 import Main from "../pages/TheMain.vue";
+import Restaurant from "../pages/TheRestaurant.vue";
 import TheFooter from "../components/TheFooter.vue";
 
 export default {
@@ -16,6 +17,7 @@ export default {
     components: {
         NavBar,
         Main,
+        Restaurant,
         TheFooter,
     },
     data() {

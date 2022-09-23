@@ -8,7 +8,7 @@
                 <div class="col-lg-6 px-4">
                     <h1>Sei un ristoratore?</h1>
                     <p>Unisciti alla famiglia DeliveBoo, potrai gestire i tuoi ordini, modificare i tuoi prodotti e tanto altro!</p>
-                    <a href="#" class="btn btn-primary large">Registrati</a>
+                    <a href="/register" class="btn btn-primary large">Registrati</a>
                 </div>
             </div>
         </div>
