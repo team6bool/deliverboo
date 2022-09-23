@@ -34,7 +34,7 @@
 
                             <div class="form-group position-relative row">
                                 <label for="name"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Nome*') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text"
@@ -50,7 +50,7 @@
 
                             <div class="form-group position-relative row">
                                 <label for="email"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo e-mail*') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email"
@@ -66,7 +66,7 @@
 
                             <div class="form-group position-relative row">
                                 <label for="password"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Password*') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password"
@@ -82,7 +82,7 @@
 
                             <div class="form-group position-relative row">
                                 <label for="password-confirm"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password*') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"
@@ -97,7 +97,7 @@
 
                             <div class="form-group position-relative row">
                                 <label for="address"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo*') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="address" type="text"
@@ -113,7 +113,7 @@
 
                             <div class="form-group position-relative row">
                                 <label for="p_iva"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('P.IVA') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Partita IVA*') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="p_iva" type="text" min="11" max="11"
@@ -128,7 +128,7 @@
 
                             <div class="form-group position-relative row">
                                 <label for="delivery_price"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Prezzo di consegna') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Prezzo di consegna*') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="delivery_price" type="number" step=".01"
@@ -174,7 +174,7 @@
 
                             <div class="form-group position-relative row" action="{{ url('form') }}">
                                 <label for="cover_img_file"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Cover img') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Immagine di copertina*') }}</label>
 
                                 <div class="col-md-6">
 
@@ -207,7 +207,7 @@
 
                             <div class="form-group position-relative row">
                                 <label for="category"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Seleziona categorie') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Seleziona categorie*') }}</label>
 
                                 <div id="category" class="col-md-6 position-relative">
                                     @foreach ($categories as $category)
