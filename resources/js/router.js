@@ -25,7 +25,7 @@ const routes = [
         },
     },
     {
-        path: "/restaurant",
+        path: "/:slug",
         component: Restaurant,
         name: "restaurant.index",
         meta: {
