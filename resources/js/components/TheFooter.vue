@@ -1,6 +1,6 @@
 <template>
     <footer class="bg-primary pt-1">
-        <img class="wave" src="../../../public/images/icons/footer.svg" alt="">
+        <img class="wave" src="/images/icons/footer.svg" alt="">
         <div class="section bg-dark">
             <div class="container text-start text-light">
                 <div class="px-3">
