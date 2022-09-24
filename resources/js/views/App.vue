@@ -79,19 +79,19 @@ export default {
     background: var(--sand);
 }
 
-.text-orange{
+.text-orange {
     color: var(--orange) !important;
 }
 
-.text-soft{
+.text-soft {
     color: var(--soft-yellow) !important;
 }
 
-.text-yellow{
+.text-yellow {
     color: var(--yellow) !important;
 }
 
-.text-sand{
+.text-sand {
     color: var(--sand) !important;
 }
 
@@ -110,6 +110,7 @@ export default {
 a {
     text-decoration: none;
     color: inherit;
+    cursor: pointer;
 
     &:hover {
         text-decoration: underline;
@@ -117,7 +118,7 @@ a {
     }
 }
 
-.no-decoration:hover{
+.no-decoration:hover {
     text-decoration: none;
 }
 
@@ -215,8 +216,10 @@ p {
     margin-bottom: 0;
 }
 
-input{
-    &:focus, &:active, &:focus-visible {
+input {
+    &:focus,
+    &:active,
+    &:focus-visible {
         box-shadow: 0 0 0 0.25rem rgba(var(--orange-rgb), 0.25) !important;
         border-color: var(--orange) !important;
         outline-color: var(--orange) !important;
