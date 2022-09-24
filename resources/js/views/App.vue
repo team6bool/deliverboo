@@ -82,6 +82,18 @@ export default {
     color: var(--orange) !important;
 }
 
+.text-soft{
+    color: var(--soft-yellow) !important;
+}
+
+.text-yellow{
+    color: var(--yellow) !important;
+}
+
+.text-sand{
+    color: var(--sand) !important;
+}
+
 .shadow {
     box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.25);
 }
