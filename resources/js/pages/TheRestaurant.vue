@@ -34,16 +34,29 @@
                             <p class="text-orange plate-name">
                                 {{ dish.name }}
                             </p>
-                            <p class="price">€ {{dish.price}}</p>
+                            <p class="ps-1 price text-nowrap">€ {{dish.price}}</p>
                         </div>
                         <div class="d-flex align-items-center justify-content-around px-2">
-                            <a href="#" class="btn btn-secondary show-btn text-small">
+                            <a href="#" class="btn btn-secondary show-btn text-small" @click="showDetails(dish.id)">
                                 Dettagli
                             </a>
                             <button class="btn btn-primary show-btn text-small">
                                 Aggiungi
                             </button>
                         </div>
+                    </div>
+                </div>
+                <div :id="'modal-' + dish.id" class="dish-details position-fixed top-0 bottom-0 end-0 start-0 d-none align-items-center justify-content-center px-3">
+                    <div class="bg-white rounded p-3" style="max-width: 600px">
+                        <div class="rounded overflow-hidden mx-5 mb-3" style="max-width: 400px">
+                            <img :src="'/images/dishes/' + dish.img" :alt="dish.name" class="w-100">
+                        </div>
+                        <h3 class="text-orange fw-bold">{{dish.name}}</h3>
+                        <h3 class="text-yellow fw-bold">€ {{dish.price}}</h3>
+                        <p>{{dish.description}}</p>
+                        <button class="btn btn-secondary mt-3" @click="hideDetails(dish.id)">
+                            Nascondi
+                        </button>
                     </div>
                 </div>
             </div>
@@ -77,6 +90,14 @@ export default {
                     console.log(error);
                 });
         },
+        showDetails(id){
+            let modal = document.getElementById("modal-" + id);
+            modal.classList.replace("d-none", "d-flex");
+        },
+        hideDetails(id){
+            let modal = document.getElementById("modal-" + id);
+            modal.classList.replace("d-flex", "d-none");
+        }
     },
     mounted() {
         this.getRestaurant();
@@ -95,6 +116,10 @@ h3 {
 
 p {
     font-size: 0.9rem;
+}
+
+.dish-details{
+    backdrop-filter: blur(2px) brightness(0.9);
 }
 
 .show-btn {
