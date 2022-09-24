@@ -55,7 +55,9 @@
                                 <p class="text-orange plate-name">
                                     {{ dish.name }}
                                 </p>
-                                <p class="price">€ {{ dish.price }}</p>
+                                <p class="ps-1 price text-nowrap">
+                                    € {{ dish.price }}
+                                </p>
                             </div>
                             <div
                                 class="d-flex align-items-center justify-content-around px-2"
@@ -63,6 +65,7 @@
                                 <a
                                     href="#"
                                     class="btn btn-secondary show-btn text-small"
+                                    @click="showDetails(dish.id)"
                                 >
                                     Dettagli
                                 </a>
@@ -74,6 +77,38 @@
                                     Aggiungi
                                 </button>
                             </div>
+                        </div>
+                    </div>
+                    <div
+                        :id="'modal-' + dish.id"
+                        style="z-index: 5"
+                        class="dish-details position-fixed top-0 bottom-0 end-0 start-0 d-none align-items-center justify-content-center px-3"
+                    >
+                        <div
+                            class="bg-white rounded p-3"
+                            style="max-width: 600px"
+                        >
+                            <div
+                                class="rounded overflow-hidden mx-5 mb-3"
+                                style="max-width: 400px"
+                            >
+                                <img
+                                    :src="'/images/dishes/' + dish.img"
+                                    :alt="dish.name"
+                                    class="w-100"
+                                />
+                            </div>
+                            <h3 class="text-orange fw-bold">{{ dish.name }}</h3>
+                            <h3 class="text-yellow fw-bold">
+                                € {{ dish.price }}
+                            </h3>
+                            <p>{{ dish.description }}</p>
+                            <button
+                                class="btn btn-secondary mt-3"
+                                @click="hideDetails(dish.id)"
+                            >
+                                Nascondi
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -112,8 +147,10 @@
                     <div class="col-9 dish-information">
                         <div class="dish-and-price">
                             <!-- title and price -->
-                            <h4>{{ dish.name }}</h4>
-                            <span>€ {{ dish.price }}</span>
+                            <p class="text-orange">{{ dish.name }}</p>
+                            <p class="ps-1 price text-nowrap">
+                                € {{ dish.price }}
+                            </p>
                         </div>
 
                         <!-- cart quantity handle -->
@@ -123,10 +160,7 @@
                             <!-- bin icon -->
                             <i class="fa-solid fa-trash"></i>
                             <!-- add and remove item from cart  -->
-                            <div
-                                @click="removeFromCart(dish)"
-                                class="pill-button"
-                            >
+                            <div class="pill-button">
                                 <a
                                     @click="removeOneFromCart(dish)"
                                     href="http://"
@@ -221,6 +255,14 @@ export default {
                     console.log(error);
                 });
         },
+        showDetails(id) {
+            let modal = document.getElementById("modal-" + id);
+            modal.classList.replace("d-none", "d-flex");
+        },
+        hideDetails(id) {
+            let modal = document.getElementById("modal-" + id);
+            modal.classList.replace("d-flex", "d-none");
+        },
         addToCart(dish) {
             if (sessionStorage.getItem("cart") === null) {
                 sessionStorage.setItem("cart", JSON.stringify([]));
@@ -275,6 +317,10 @@ h3 {
 
 p {
     font-size: 0.9rem;
+}
+
+.dish-details {
+    backdrop-filter: blur(2px) brightness(0.9);
 }
 
 .show-btn {
@@ -383,6 +429,7 @@ p {
             align-items: center;
             border-radius: 0.5rem;
             margin-right: 0.7rem;
+            margin-bottom: 0.3rem;
 
             background: var(--soft-yellow);
             height: 28px;
