@@ -4,7 +4,8 @@
         <div class="search-section bg-primary">
             <div class="container py-3">
                 <button class="btn btn-secondary large">
-                    <i class="fa fa-solid fa-search pe-2"></i> Cerca per categoria
+                <router-link :to="{ name: 'search.index' }">
+                    <i class="fa fa-solid fa-search pe-2"></i> Cerca per categoria</router-link>
                 </button>
             </div>
         </div>
