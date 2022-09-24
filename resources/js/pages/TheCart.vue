@@ -12,7 +12,6 @@
                             alt="DeliveBoo Logo"
                         />
 
-                        <!-- restaurant name from db -->
                         <h2 class="restaurant-name">Ciccio Pasticcio</h2>
                         <p class="restaurant-address">Via Roma, 34</p>
                     </div>
@@ -62,14 +61,6 @@
 
         <img class="w-100" src="/images/checkout-bg.svg" alt="checkout-bg" />
         <div class="checkout-section bg-soft">
-            <!--
-            Structure:
-            - delivery fee
-            - product price
-            - total price
-            - checkout button
-            -->
-
             <div class="container py-3">
                 <div class="row gy-3">
                     <div class="col-6">
@@ -115,6 +106,7 @@
 import axios from "axios";
 
 export default {
+    props: ["restaurant"],
     data() {
         return {
             dishes: [],
@@ -124,7 +116,71 @@ export default {
             cart: null,
         };
     },
-    methods: {},
+    mounted() {
+        this.cart = JSON.parse(sessionStorage.getItem("cart"));
+        this.dishes = this.cart.dishes;
+        this.quantity = this.cart.quantity;
+        this.subtotal = this.cart.subtotal;
+        this.total = this.cart.total;
+    },
+    methods: {
+        addDishToCart(dish) {
+            //check if the dish is already in the cart
+            if (this.dishes.includes(dish)) {
+                //if the dish is already in the cart, increase the quantity
+                this.quantity[this.dishes.indexOf(dish)]++;
+            } else {
+                //if the dish is not in the cart, add it to the cart
+                this.dishes.push(dish);
+                this.quantity.push(1);
+            }
+            //update the subtotal
+            this.subtotal = this.dishes.map((dish, index) => {
+                return dish.price * this.quantity[index];
+            });
+            //update the total
+            this.total = this.subtotal.reduce((a, b) => a + b, 0);
+            //save the cart in the session storage
+            sessionStorage.setItem(
+                "cart",
+                JSON.stringify({
+                    dishes: this.dishes,
+                    quantity: this.quantity,
+                    subtotal: this.subtotal,
+                    total: this.total,
+                })
+            );
+        },
+        //function that remove the dishes from restaurant to the cart
+        removeDishFromCart(dish) {
+            //check if the dish is already in the cart
+            if (this.dishes.includes(dish)) {
+                //if the dish is already in the cart, decrease the quantity
+                this.quantity[this.dishes.indexOf(dish)]--;
+                //if the quantity is 0, remove the dish from the cart
+                if (this.quantity[this.dishes.indexOf(dish)] == 0) {
+                    this.dishes.splice(this.dishes.indexOf(dish), 1);
+                    this.quantity.splice(this.dishes.indexOf(dish), 1);
+                }
+            }
+            //update the subtotal
+            this.subtotal = this.dishes.map((dish, index) => {
+                return dish.price * this.quantity[index];
+            });
+            //update the total
+            this.total = this.subtotal.reduce((a, b) => a + b, 0);
+            //save the cart in the session storage
+            sessionStorage.setItem(
+                "cart",
+                JSON.stringify({
+                    dishes: this.dishes,
+                    quantity: this.quantity,
+                    subtotal: this.subtotal,
+                    total: this.total,
+                })
+            );
+        },
+    },
 };
 </script>
 
