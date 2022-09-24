@@ -147,8 +147,10 @@
                     <div class="col-9 dish-information">
                         <div class="dish-and-price">
                             <!-- title and price -->
-                            <h4>{{ dish.name }}</h4>
-                            <span>€ {{ dish.price }}</span>
+                            <p class="text-orange">{{ dish.name }}</p>
+                            <p class="ps-1 price text-nowrap">
+                                € {{ dish.price }}
+                            </p>
                         </div>
 
                         <!-- cart quantity handle -->
@@ -158,10 +160,7 @@
                             <!-- bin icon -->
                             <i class="fa-solid fa-trash"></i>
                             <!-- add and remove item from cart  -->
-                            <div
-                                @click="removeFromCart(dish)"
-                                class="pill-button"
-                            >
+                            <div class="pill-button">
                                 <a
                                     @click="removeOneFromCart(dish)"
                                     href="http://"
@@ -430,6 +429,7 @@ p {
             align-items: center;
             border-radius: 0.5rem;
             margin-right: 0.7rem;
+            margin-bottom: 0.3rem;
 
             background: var(--soft-yellow);
             height: 28px;
