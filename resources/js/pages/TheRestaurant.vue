@@ -158,7 +158,9 @@
                             class="d-flex align-items-center cart-quantity-button"
                         >
                             <!-- bin icon -->
-                            <i class="fa-solid fa-trash"></i>
+                            <a href="http://" @click="removeAllFromCart(dish)"
+                                ><i class="fa-solid fa-trash"></i
+                            ></a>
                             <!-- add and remove item from cart  -->
                             <div class="pill-button">
                                 <a
@@ -168,11 +170,9 @@
                                 >
 
                                 <div class="display-num-pill-button">
-                                    {{ quantity }}
+                                    {{ dish.quantity }}
                                 </div>
-                                <a @click="addFromCart(dish)" href="http://"
-                                    >+</a
-                                >
+                                <a @click="addToCart(dish)" href="http://">+</a>
                             </div>
                         </div>
                     </div>
@@ -264,44 +264,68 @@ export default {
             modal.classList.replace("d-flex", "d-none");
         },
         addToCart(dish) {
-            if (sessionStorage.getItem("cart") === null) {
+            if (sessionStorage.getItem("cart") == null) {
                 sessionStorage.setItem("cart", JSON.stringify([]));
             }
-            this.cart = JSON.parse(sessionStorage.getItem("cart"));
-            this.cart.push(dish);
-            sessionStorage.setItem("cart", JSON.stringify(this.cart));
-            console.log(this.cart);
-        },
-        updateCart() {
-            if (sessionStorage.getItem("cart") !== null) {
-                this.cart = JSON.parse(sessionStorage.getItem("cart"));
+            let cart = JSON.parse(sessionStorage.getItem("cart"));
+            let index = cart.findIndex((item) => item.id == dish.id);
+            if (index == -1) {
+                dish.quantity = 1;
+                cart.push(dish);
+            } else {
+                cart[index].quantity++;
             }
-        },
-        removeFromCart(dish) {
+            sessionStorage.setItem("cart", JSON.stringify(cart));
             this.cart = JSON.parse(sessionStorage.getItem("cart"));
-            this.cart = this.cart.filter((item) => item.id !== dish.id);
-            sessionStorage.setItem("cart", JSON.stringify(this.cart));
-        },
-        addFromCart(dish) {
-            this.cart = JSON.parse(sessionStorage.getItem("cart"));
-            this.cart.push(dish);
-            sessionStorage.setItem("cart", JSON.stringify(this.cart));
+            this.partialTotal = this.cart.reduce(
+                (acc, dish) => acc + dish.price * dish.quantity,
+                0
+            );
+
+            this.total = this.partialTotal + this.restaurant.delivery_price;
         },
         removeOneFromCart(dish) {
+            let cart = JSON.parse(sessionStorage.getItem("cart"));
+            let index = cart.findIndex((item) => item.id == dish.id);
+            if (index !== -1) {
+                cart[index].quantity--;
+                if (cart[index].quantity == 0) {
+                    cart.splice(index, 1);
+                }
+            }
+            sessionStorage.setItem("cart", JSON.stringify(cart));
             this.cart = JSON.parse(sessionStorage.getItem("cart"));
-            this.cart = this.cart.filter((item) => item.id !== dish.id);
-            sessionStorage.setItem("cart", JSON.stringify(this.cart));
+            this.partialTotal = this.cart.reduce(
+                (acc, dish) => acc + dish.price * dish.quantity,
+                0
+            );
+
+            this.total = this.partialTotal + this.restaurant.delivery_price;
         },
-        getProductsTotal() {
+        removeAllFromCart(dish) {
+            let cart = JSON.parse(sessionStorage.getItem("cart"));
+            let index = cart.findIndex((item) => item.id == dish.id);
+            if (index !== -1) {
+                cart.splice(index, 1);
+            }
+            sessionStorage.setItem("cart", JSON.stringify(cart));
             this.cart = JSON.parse(sessionStorage.getItem("cart"));
-            this.cart.forEach((dish) => {
-                this.productsTotal += dish.price * dish.quantity;
-            });
+            this.partialTotal = this.cart.reduce(
+                (acc, dish) => acc + dish.price * dish.quantity,
+                0
+            );
+
+            this.total = this.partialTotal + this.restaurant.delivery_price;
         },
     },
     mounted() {
         this.getRestaurant();
-        this.updateCart();
+        this.cart = JSON.parse(sessionStorage.getItem("cart"));
+        this.partialTotal = this.cart.reduce(
+            (acc, dish) => acc + dish.price * dish.quantity,
+            0
+        );
+        this.total = this.partialTotal + this.restaurant.delivery_price;
     },
 };
 </script>
