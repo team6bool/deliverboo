@@ -1,52 +1,80 @@
 <template>
-    <main class="container text-start pt-3 px-3">
-        <router-link :to="{ name: 'home.index' }">
-            <a href="#" class="btn btn-secondary text-white my-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="feather feather-activity">-
-                    <line x1="20" y1="12" x2="4" y2="12"></line>
-                    <polyline points="10 18 4 12 10 6"></polyline>
-                </svg>
-                Indietro
-            </a>
-        </router-link>
+    <div>
+        <main class="container text-start pt-3 px-3">
+            <router-link :to="{ name: 'home.index' }">
+                <a href="#" class="btn btn-secondary text-white my-btn">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="feather feather-activity"
+                    >
+                        -
+                        <line x1="20" y1="12" x2="4" y2="12"></line>
+                        <polyline points="10 18 4 12 10 6"></polyline>
+                    </svg>
+                    Indietro
+                </a>
+            </router-link>
 
-        <div class="text-center pt-4">
-            <h2 class="text-orange name">{{ restaurant.name }}</h2>
-            <h3 class="text-yellow">{{ restaurant.address }}</h3>
-            <p class="text-start pt-4">
-                {{ restaurant.description }}
-            </p>
-        </div>
+            <div class="text-center pt-4">
+                <h2 class="text-orange name">{{ restaurant.name }}</h2>
+                <h3 class="text-yellow">{{ restaurant.address }}</h3>
+                <p class="text-start pt-4">
+                    {{ restaurant.description }}
+                </p>
+            </div>
 
-        <div class="text-center pt-2">
-            <h2 class="text-yellow">I nostri piatti</h2>
-            <div v-for="dish in restaurant.dishes" :key="dish.id" class="card-box mt-4">
-                <div class="row">
-                    <div class="col-3 d-flex align-center">
-                        <div class="img-box">
-                            <img :src="'/images/dishes/' + dish.img" :alt="dish.name" class="plate-img" />
+            <div class="text-center pt-2">
+                <h2 class="text-yellow">I nostri piatti</h2>
+                <div
+                    v-for="dish in restaurant.dishes"
+                    :key="dish.id"
+                    class="card-box mt-4"
+                >
+                    <div class="row">
+                        <div class="col-3 d-flex align-center">
+                            <div class="img-box">
+                                <img
+                                    :src="'/images/dishes/' + dish.img"
+                                    :alt="dish.name"
+                                    class="plate-img"
+                                />
+                            </div>
+                        </div>
+                        <div class="col-9 text-start ps-0 pt-2">
+                            <div
+                                class="d-flex align-items-center justify-content-between px-2"
+                            >
+                                <p class="text-orange plate-name">
+                                    {{ dish.name }}
+                                </p>
+                                <p class="ps-1 price text-nowrap">€ {{ dish.price }}</p>
+                            </div>
+                            <div
+                                class="d-flex align-items-center justify-content-around px-2"
+                            >
+                                <a
+                                    href="#"
+                                    class="btn btn-secondary show-btn text-small" @click="showDetails(dish.id)"
+                                >
+                                    Dettagli
+                                </a>
+                                <button
+                                    class="btn btn-primary show-btn text-small"
+                                >
+                                    Aggiungi
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-9 text-start ps-0 pt-2">
-                        <div class="d-flex align-items-center justify-content-between px-2">
-                            <p class="text-orange plate-name">
-                                {{ dish.name }}
-                            </p>
-                            <p class="ps-1 price text-nowrap">€ {{dish.price}}</p>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-around px-2">
-                            <a href="#" class="btn btn-secondary show-btn text-small" @click="showDetails(dish.id)">
-                                Dettagli
-                            </a>
-                            <button class="btn btn-primary show-btn text-small">
-                                Aggiungi
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div :id="'modal-' + dish.id" class="dish-details position-fixed top-0 bottom-0 end-0 start-0 d-none align-items-center justify-content-center px-3">
+                <div :id="'modal-' + dish.id" style="z-index: 5" class="dish-details position-fixed top-0 bottom-0 end-0 start-0 d-none align-items-center justify-content-center px-3">
                     <div class="bg-white rounded p-3" style="max-width: 600px">
                         <div class="rounded overflow-hidden mx-5 mb-3" style="max-width: 400px">
                             <img :src="'/images/dishes/' + dish.img" :alt="dish.name" class="w-100">
@@ -59,12 +87,104 @@
                         </button>
                     </div>
                 </div>
+                </div>
             </div>
-            <a href="#" class="btn btn-primary my-4">
-                Aggiungi al carrello
-            </a>
+            <div class="d-flex flex-column justify-content-center">
+                <!-- cart header with logo image, restaurant name and restaurant street -->
+                <div class="row">
+                    <div class="col cart-header">
+                        <h2 class="text-orange pt-5 pb-4">Carrello</h2>
+                    </div>
+                </div>
+                <!-- dishes section -->
+                <!--
+                    Structure:
+                        - image on the left
+                        - description and price center
+                        - delete icon
+                        - remove and add icon with number at the center
+                    -->
+                <div class="row dish-container">
+                    <div class="col-3">
+                        <div class="dish-image">
+                            <!-- image of the dish -->
+                            <img
+                                src="storage/public/images/dishes/4.jpg"
+                                alt="dish image"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-9 dish-information">
+                        <div class="dish-and-price">
+                            <!-- title and price -->
+                            <h4>Pizza Margherita</h4>
+                            <span>€ 5,00</span>
+                        </div>
+
+                        <!-- cart quantity handle -->
+                        <div
+                            class="d-flex align-items-center cart-quantity-button"
+                        >
+                            <!-- bin icon -->
+                            <i class="fa-solid fa-trash"></i>
+                            <!-- add and remove item from cart  -->
+                            <div class="pill-button">
+                                <a href="http://">-</a>
+                                <div class="display-num-pill-button">2</div>
+                                <a href="http://">+</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <div>
+            <img
+                class="w-100"
+                src="/images/checkout-bg.svg"
+                alt="checkout-bg"
+            />
+            <div class="checkout-section bg-soft">
+                <div class="container py-3">
+                    <div class="row gy-3">
+                        <div class="col-6">
+                            <div class="text-start text-checkout-start fs-5">
+                                Consegna
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-end fs-5 text-checkout-end">
+                                € 1,50
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-start text-checkout-start fs-5">
+                                Prodotti
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-end text-checkout-end fs-5">
+                                € 98,50
+                            </div>
+                        </div>
+                        <div class="total-line"></div>
+                        <div class="col-6">
+                            <div class="text-start text-checkout-start fs-2">
+                                Totale
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-end text-checkout-end fs-2">
+                                € 100,00
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="btn btn-primary my-4">Procedi al checkout</div>
+                </div>
+            </div>
         </div>
-    </main>
+    </div>
 </template>
 
 <script>
@@ -170,5 +290,96 @@ p {
 
 .plate-name {
     font-weight: 600;
+}
+
+//cart style
+
+.dish-container {
+    //border of the container border
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    margin-inline: 0.7rem;
+    margin-bottom: 2rem;
+    padding-block: 0.5rem;
+
+    .dish-image {
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 50%;
+        overflow: hidden;
+        align-items: center;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    .dish-information {
+        position: relative;
+        padding: 0;
+        .dish-and-price {
+            text-align: start;
+            h4 {
+                color: var(--orange);
+            }
+            span {
+                font-weight: 600;
+                padding-bottom: 1rem;
+            }
+        }
+
+        .cart-quantity-button {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            .fa-trash {
+                color: var(--soft-yellow);
+                padding-right: 1rem;
+                font-size: larger;
+                vertical-align: middle;
+            }
+        }
+
+        .pill-button {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            border-radius: 0.5rem;
+            margin-right: 0.7rem;
+
+            background: var(--soft-yellow);
+            height: 28px;
+            width: 100px;
+            .display-num-pill-button {
+                background-color: white;
+                text-align: center;
+                width: 33px;
+                height: 26px;
+                line-height: 28px;
+            }
+        }
+    }
+}
+
+.checkout-section {
+    position: relative;
+    padding-top: 1rem;
+    margin-top: -1px;
+
+    .text-checkout-start {
+        font-weight: 600;
+        color: var(--orange);
+    }
+
+    .text-checkout-end {
+        font-weight: 600;
+    }
+
+    .total-line {
+        height: 1px;
+        background-color: var(--orange);
+    }
 }
 </style>
