@@ -22,25 +22,26 @@
         >
 
         <div class="text-center pt-4">
-            <h2 class="text-orange name">Ciccio Pasticcio</h2>
-            <h3 class="text-yellow">Via Roma, 34</h3>
+            <h2 class="text-orange name">{{ restaurant.name }}</h2>
+            <h3 class="text-yellow">{{ restaurant.address }}</h3>
             <p class="text-start pt-4">
-                Nasce nel 2004 a Ponza la “Ciccio Pasticcio”, direttamente
-                dall’antica tradizione Partenopea. Una Tipica Pizzeria
-                Napoletana a doppio forno a legna e con cucina specializzata nei
-                piatti della classica arte della cucina di Napoli.
+                {{ restaurant.description }}
             </p>
         </div>
 
         <div class="text-center pt-2">
             <h2 class="text-yellow">I nostri piatti</h2>
-            <div class="card-box mt-4">
+            <div
+                v-for="dish in restaurant.dishes"
+                :key="dish.id"
+                class="card-box mt-4"
+            >
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-3 d-flex align-center">
                         <div class="img-box">
                             <img
-                                src="/images/DeliveBooLogoSmall.png"
-                                alt=""
+                                :src="'/images/dishes/' + dish.img"
+                                :alt="dish.name"
                                 class="plate-img"
                             />
                         </div>
@@ -48,7 +49,7 @@
                     <div class="col-9 text-center ps-0 pt-2">
                         <div class="text-start">
                             <h3 class="text-orange plate-name">
-                                Pizza Cipolle
+                                {{ dish.name }}
                             </h3>
                         </div>
                         <div>
@@ -62,14 +63,40 @@
                     </div>
                 </div>
             </div>
-            <a href="#" class="btn btn-primary text-mid text-small my-4"> Vai al carrello </a>
+            <a href="#" class="btn btn-primary text-mid text-small my-4">
+                Vai al carrello
+            </a>
         </div>
     </main>
 </template>
 
 <script>
+//axios call to get the restaurant and its dishes
+import axios from "axios";
+
 export default {
-    components: {},
+    name: "TheRestaurant",
+    data() {
+        return {
+            restaurant: {},
+        };
+    },
+    methods: {
+        //get the restaurant and the dishes with axios call and set the data
+        getRestaurant() {
+            axios
+                .get("/api/restaurants/" + this.$route.params.slug)
+                .then((response) => {
+                    this.restaurant = response.data;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+    },
+    mounted() {
+        this.getRestaurant();
+    },
 };
 </script>
 
@@ -106,7 +133,6 @@ p {
 
 .text-mid {
     font-size: 1.3rem;
-
 }
 .name {
     font-weight: 700;
@@ -123,12 +149,13 @@ p {
 .img-box {
     border: 1px solid transparent;
     border-radius: 50%;
+    overflow: hidden;
     height: 3.7rem;
     width: 3.7rem;
 }
 
 .plate-img {
-    object-fit: contain;
+    object-fit: cover;
     height: 3.7rem;
     width: 3.7rem;
 }

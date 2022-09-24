@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Restaurant from "./pages/TheRestaurant.vue";
 import Home from "./pages/TheMain.vue";
 import Cart from "./pages/TheCart.vue";
+import Search from "./pages/AdvancedSearch.vue";
 
 //put all the different pages below
 
@@ -30,6 +31,14 @@ const routes = [
         name: "cart.index",
         meta: {
             title: "Deliveboo Cart",
+        },
+    },
+    {
+        path: "/search",
+        component: Search,
+        name: "search.index",
+        meta: {
+            title: "Deliveboo Search Restaurants",
         },
     },
     {

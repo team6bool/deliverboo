@@ -43,7 +43,9 @@
                         </div>
 
                         <!-- cart quantity handle -->
-                        <div class="d-flex align-items-center cart-quantity-button">
+                        <div
+                            class="d-flex align-items-center cart-quantity-button"
+                        >
                             <!-- bin icon -->
                             <i class="fa-solid fa-trash"></i>
                             <!-- add and remove item from cart  -->
@@ -55,15 +57,11 @@
                         </div>
                     </div>
                 </div>
-                
             </div>
         </div>
 
+        <img class="w-100" src="/images/checkout-bg.svg" alt="checkout-bg" />
         <div class="checkout-section bg-soft">
-            <div class="bg-image">
-                <img src="/images/checkout-bg.svg" alt="checkout-bg"/>
-            </div>
-            
             <!--
             Structure:
             - delivery fee
@@ -73,31 +71,41 @@
             -->
 
             <div class="container py-3">
-
                 <div class="row gy-3">
                     <div class="col-6">
-                        <div class="text-start text-checkout-start fs-5">Consegna</div>
+                        <div class="text-start text-checkout-start fs-5">
+                            Consegna
+                        </div>
                     </div>
                     <div class="col-6">
-                        <div class="text-end fs-5 text-checkout-end">€ 1,50</div>
+                        <div class="text-end fs-5 text-checkout-end">
+                            € 1,50
+                        </div>
                     </div>
                     <div class="col-6">
-                        <div class="text-start text-checkout-start fs-5">Prodotti</div>
+                        <div class="text-start text-checkout-start fs-5">
+                            Prodotti
+                        </div>
                     </div>
                     <div class="col-6">
-                        <div class="text-end text-checkout-end fs-5">€ 98,50</div>
+                        <div class="text-end text-checkout-end fs-5">
+                            € 98,50
+                        </div>
                     </div>
                     <div class="total-line"></div>
                     <div class="col-6">
-                        <div class="text-start text-checkout-start fs-2">Totale</div>
+                        <div class="text-start text-checkout-start fs-2">
+                            Totale
+                        </div>
                     </div>
                     <div class="col-6">
-                        <div class="text-end text-checkout-end fs-2">€ 100,00</div>
+                        <div class="text-end text-checkout-end fs-2">
+                            € 100,00
+                        </div>
                     </div>
                 </div>
 
                 <div class="btn btn-primary my-4">Procedi al checkout</div>
-
             </div>
         </div>
     </div>
@@ -121,116 +129,110 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .cart-header {
-        .custom-image-cart {
-            padding-top: 1.5rem;
-            padding-bottom: 1.5rem;
-            width: 50%;
-        }
-        .restaurant-name {
-            color: var(--orange);
-            font-weight: 500;
-        }
-    
-        .restaurant-address {
-            color: var(--yellow);
-            font-size: 0.9rem;
-            font-weight: 500;
-            padding-bottom: 2rem;
-        }
+.cart-header {
+    .custom-image-cart {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+        width: 50%;
     }
-    
-    .dish-container {
-        //border of the container border
-        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
-        border-radius: 15px;
-        display: flex;
+    .restaurant-name {
+        color: var(--orange);
+        font-weight: 500;
+    }
+
+    .restaurant-address {
+        color: var(--yellow);
+        font-size: 0.9rem;
+        font-weight: 500;
+        padding-bottom: 2rem;
+    }
+}
+
+.dish-container {
+    //border of the container border
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    margin-inline: 0.7rem;
+    margin-bottom: 2rem;
+    padding-block: 0.5rem;
+
+    .dish-image {
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 50%;
+        overflow: hidden;
         align-items: center;
-        margin-inline: 0.7rem;
-        margin-bottom: 1rem;
-        padding-block: 0.5rem;
-    
-        .dish-image {
-            width: 3.5rem;
-            height: 3.5rem;
-            border-radius: 50%;
-            overflow: hidden;
-            align-items: center;
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-        }
-        .dish-information {
-            position: relative;
-            padding: 0;
-            .dish-and-price {
-                text-align: start;
-                h4 {
-                    color: var(--orange);
-                }
-                span {
-                    font-weight: 600;
-                    padding-bottom: 1rem;
-                }
-            }
-    
-            .cart-quantity-button {
-                position: absolute;
-                right: 0;
-                bottom: 0;
-                .fa-trash {
-                    color: var(--soft-yellow);
-                    padding-right: 1rem;
-                    font-size: larger;
-                    vertical-align: middle;
-                }
-            }
-    
-            .pill-button {
-                display: flex;
-                justify-content: space-evenly;
-                align-items: center;
-                border-radius: 0.5rem;
-                margin-right: 0.7rem;
-    
-                background: var(--soft-yellow);
-                height: 28px;
-                width: 100px;
-                .display-num-pill-button {
-                    background-color: white;
-                    width: 33px;
-                    height: 26px;
-                    line-height: 28px;
-                }
-            }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     }
-
-    .checkout-section {
+    .dish-information {
         position: relative;
-        margin-top: 2.5rem;
-        padding-top: 1rem;
-        
-            .bg-image {
-                position: absolute;
-                top: -15px;
-            }
-
-            .text-checkout-start {
-                font-weight: 600;
+        padding: 0;
+        .dish-and-price {
+            text-align: start;
+            h4 {
                 color: var(--orange);
             }
-
-            .text-checkout-end {
+            span {
                 font-weight: 600;
+                padding-bottom: 1rem;
             }
-
-            .total-line {
-                height: 1px;
-                background-color: var(--orange);
-            }
-
         }
+
+        .cart-quantity-button {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            .fa-trash {
+                color: var(--soft-yellow);
+                padding-right: 1rem;
+                font-size: larger;
+                vertical-align: middle;
+            }
+        }
+
+        .pill-button {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            border-radius: 0.5rem;
+            margin-right: 0.7rem;
+
+            background: var(--soft-yellow);
+            height: 28px;
+            width: 100px;
+            .display-num-pill-button {
+                background-color: white;
+                width: 33px;
+                height: 26px;
+                line-height: 28px;
+            }
+        }
+    }
+}
+
+.checkout-section {
+    position: relative;
+    padding-top: 1rem;
+    margin-top: -1px;
+
+    .text-checkout-start {
+        font-weight: 600;
+        color: var(--orange);
+    }
+
+    .text-checkout-end {
+        font-weight: 600;
+    }
+
+    .total-line {
+        height: 1px;
+        background-color: var(--orange);
+    }
+}
 </style>
