@@ -74,7 +74,7 @@
                             </div>
                         </div>
                     </div>
-                <div :id="'modal-' + dish.id" class="dish-details position-fixed top-0 bottom-0 end-0 start-0 d-none align-items-center justify-content-center px-3">
+                <div :id="'modal-' + dish.id" style="z-index: 5" class="dish-details position-fixed top-0 bottom-0 end-0 start-0 d-none align-items-center justify-content-center px-3">
                     <div class="bg-white rounded p-3" style="max-width: 600px">
                         <div class="rounded overflow-hidden mx-5 mb-3" style="max-width: 400px">
                             <img :src="'/images/dishes/' + dish.img" :alt="dish.name" class="w-100">
