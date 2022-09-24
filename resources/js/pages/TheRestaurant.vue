@@ -281,6 +281,7 @@ export default {
                 (acc, dish) => acc + dish.price * dish.quantity,
                 0
             );
+
             sessionStorage.setItem(
                 "partialTotal",
                 JSON.stringify(this.partialTotal)
