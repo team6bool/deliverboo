@@ -281,8 +281,12 @@ export default {
                 (acc, dish) => acc + dish.price * dish.quantity,
                 0
             );
-
+            sessionStorage.setItem(
+                "partialTotal",
+                JSON.stringify(this.partialTotal)
+            );
             this.total = this.partialTotal + this.restaurant.delivery_price;
+            sessionStorage.setItem("total", JSON.stringify(this.total));
         },
         removeOneFromCart(dish) {
             let cart = JSON.parse(sessionStorage.getItem("cart"));
@@ -299,8 +303,13 @@ export default {
                 (acc, dish) => acc + dish.price * dish.quantity,
                 0
             );
+            sessionStorage.setItem(
+                "partialTotal",
+                JSON.stringify(this.partialTotal)
+            );
 
             this.total = this.partialTotal + this.restaurant.delivery_price;
+            sessionStorage.setItem("total", JSON.stringify(this.total));
         },
         removeAllFromCart(dish) {
             let cart = JSON.parse(sessionStorage.getItem("cart"));
@@ -314,18 +323,24 @@ export default {
                 (acc, dish) => acc + dish.price * dish.quantity,
                 0
             );
+            sessionStorage.setItem(
+                "partialTotal",
+                JSON.stringify(this.partialTotal)
+            );
 
             this.total = this.partialTotal + this.restaurant.delivery_price;
+            sessionStorage.setItem("total", JSON.stringify(this.total));
+        },
+        getDeliveryPrice() {
+            return this.restaurant.delivery_price;
         },
     },
     mounted() {
+        const delivery_price = this.getDeliveryPrice();
         this.getRestaurant();
         this.cart = JSON.parse(sessionStorage.getItem("cart"));
-        this.partialTotal = this.cart.reduce(
-            (acc, dish) => acc + dish.price * dish.quantity,
-            0
-        );
-        this.total = this.partialTotal + this.restaurant.delivery_price;
+        this.partialTotal = JSON.parse(sessionStorage.getItem("partialTotal"));
+        this.total = JSON.parse(sessionStorage.getItem("total"));
     },
 };
 </script>
