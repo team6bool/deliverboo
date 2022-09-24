@@ -55,38 +55,62 @@
                                 <p class="text-orange plate-name">
                                     {{ dish.name }}
                                 </p>
-                                <p class="ps-1 price text-nowrap">€ {{ dish.price }}</p>
+                                <p class="ps-1 price text-nowrap">
+                                    € {{ dish.price }}
+                                </p>
                             </div>
                             <div
                                 class="d-flex align-items-center justify-content-around px-2"
                             >
                                 <a
                                     href="#"
-                                    class="btn btn-secondary show-btn text-small" @click="showDetails(dish.id)"
+                                    class="btn btn-secondary show-btn text-small"
+                                    @click="showDetails(dish.id)"
                                 >
                                     Dettagli
                                 </a>
+                                <!-- add a button that on click add item to the cart on the same page -->
                                 <button
                                     class="btn btn-primary show-btn text-small"
+                                    @click="addToCart(dish)"
                                 >
                                     Aggiungi
                                 </button>
                             </div>
                         </div>
                     </div>
-                <div :id="'modal-' + dish.id" style="z-index: 5" class="dish-details position-fixed top-0 bottom-0 end-0 start-0 d-none align-items-center justify-content-center px-3">
-                    <div class="bg-white rounded p-3" style="max-width: 600px">
-                        <div class="rounded overflow-hidden mx-5 mb-3" style="max-width: 400px">
-                            <img :src="'/images/dishes/' + dish.img" :alt="dish.name" class="w-100">
+                    <div
+                        :id="'modal-' + dish.id"
+                        style="z-index: 5"
+                        class="dish-details position-fixed top-0 bottom-0 end-0 start-0 d-none align-items-center justify-content-center px-3"
+                    >
+                        <div
+                            class="bg-white rounded p-3"
+                            style="max-width: 600px"
+                        >
+                            <div
+                                class="rounded overflow-hidden mx-5 mb-3"
+                                style="max-width: 400px"
+                            >
+                                <img
+                                    :src="'/images/dishes/' + dish.img"
+                                    :alt="dish.name"
+                                    class="w-100"
+                                />
+                            </div>
+                            <h3 class="text-orange fw-bold">{{ dish.name }}</h3>
+                            <h3 class="text-yellow fw-bold">
+                                € {{ dish.price }}
+                            </h3>
+                            <p>{{ dish.description }}</p>
+                            <button
+                                class="btn btn-secondary mt-3"
+                                @click="hideDetails(dish.id)"
+                            >
+                                Nascondi
+                            </button>
                         </div>
-                        <h3 class="text-orange fw-bold">{{dish.name}}</h3>
-                        <h3 class="text-yellow fw-bold">€ {{dish.price}}</h3>
-                        <p>{{dish.description}}</p>
-                        <button class="btn btn-secondary mt-3" @click="hideDetails(dish.id)">
-                            Nascondi
-                        </button>
                     </div>
-                </div>
                 </div>
             </div>
             <div class="d-flex flex-column justify-content-center">
@@ -104,21 +128,27 @@
                         - delete icon
                         - remove and add icon with number at the center
                     -->
-                <div class="row dish-container">
+                <div
+                    v-for="dish in cart"
+                    :key="dish.id"
+                    class="row dish-container"
+                >
                     <div class="col-3">
                         <div class="dish-image">
                             <!-- image of the dish -->
                             <img
-                                src="storage/public/images/dishes/4.jpg"
-                                alt="dish image"
+                                :src="'/images/dishes/' + dish.img"
+                                :alt="dish.name"
+                                class="plate-img"
                             />
                         </div>
                     </div>
+
                     <div class="col-9 dish-information">
                         <div class="dish-and-price">
                             <!-- title and price -->
-                            <h4>Pizza Margherita</h4>
-                            <span>€ 5,00</span>
+                            <h4>{{ dish.name }}</h4>
+                            <span>€ {{ dish.price }}</span>
                         </div>
 
                         <!-- cart quantity handle -->
@@ -128,10 +158,22 @@
                             <!-- bin icon -->
                             <i class="fa-solid fa-trash"></i>
                             <!-- add and remove item from cart  -->
-                            <div class="pill-button">
-                                <a href="http://">-</a>
-                                <div class="display-num-pill-button">2</div>
-                                <a href="http://">+</a>
+                            <div
+                                @click="removeFromCart(dish)"
+                                class="pill-button"
+                            >
+                                <a
+                                    @click="removeOneFromCart(dish)"
+                                    href="http://"
+                                    >-</a
+                                >
+
+                                <div class="display-num-pill-button">
+                                    {{ quantity }}
+                                </div>
+                                <a @click="addFromCart(dish)" href="http://"
+                                    >+</a
+                                >
                             </div>
                         </div>
                     </div>
@@ -154,7 +196,7 @@
                         </div>
                         <div class="col-6">
                             <div class="text-end fs-5 text-checkout-end">
-                                € 1,50
+                                € {{ restaurant.delivery_price }}
                             </div>
                         </div>
                         <div class="col-6">
@@ -164,7 +206,7 @@
                         </div>
                         <div class="col-6">
                             <div class="text-end text-checkout-end fs-5">
-                                € 98,50
+                                € {{ partialTotal }}
                             </div>
                         </div>
                         <div class="total-line"></div>
@@ -175,7 +217,7 @@
                         </div>
                         <div class="col-6">
                             <div class="text-end text-checkout-end fs-2">
-                                € 100,00
+                                € {{ total }}
                             </div>
                         </div>
                     </div>
@@ -196,6 +238,10 @@ export default {
     data() {
         return {
             restaurant: {},
+            cart: {},
+            quantity: 1,
+            partialTotal: 0,
+            total: 0,
         };
     },
     methods: {
@@ -210,17 +256,53 @@ export default {
                     console.log(error);
                 });
         },
-        showDetails(id){
+        showDetails(id) {
             let modal = document.getElementById("modal-" + id);
             modal.classList.replace("d-none", "d-flex");
         },
-        hideDetails(id){
+        hideDetails(id) {
             let modal = document.getElementById("modal-" + id);
             modal.classList.replace("d-flex", "d-none");
-        }
+        },
+        addToCart(dish) {
+            if (sessionStorage.getItem("cart") === null) {
+                sessionStorage.setItem("cart", JSON.stringify([]));
+            }
+            this.cart = JSON.parse(sessionStorage.getItem("cart"));
+            this.cart.push(dish);
+            sessionStorage.setItem("cart", JSON.stringify(this.cart));
+            console.log(this.cart);
+        },
+        updateCart() {
+            if (sessionStorage.getItem("cart") !== null) {
+                this.cart = JSON.parse(sessionStorage.getItem("cart"));
+            }
+        },
+        removeFromCart(dish) {
+            this.cart = JSON.parse(sessionStorage.getItem("cart"));
+            this.cart = this.cart.filter((item) => item.id !== dish.id);
+            sessionStorage.setItem("cart", JSON.stringify(this.cart));
+        },
+        addFromCart(dish) {
+            this.cart = JSON.parse(sessionStorage.getItem("cart"));
+            this.cart.push(dish);
+            sessionStorage.setItem("cart", JSON.stringify(this.cart));
+        },
+        removeOneFromCart(dish) {
+            this.cart = JSON.parse(sessionStorage.getItem("cart"));
+            this.cart = this.cart.filter((item) => item.id !== dish.id);
+            sessionStorage.setItem("cart", JSON.stringify(this.cart));
+        },
+        getProductsTotal() {
+            this.cart = JSON.parse(sessionStorage.getItem("cart"));
+            this.cart.forEach((dish) => {
+                this.productsTotal += dish.price * dish.quantity;
+            });
+        },
     },
     mounted() {
         this.getRestaurant();
+        this.updateCart();
     },
 };
 </script>
@@ -238,7 +320,7 @@ p {
     font-size: 0.9rem;
 }
 
-.dish-details{
+.dish-details {
     backdrop-filter: blur(2px) brightness(0.9);
 }
 
