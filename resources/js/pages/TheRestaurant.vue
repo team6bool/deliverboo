@@ -66,8 +66,10 @@
                                 >
                                     Dettagli
                                 </a>
+                                <!-- add a button that on click add item to the cart on the same page -->
                                 <button
                                     class="btn btn-primary show-btn text-small"
+                                    @click="addToCart(dish)"
                                 >
                                     Aggiungi
                                 </button>
@@ -91,21 +93,27 @@
                         - delete icon
                         - remove and add icon with number at the center
                     -->
-                <div class="row dish-container">
+                <div
+                    v-for="dish in cart"
+                    :key="dish.id"
+                    class="row dish-container"
+                >
                     <div class="col-3">
                         <div class="dish-image">
                             <!-- image of the dish -->
                             <img
-                                src="storage/public/images/dishes/4.jpg"
-                                alt="dish image"
+                                :src="'/images/dishes/' + dish.img"
+                                :alt="dish.name"
+                                class="plate-img"
                             />
                         </div>
                     </div>
+
                     <div class="col-9 dish-information">
                         <div class="dish-and-price">
                             <!-- title and price -->
-                            <h4>Pizza Margherita</h4>
-                            <span>€ 5,00</span>
+                            <h4>{{ dish.name }}</h4>
+                            <span>€ {{ dish.price }}</span>
                         </div>
 
                         <!-- cart quantity handle -->
@@ -115,10 +123,22 @@
                             <!-- bin icon -->
                             <i class="fa-solid fa-trash"></i>
                             <!-- add and remove item from cart  -->
-                            <div class="pill-button">
-                                <a href="http://">-</a>
-                                <div class="display-num-pill-button">2</div>
-                                <a href="http://">+</a>
+                            <div
+                                @click="removeFromCart(dish)"
+                                class="pill-button"
+                            >
+                                <a
+                                    @click="removeOneFromCart(dish)"
+                                    href="http://"
+                                    >-</a
+                                >
+
+                                <div class="display-num-pill-button">
+                                    {{ quantity }}
+                                </div>
+                                <a @click="addFromCart(dish)" href="http://"
+                                    >+</a
+                                >
                             </div>
                         </div>
                     </div>
@@ -141,7 +161,7 @@
                         </div>
                         <div class="col-6">
                             <div class="text-end fs-5 text-checkout-end">
-                                € 1,50
+                                € {{ restaurant.delivery_price }}
                             </div>
                         </div>
                         <div class="col-6">
@@ -151,7 +171,7 @@
                         </div>
                         <div class="col-6">
                             <div class="text-end text-checkout-end fs-5">
-                                € 98,50
+                                € {{ partialTotal }}
                             </div>
                         </div>
                         <div class="total-line"></div>
@@ -162,7 +182,7 @@
                         </div>
                         <div class="col-6">
                             <div class="text-end text-checkout-end fs-2">
-                                € 100,00
+                                € {{ total }}
                             </div>
                         </div>
                     </div>
@@ -183,6 +203,10 @@ export default {
     data() {
         return {
             restaurant: {},
+            cart: {},
+            quantity: 1,
+            partialTotal: 0,
+            total: 0,
         };
     },
     methods: {
@@ -197,9 +221,45 @@ export default {
                     console.log(error);
                 });
         },
+        addToCart(dish) {
+            if (sessionStorage.getItem("cart") === null) {
+                sessionStorage.setItem("cart", JSON.stringify([]));
+            }
+            this.cart = JSON.parse(sessionStorage.getItem("cart"));
+            this.cart.push(dish);
+            sessionStorage.setItem("cart", JSON.stringify(this.cart));
+            console.log(this.cart);
+        },
+        updateCart() {
+            if (sessionStorage.getItem("cart") !== null) {
+                this.cart = JSON.parse(sessionStorage.getItem("cart"));
+            }
+        },
+        removeFromCart(dish) {
+            this.cart = JSON.parse(sessionStorage.getItem("cart"));
+            this.cart = this.cart.filter((item) => item.id !== dish.id);
+            sessionStorage.setItem("cart", JSON.stringify(this.cart));
+        },
+        addFromCart(dish) {
+            this.cart = JSON.parse(sessionStorage.getItem("cart"));
+            this.cart.push(dish);
+            sessionStorage.setItem("cart", JSON.stringify(this.cart));
+        },
+        removeOneFromCart(dish) {
+            this.cart = JSON.parse(sessionStorage.getItem("cart"));
+            this.cart = this.cart.filter((item) => item.id !== dish.id);
+            sessionStorage.setItem("cart", JSON.stringify(this.cart));
+        },
+        getProductsTotal() {
+            this.cart = JSON.parse(sessionStorage.getItem("cart"));
+            this.cart.forEach((dish) => {
+                this.productsTotal += dish.price * dish.quantity;
+            });
+        },
     },
     mounted() {
         this.getRestaurant();
+        this.updateCart();
     },
 };
 </script>
