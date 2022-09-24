@@ -2,7 +2,7 @@
     <div class="search-section bg-primary">
         <div class="container py-3">
             <div class="search-bar d-flex shadow my-3">
-                <a class="icon bg-soft" href="#">
+                <!-- <a class="icon bg-soft" href="#">
                     <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g filter="url(#filter0_d_7_23)">
                             <path
@@ -25,14 +25,27 @@
                             </filter>
                         </defs>
                     </svg>
-                </a>
-                <select name="categorie" id="">
+                </a> -->
+                <!-- <select name="categories" id="">
                     <option value="" disabled selected>Cosa ti va di mangiare?</option>
                     <option v-for="category in categories" :key="category" :value="category">{{category}}</option>
-                </select>
+                </select> -->
+                
+                
+                
             </div>
             <h1 v-for="restaurant in restaurants" :key="restaurant.id">{{restaurant.name}}</h1>
         </div>
+        <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropdown link
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        <li v-for="category in categories" :key="category"><a class="dropdown-item" href="#" @click="changeCategory(category)">{{category}}</a></li>
+                    </ul>
+                </div>
+                
     </div>
 </template>
 
@@ -44,7 +57,7 @@ export default {
         return {
             restaurants: [],
             categories: [],
-            selectedCategory: "Veg",
+            selectedCategory: [],
         }
     },
     methods: {
@@ -69,7 +82,13 @@ export default {
                         this.categories.push(resp.data[i].name);
                     }
                 })
-        }
+        },
+
+        changeCategory(value){
+            this.selectedCategory = value;
+            this.fetchRestaurants();
+        },
+
     },
     mounted() {
         this.fetchRestaurants(),
