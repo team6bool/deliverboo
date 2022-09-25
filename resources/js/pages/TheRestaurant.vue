@@ -197,9 +197,8 @@
                             <!-- bin icon -->
                             <a
                                 class="no-decoration"
-                                href="http://"
                                 @click="removeAllFromCart(dish)"
-                                ><i class="fa-solid fa-trash no-decoration"></i
+                                ><i class="fa-solid fa-trash"></i
                             ></a>
                             <!-- add and remove item from cart  -->
                             <div
