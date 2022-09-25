@@ -8,6 +8,8 @@
     <title>Laravel</title>
 
     <script src="{{ asset('js/frontend.js') }}" defer></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.1/js/bootstrap.bundle.min.js' integrity='sha512-1TK4hjCY5+E9H3r5+05bEGbKGyK506WaDPfPe1s/ihwRjr6OtL43zJLzOFQ+/zciONEd+sp7LwrfOCnyukPSsg==' crossorigin='anonymous'></script>
+
     <script src="https://js.braintreegateway.com/web/dropin/1.10.0/js/dropin.js"></script>
     <script>
         var button = document.querySelector('#submit-button');
