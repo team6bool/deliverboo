@@ -55,6 +55,9 @@ const router = new VueRouter({
     //it must contain an array of routes
 
     routes,
+    scrollBehavior (to, from, savedPosition) {
+        return { x: 0, y: 0, behavior: 'auto' }
+    },
     mode: "history",
 });
 
