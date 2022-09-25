@@ -80,8 +80,9 @@
                     <div class="row">
                         <div class="col-3 d-flex align-center">
                             <div class="img-box">
+                                <!-- use the function getImagePath(image) -->
                                 <img
-                                    :src="'/images/dishes/' + dish.img"
+                                    :src="getImagePath(dish.img)"
                                     :alt="dish.name"
                                     class="plate-img"
                                 />
@@ -132,7 +133,10 @@
                                 style="max-width: 400px"
                             >
                                 <img
-                                    :src="'/images/dishes/' + dish.img"
+                                    :src="
+                                        './storage/public/images/dishes/' +
+                                        dish.img
+                                    "
                                     :alt="dish.name"
                                     class="w-100"
                                 />
@@ -176,7 +180,7 @@
                         <div class="dish-image">
                             <!-- image of the dish -->
                             <img
-                                :src="'/images/dishes/' + dish.img"
+                                :src="getImagePath(dish.img)"
                                 :alt="dish.name"
                                 class="plate-img"
                             />
@@ -187,7 +191,7 @@
                         <div class="dish-and-price">
                             <p class="text-orange">{{ dish.name }}</p>
                             <p class="ps-1 price text-nowrap">
-                                € {{ dish.price * dish.quantity }}
+                                € {{ (dish.price * dish.quantity).toFixed(2) }}
                             </p>
                         </div>
 
@@ -400,10 +404,16 @@ export default {
             let modal = document.getElementById("modal-" + id);
             modal.classList.replace("d-flex", "d-none");
         },
+        getImagePath(img) {
+            return "/storage/public/images/dishes/" + img;
+        },
         addToCart(dish) {
-            if ((sessionStorage.getItem("cart") != null) && (this.cart[0].user_id != this.restaurant.id)){
-                    this.checkCart();
-                    this.addToCart().preventDefault();
+            if (
+                sessionStorage.getItem("cart") != null &&
+                this.cart[0].user_id != this.restaurant.id
+            ) {
+                this.checkCart();
+                this.addToCart().preventDefault();
             }
             if (sessionStorage.getItem("cart") == null) {
                 sessionStorage.setItem("cart", JSON.stringify([]));
@@ -429,7 +439,10 @@ export default {
                 "partialTotal",
                 JSON.stringify(this.partialTotal)
             );
-            this.total = this.partialTotal + this.restaurant.delivery_price;
+            this.total = round(
+                this.partialTotal + this.restaurant.delivery_price,
+                2
+            );
             sessionStorage.setItem("total", JSON.stringify(this.total));
         },
         checkCart() {
@@ -475,7 +488,10 @@ export default {
                 "partialTotal",
                 JSON.stringify(this.partialTotal)
             );
-            this.total = this.partialTotal + this.restaurant.delivery_price;
+            this.total = round(
+                this.partialTotal + this.restaurant.delivery_price,
+                2
+            );
             sessionStorage.setItem("total", JSON.stringify(this.total));
             if (this.cart.length == 0) {
                 sessionStorage.removeItem("cart");
@@ -505,7 +521,10 @@ export default {
                 JSON.stringify(this.partialTotal)
             );
 
-            this.total = this.partialTotal + this.restaurant.delivery_price;
+            this.total = round(
+                this.partialTotal + this.restaurant.delivery_price,
+                2
+            );
             sessionStorage.setItem("total", JSON.stringify(this.total));
             if (this.cart.length == 0) {
                 sessionStorage.removeItem("cart");
