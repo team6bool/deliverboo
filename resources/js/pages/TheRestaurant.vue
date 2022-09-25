@@ -185,14 +185,12 @@
 
                     <div class="col-9 dish-information">
                         <div class="dish-and-price">
-                            <!-- title and price -->
                             <p class="text-orange">{{ dish.name }}</p>
                             <p class="ps-1 price text-nowrap">
-                                € {{ dish.price }}
+                                € {{ dish.price * dish.quantity }}
                             </p>
                         </div>
 
-                        <!-- cart quantity handle -->
                         <div
                             class="d-flex align-items-center cart-quantity-button"
                         >
@@ -435,7 +433,6 @@ export default {
             this.total = this.partialTotal + this.restaurant.delivery_price;
             sessionStorage.setItem("total", JSON.stringify(this.total));
         },
-        //check if the dish user_id has the same id of the restaurant, if not, show a popup with a button that allow to empty the cart and another button that allow to go back to the restaurant page
         checkCart() {
             if (this.cart.length > 0) {
                 if (this.cart[0].user_id != this.restaurant.id) {
@@ -456,7 +453,6 @@ export default {
             this.partialTotal = 0;
             this.total = 0;
             this.closeModalCart();
-
         },
         removeOneFromCart(dish) {
             let cart = JSON.parse(sessionStorage.getItem("cart"));
@@ -480,7 +476,6 @@ export default {
                 "partialTotal",
                 JSON.stringify(this.partialTotal)
             );
-
             this.total = this.partialTotal + this.restaurant.delivery_price;
             sessionStorage.setItem("total", JSON.stringify(this.total));
             if (this.cart.length == 0) {
@@ -521,12 +516,21 @@ export default {
                 this.total = 0;
             }
         },
+        dishSubtotals() {
+            let subtotals = [];
+            this.cart.forEach((dish) => {
+                subtotals.push(dish.price * dish.quantity);
+            });
+            sessionStorage.setItem("subtotals", JSON.stringify(subtotals));
+        },
     },
     mounted() {
         this.getRestaurant();
         this.cart = JSON.parse(sessionStorage.getItem("cart"));
         this.partialTotal = JSON.parse(sessionStorage.getItem("partialTotal"));
         this.total = JSON.parse(sessionStorage.getItem("total"));
+        this.dishSubtotals();
+        console.log(window.sessionStorage);
     },
 };
 </script>
