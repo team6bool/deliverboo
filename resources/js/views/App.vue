@@ -118,8 +118,9 @@ a {
     }
 }
 
-.no-decoration:hover {
-    text-decoration: none;
+.no-decoration:focus, .no-decoration:hover , .no-decoration:active {
+    text-decoration: none !important;
+    border-bottom:none !important;
 }
 
 .link {
@@ -132,6 +133,7 @@ a {
         opacity: 0.8;
     }
 }
+
 
 button,
 .btn {
