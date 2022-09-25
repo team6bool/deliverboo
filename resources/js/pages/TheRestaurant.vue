@@ -197,8 +197,11 @@
                             class="d-flex align-items-center cart-quantity-button"
                         >
                             <!-- bin icon -->
-                            <a href="http://" @click="removeAllFromCart(dish)"
-                                ><i class="fa-solid fa-trash"></i
+                            <a
+                                class="no-decoration"
+                                href="http://"
+                                @click="removeAllFromCart(dish)"
+                                ><i class="fa-solid fa-trash no-decoration"></i
                             ></a>
                             <!-- add and remove item from cart  -->
                             <div
@@ -401,11 +404,9 @@ export default {
             modal.classList.replace("d-flex", "d-none");
         },
         addToCart(dish) {
-            if (sessionStorage.getItem("cart") != null) {
-                if (this.cart[0].user_id != this.restaurant.id)  {
+            if ((sessionStorage.getItem("cart") != null) && (this.cart[0].user_id != this.restaurant.id)){
                     this.checkCart();
                     this.addToCart().preventDefault();
-                }
             }
             if (sessionStorage.getItem("cart") == null) {
                 sessionStorage.setItem("cart", JSON.stringify([]));
@@ -455,6 +456,7 @@ export default {
             this.partialTotal = 0;
             this.total = 0;
             this.closeModalCart();
+
         },
         removeOneFromCart(dish) {
             let cart = JSON.parse(sessionStorage.getItem("cart"));
@@ -481,6 +483,13 @@ export default {
 
             this.total = this.partialTotal + this.restaurant.delivery_price;
             sessionStorage.setItem("total", JSON.stringify(this.total));
+            if (this.cart.length == 0) {
+                sessionStorage.removeItem("cart");
+                sessionStorage.removeItem("partialTotal");
+                sessionStorage.removeItem("total");
+                this.partialTotal = 0;
+                this.total = 0;
+            }
         },
         removeAllFromCart(dish) {
             let cart = JSON.parse(sessionStorage.getItem("cart"));
@@ -504,6 +513,13 @@ export default {
 
             this.total = this.partialTotal + this.restaurant.delivery_price;
             sessionStorage.setItem("total", JSON.stringify(this.total));
+            if (this.cart.length == 0) {
+                sessionStorage.removeItem("cart");
+                sessionStorage.removeItem("partialTotal");
+                sessionStorage.removeItem("total");
+                this.partialTotal = 0;
+                this.total = 0;
+            }
         },
     },
     mounted() {
