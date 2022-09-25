@@ -34,6 +34,7 @@ export default {
 :root {
     --yellow: #ffc244;
     --orange: #fd5f25;
+    --orange-rgb: 253, 95, 37;
     --dark-orange: #e83e00;
     --black: #1d1d1d;
     --soft-yellow: #ffdc95;
@@ -78,19 +79,19 @@ export default {
     background: var(--sand);
 }
 
-.text-orange{
+.text-orange {
     color: var(--orange) !important;
 }
 
-.text-soft{
+.text-soft {
     color: var(--soft-yellow) !important;
 }
 
-.text-yellow{
+.text-yellow {
     color: var(--yellow) !important;
 }
 
-.text-sand{
+.text-sand {
     color: var(--sand) !important;
 }
 
@@ -109,6 +110,7 @@ export default {
 a {
     text-decoration: none;
     color: inherit;
+    cursor: pointer;
 
     &:hover {
         text-decoration: underline;
@@ -116,7 +118,7 @@ a {
     }
 }
 
-.no-decoration:hover{
+.no-decoration:hover {
     text-decoration: none;
 }
 
@@ -212,6 +214,16 @@ p {
     font-weight: 600;
     padding-bottom: 1rem;
     margin-bottom: 0;
+}
+
+input {
+    &:focus,
+    &:active,
+    &:focus-visible {
+        box-shadow: 0 0 0 0.25rem rgba(var(--orange-rgb), 0.25) !important;
+        border-color: var(--orange) !important;
+        outline-color: var(--orange) !important;
+    }
 }
 
 @media screen and (min-width: 1200px) {

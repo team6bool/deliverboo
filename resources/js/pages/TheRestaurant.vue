@@ -23,6 +23,45 @@
                 </a>
             </router-link>
 
+            <div
+                id="modal-cart"
+                style="z-index: 5"
+                tabindex="-1"
+                class="modal-bg position-fixed top-0 bottom-0 end-0 start-0 d-none align-items-center justify-content-center px-3"
+            >
+                <div class="modal-dialog bg-white rounded p-3">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">
+                                Hai degli elementi nel carrello
+                            </h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                Per accedere ad altro ristorante bisogna
+                                svuotare il carrello.
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <!-- button to close the modal -->
+                            <button
+                                class="btn btn-secondary"
+                                @click="closeModalCart()"
+                            >
+                                Continua sulla pagina
+                            </button>
+
+                            <button
+                                class="btn btn-danger mt-3"
+                                @click="removeAllFromSession()"
+                            >
+                                Svuota carrello
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="text-center pt-4">
                 <h2 class="text-orange name">{{ restaurant.name }}</h2>
                 <h3 class="text-yellow">{{ restaurant.address }}</h3>
@@ -82,7 +121,7 @@
                     <div
                         :id="'modal-' + dish.id"
                         style="z-index: 5"
-                        class="dish-details position-fixed top-0 bottom-0 end-0 start-0 d-none align-items-center justify-content-center px-3"
+                        class="modal-bg position-fixed top-0 bottom-0 end-0 start-0 d-none align-items-center justify-content-center px-3"
                     >
                         <div
                             class="bg-white rounded p-3"
@@ -162,17 +201,24 @@
                                 ><i class="fa-solid fa-trash"></i
                             ></a>
                             <!-- add and remove item from cart  -->
-                            <div class="pill-button">
+                            <div
+                                @click="removeFromCart(dish)"
+                                class="pill-button"
+                            >
                                 <a
                                     @click="removeOneFromCart(dish)"
-                                    href="http://"
-                                    >-</a
-                                >
+                                    class="no-decoration"
+                                    >-
+                                </a>
 
                                 <div class="display-num-pill-button">
                                     {{ dish.quantity }}
                                 </div>
-                                <a @click="addToCart(dish)" href="http://">+</a>
+                                <a
+                                    @click="addToCart(dish)"
+                                    class="no-decoration"
+                                    >+</a
+                                >
                             </div>
                         </div>
                     </div>
@@ -221,7 +267,74 @@
                         </div>
                     </div>
 
-                    <div class="btn btn-primary my-4">Procedi al checkout</div>
+                    <div class="checkout-open mt-3">
+                        <h2 class="pt-3 text-white text-shadow">Checkout</h2>
+                        <form
+                            action=""
+                            method="post"
+                            enctype="multipart/form-data"
+                        >
+                            <div class="form-group my-3">
+                                <label class="fw-semibold text-orange fs-5 pb-1"
+                                    >Nome*</label
+                                >
+                                <input
+                                    type="text"
+                                    name="name"
+                                    class="form-control"
+                                    required
+                                />
+                            </div>
+                            <div class="form-group my-3">
+                                <label class="fw-semibold text-orange fs-5 pb-1"
+                                    >Cognome*</label
+                                >
+                                <input
+                                    type="text"
+                                    name="lastname"
+                                    class="form-control"
+                                    required
+                                />
+                            </div>
+                            <div class="form-group my-3">
+                                <label class="fw-semibold text-orange fs-5 pb-1"
+                                    >Indirizzo*</label
+                                >
+                                <input
+                                    type="text"
+                                    name="address"
+                                    class="form-control"
+                                    required
+                                />
+                            </div>
+                            <div class="form-group my-3">
+                                <label class="fw-semibold text-orange fs-5 pb-1"
+                                    >Email*</label
+                                >
+                                <input
+                                    type="text"
+                                    name="email"
+                                    class="form-control"
+                                    required
+                                />
+                            </div>
+                            <div class="form-group my-3">
+                                <label class="fw-semibold text-orange fs-5 pb-1"
+                                    >Numero di telefono*</label
+                                >
+                                <input
+                                    type="text"
+                                    name="phone"
+                                    class="form-control"
+                                    required
+                                />
+                            </div>
+                            <div id="dropin-container"></div>
+                            <button id="submit-button" class="btn btn-primary">
+                                Ordina
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -231,6 +344,30 @@
 <script>
 //axios call to get the restaurant and its dishes
 import axios from "axios";
+
+export function round(number, precision) {
+    "use strict";
+    precision = precision ? +precision : 0;
+
+    var sNumber = number + "",
+        periodIndex = sNumber.indexOf("."),
+        factor = Math.pow(10, precision);
+
+    if (periodIndex === -1 || precision < 0) {
+        return Math.round(number * factor) / factor;
+    }
+
+    number = +number;
+
+    // sNumber[periodIndex + precision + 1] is the last digit
+    if (sNumber[periodIndex + precision + 1] >= 5) {
+        // Correcting float error
+        // factor * 10 to use one decimal place beyond the precision
+        number += (number < 0 ? -1 : 1) / (factor * 10);
+    }
+
+    return +number.toFixed(precision);
+}
 
 export default {
     name: "TheRestaurant",
@@ -264,6 +401,12 @@ export default {
             modal.classList.replace("d-flex", "d-none");
         },
         addToCart(dish) {
+            if (sessionStorage.getItem("cart") != null) {
+                if (this.cart[0].user_id != this.restaurant.id)  {
+                    this.checkCart();
+                    this.addToCart().preventDefault();
+                }
+            }
             if (sessionStorage.getItem("cart") == null) {
                 sessionStorage.setItem("cart", JSON.stringify([]));
             }
@@ -277,17 +420,41 @@ export default {
             }
             sessionStorage.setItem("cart", JSON.stringify(cart));
             this.cart = JSON.parse(sessionStorage.getItem("cart"));
-            this.partialTotal = this.cart.reduce(
-                (acc, dish) => acc + dish.price * dish.quantity,
-                0
+            this.partialTotal = round(
+                this.cart.reduce(
+                    (acc, dish) => acc + dish.price * dish.quantity,
+                    0
+                ),
+                2
             );
-
             sessionStorage.setItem(
                 "partialTotal",
                 JSON.stringify(this.partialTotal)
             );
             this.total = this.partialTotal + this.restaurant.delivery_price;
             sessionStorage.setItem("total", JSON.stringify(this.total));
+        },
+        //check if the dish user_id has the same id of the restaurant, if not, show a popup with a button that allow to empty the cart and another button that allow to go back to the restaurant page
+        checkCart() {
+            if (this.cart.length > 0) {
+                if (this.cart[0].user_id != this.restaurant.id) {
+                    let modal = document.getElementById("modal-cart");
+                    modal.classList.replace("d-none", "d-flex");
+                }
+            }
+        },
+        closeModalCart() {
+            let modal = document.getElementById("modal-cart");
+            modal.classList.replace("d-flex", "d-none");
+        },
+        removeAllFromSession() {
+            sessionStorage.removeItem("cart");
+            sessionStorage.removeItem("partialTotal");
+            sessionStorage.removeItem("total");
+            this.cart = [];
+            this.partialTotal = 0;
+            this.total = 0;
+            this.closeModalCart();
         },
         removeOneFromCart(dish) {
             let cart = JSON.parse(sessionStorage.getItem("cart"));
@@ -300,9 +467,12 @@ export default {
             }
             sessionStorage.setItem("cart", JSON.stringify(cart));
             this.cart = JSON.parse(sessionStorage.getItem("cart"));
-            this.partialTotal = this.cart.reduce(
-                (acc, dish) => acc + dish.price * dish.quantity,
-                0
+            this.partialTotal = round(
+                this.cart.reduce(
+                    (acc, dish) => acc + dish.price * dish.quantity,
+                    0
+                ),
+                2
             );
             sessionStorage.setItem(
                 "partialTotal",
@@ -320,9 +490,12 @@ export default {
             }
             sessionStorage.setItem("cart", JSON.stringify(cart));
             this.cart = JSON.parse(sessionStorage.getItem("cart"));
-            this.partialTotal = this.cart.reduce(
-                (acc, dish) => acc + dish.price * dish.quantity,
-                0
+            this.partialTotal = round(
+                this.cart.reduce(
+                    (acc, dish) => acc + dish.price * dish.quantity,
+                    0
+                ),
+                2
             );
             sessionStorage.setItem(
                 "partialTotal",
@@ -332,12 +505,8 @@ export default {
             this.total = this.partialTotal + this.restaurant.delivery_price;
             sessionStorage.setItem("total", JSON.stringify(this.total));
         },
-        getDeliveryPrice() {
-            return this.restaurant.delivery_price;
-        },
     },
     mounted() {
-        const delivery_price = this.getDeliveryPrice();
         this.getRestaurant();
         this.cart = JSON.parse(sessionStorage.getItem("cart"));
         this.partialTotal = JSON.parse(sessionStorage.getItem("partialTotal"));
@@ -359,7 +528,11 @@ p {
     font-size: 0.9rem;
 }
 
-.dish-details {
+.checkout-open {
+    border-top: 2px solid var(--orange);
+}
+
+.modal-bg {
     backdrop-filter: blur(2px) brightness(0.9);
 }
 
@@ -431,20 +604,25 @@ p {
         border-radius: 50%;
         overflow: hidden;
         align-items: center;
+
         img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
     }
+
     .dish-information {
         position: relative;
         padding: 0;
+
         .dish-and-price {
             text-align: start;
+
             h4 {
                 color: var(--orange);
             }
+
             span {
                 font-weight: 600;
                 padding-bottom: 1rem;
@@ -455,6 +633,7 @@ p {
             position: absolute;
             right: 0;
             bottom: 0;
+
             .fa-trash {
                 color: var(--soft-yellow);
                 padding-right: 1rem;
@@ -474,6 +653,7 @@ p {
             background: var(--soft-yellow);
             height: 28px;
             width: 100px;
+
             .display-num-pill-button {
                 background-color: white;
                 text-align: center;
