@@ -23,6 +23,45 @@
                 </a>
             </router-link>
 
+            <div
+                id="modal-cart"
+                style="z-index: 5"
+                tabindex="-1"
+                class="modal-bg position-fixed top-0 bottom-0 end-0 start-0 d-none align-items-center justify-content-center px-3"
+            >
+                <div class="modal-dialog bg-white rounded p-3">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">
+                                Hai degli elementi nel carrello
+                            </h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                Per accedere ad altro ristorante bisogna
+                                svuotare il carrello.
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <!-- button to close the modal -->
+                            <button
+                                class="btn btn-secondary"
+                                @click="closeModalCart()"
+                            >
+                                Continua sulla pagina
+                            </button>
+
+                            <button
+                                class="btn btn-danger mt-3"
+                                @click="removeAllFromSession()"
+                            >
+                                Svuota carrello
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="text-center pt-4">
                 <h2 class="text-orange name">{{ restaurant.name }}</h2>
                 <h3 class="text-yellow">{{ restaurant.address }}</h3>
@@ -307,12 +346,12 @@
 import axios from "axios";
 
 export function round(number, precision) {
-    'use strict';
+    "use strict";
     precision = precision ? +precision : 0;
 
-    var sNumber     = number + '',
-        periodIndex = sNumber.indexOf('.'),
-        factor      = Math.pow(10, precision);
+    var sNumber = number + "",
+        periodIndex = sNumber.indexOf("."),
+        factor = Math.pow(10, precision);
 
     if (periodIndex === -1 || precision < 0) {
         return Math.round(number * factor) / factor;
@@ -362,6 +401,12 @@ export default {
             modal.classList.replace("d-flex", "d-none");
         },
         addToCart(dish) {
+            if (sessionStorage.getItem("cart") != null) {
+                if (this.cart[0].user_id != this.restaurant.id)  {
+                    this.checkCart();
+                    this.addToCart().preventDefault();
+                }
+            }
             if (sessionStorage.getItem("cart") == null) {
                 sessionStorage.setItem("cart", JSON.stringify([]));
             }
@@ -375,16 +420,41 @@ export default {
             }
             sessionStorage.setItem("cart", JSON.stringify(cart));
             this.cart = JSON.parse(sessionStorage.getItem("cart"));
-            this.partialTotal = round(this.cart.reduce(
-                (acc, dish) => acc + dish.price * dish.quantity,
-                0
-            ), 2);
+            this.partialTotal = round(
+                this.cart.reduce(
+                    (acc, dish) => acc + dish.price * dish.quantity,
+                    0
+                ),
+                2
+            );
             sessionStorage.setItem(
                 "partialTotal",
                 JSON.stringify(this.partialTotal)
             );
             this.total = this.partialTotal + this.restaurant.delivery_price;
             sessionStorage.setItem("total", JSON.stringify(this.total));
+        },
+        //check if the dish user_id has the same id of the restaurant, if not, show a popup with a button that allow to empty the cart and another button that allow to go back to the restaurant page
+        checkCart() {
+            if (this.cart.length > 0) {
+                if (this.cart[0].user_id != this.restaurant.id) {
+                    let modal = document.getElementById("modal-cart");
+                    modal.classList.replace("d-none", "d-flex");
+                }
+            }
+        },
+        closeModalCart() {
+            let modal = document.getElementById("modal-cart");
+            modal.classList.replace("d-flex", "d-none");
+        },
+        removeAllFromSession() {
+            sessionStorage.removeItem("cart");
+            sessionStorage.removeItem("partialTotal");
+            sessionStorage.removeItem("total");
+            this.cart = [];
+            this.partialTotal = 0;
+            this.total = 0;
+            this.closeModalCart();
         },
         removeOneFromCart(dish) {
             let cart = JSON.parse(sessionStorage.getItem("cart"));
@@ -397,11 +467,13 @@ export default {
             }
             sessionStorage.setItem("cart", JSON.stringify(cart));
             this.cart = JSON.parse(sessionStorage.getItem("cart"));
-            this.partialTotal = round(this.cart.reduce(
-                (acc, dish) =>
-                    acc + dish.price * dish.quantity,
-                0
-            ),2);
+            this.partialTotal = round(
+                this.cart.reduce(
+                    (acc, dish) => acc + dish.price * dish.quantity,
+                    0
+                ),
+                2
+            );
             sessionStorage.setItem(
                 "partialTotal",
                 JSON.stringify(this.partialTotal)
@@ -418,10 +490,13 @@ export default {
             }
             sessionStorage.setItem("cart", JSON.stringify(cart));
             this.cart = JSON.parse(sessionStorage.getItem("cart"));
-            this.partialTotal = round(this.cart.reduce(
-                (acc, dish) => acc + (dish.price * dish.quantity),
-                0
-            ), 2);
+            this.partialTotal = round(
+                this.cart.reduce(
+                    (acc, dish) => acc + dish.price * dish.quantity,
+                    0
+                ),
+                2
+            );
             sessionStorage.setItem(
                 "partialTotal",
                 JSON.stringify(this.partialTotal)
