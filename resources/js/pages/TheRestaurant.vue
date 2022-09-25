@@ -306,6 +306,30 @@
 //axios call to get the restaurant and its dishes
 import axios from "axios";
 
+export function round(number, precision) {
+    'use strict';
+    precision = precision ? +precision : 0;
+
+    var sNumber     = number + '',
+        periodIndex = sNumber.indexOf('.'),
+        factor      = Math.pow(10, precision);
+
+    if (periodIndex === -1 || precision < 0) {
+        return Math.round(number * factor) / factor;
+    }
+
+    number = +number;
+
+    // sNumber[periodIndex + precision + 1] is the last digit
+    if (sNumber[periodIndex + precision + 1] >= 5) {
+        // Correcting float error
+        // factor * 10 to use one decimal place beyond the precision
+        number += (number < 0 ? -1 : 1) / (factor * 10);
+    }
+
+    return +number.toFixed(precision);
+}
+
 export default {
     name: "TheRestaurant",
     data() {
@@ -351,11 +375,10 @@ export default {
             }
             sessionStorage.setItem("cart", JSON.stringify(cart));
             this.cart = JSON.parse(sessionStorage.getItem("cart"));
-            this.partialTotal = this.cart.reduce(
+            this.partialTotal = round(this.cart.reduce(
                 (acc, dish) => acc + dish.price * dish.quantity,
                 0
-            );
-
+            ), 2);
             sessionStorage.setItem(
                 "partialTotal",
                 JSON.stringify(this.partialTotal)
@@ -374,10 +397,11 @@ export default {
             }
             sessionStorage.setItem("cart", JSON.stringify(cart));
             this.cart = JSON.parse(sessionStorage.getItem("cart"));
-            this.partialTotal = this.cart.reduce(
-                (acc, dish) => acc + dish.price * dish.quantity,
+            this.partialTotal = round(this.cart.reduce(
+                (acc, dish) =>
+                    acc + dish.price * dish.quantity,
                 0
-            );
+            ),2);
             sessionStorage.setItem(
                 "partialTotal",
                 JSON.stringify(this.partialTotal)
@@ -394,10 +418,10 @@ export default {
             }
             sessionStorage.setItem("cart", JSON.stringify(cart));
             this.cart = JSON.parse(sessionStorage.getItem("cart"));
-            this.partialTotal = this.cart.reduce(
-                (acc, dish) => acc + dish.price * dish.quantity,
+            this.partialTotal = round(this.cart.reduce(
+                (acc, dish) => acc + (dish.price * dish.quantity),
                 0
-            );
+            ), 2);
             sessionStorage.setItem(
                 "partialTotal",
                 JSON.stringify(this.partialTotal)
