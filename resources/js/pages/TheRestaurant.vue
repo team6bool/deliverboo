@@ -1,7 +1,7 @@
 <template>
     <div>
         <main class="container text-start pt-3 px-3">
-            <router-link :to="{ name: 'home.index' }">
+            <router-link :to="{ name: 'search.index' }">
                 <a href="#" class="btn btn-secondary text-white my-btn">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
