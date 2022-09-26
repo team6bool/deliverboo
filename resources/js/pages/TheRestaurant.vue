@@ -205,10 +205,7 @@
                                 ><i class="fa-solid fa-trash"></i
                             ></a>
                             <!-- add and remove item from cart  -->
-                            <div
-                                @click="removeFromCart(dish)"
-                                class="pill-button"
-                            >
+                            <div class="pill-button">
                                 <a
                                     @click="removeOneFromCart(dish)"
                                     class="no-decoration"
@@ -467,38 +464,40 @@ export default {
             this.closeModalCart();
         },
         removeOneFromCart(dish) {
-            let cart = JSON.parse(sessionStorage.getItem("cart"));
-            let index = cart.findIndex((item) => item.id == dish.id);
-            if (index !== -1) {
-                cart[index].quantity--;
-                if (cart[index].quantity == 0) {
-                    cart.splice(index, 1);
+            if (this.cart && this.cart.length > 0) {
+                let cart = JSON.parse(sessionStorage.getItem("cart"));
+                let index = cart.findIndex((item) => item.id == dish.id);
+                if (index !== -1) {
+                    cart[index].quantity--;
+                    if (cart[index].quantity == 0) {
+                        cart.splice(index, 1);
+                    }
                 }
-            }
-            sessionStorage.setItem("cart", JSON.stringify(cart));
-            this.cart = JSON.parse(sessionStorage.getItem("cart"));
-            this.partialTotal = round(
-                this.cart.reduce(
-                    (acc, dish) => acc + dish.price * dish.quantity,
-                    0
-                ),
-                2
-            );
-            sessionStorage.setItem(
-                "partialTotal",
-                JSON.stringify(this.partialTotal)
-            );
-            this.total = round(
-                this.partialTotal + this.restaurant.delivery_price,
-                2
-            );
-            sessionStorage.setItem("total", JSON.stringify(this.total));
-            if (this.cart.length == 0) {
-                sessionStorage.removeItem("cart");
-                sessionStorage.removeItem("partialTotal");
-                sessionStorage.removeItem("total");
-                this.partialTotal = 0;
-                this.total = 0;
+                sessionStorage.setItem("cart", JSON.stringify(cart));
+                this.cart = JSON.parse(sessionStorage.getItem("cart"));
+                this.partialTotal = round(
+                    this.cart.reduce(
+                        (acc, dish) => acc + dish.price * dish.quantity,
+                        0
+                    ),
+                    2
+                );
+                sessionStorage.setItem(
+                    "partialTotal",
+                    JSON.stringify(this.partialTotal)
+                );
+                this.total = round(
+                    this.partialTotal + this.restaurant.delivery_price,
+                    2
+                );
+                sessionStorage.setItem("total", JSON.stringify(this.total));
+                if (this.cart.length == 0) {
+                    sessionStorage.removeItem("cart");
+                    sessionStorage.removeItem("partialTotal");
+                    sessionStorage.removeItem("total");
+                    this.partialTotal = 0;
+                    this.total = 0;
+                }
             }
         },
         removeAllFromCart(dish) {
@@ -536,9 +535,11 @@ export default {
         },
         dishSubtotals() {
             let subtotals = [];
-            this.cart.forEach((dish) => {
-                subtotals.push(dish.price * dish.quantity);
-            });
+            if (this.cart && this.cart.length > 0) {
+                this.cart.forEach((dish) => {
+                    subtotals.push(dish.price * dish.quantity);
+                });
+            }
             sessionStorage.setItem("subtotals", JSON.stringify(subtotals));
         },
     },
