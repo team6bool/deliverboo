@@ -57,7 +57,7 @@ export default {
             restaurants: [],
             categories: [],
             selectedCategory: state.selectedCategory,
-            jumbo: "0",
+            jumbo: "sushi.png",
         }
     },
     methods: {
@@ -98,7 +98,7 @@ export default {
                 });
             let counter = 0;
             setInterval(function(){
-                if(counter < data.length){
+                if(counter < (data.length - 1)){
                     counter = counter + 1;
                 }else{
                     counter = 0;

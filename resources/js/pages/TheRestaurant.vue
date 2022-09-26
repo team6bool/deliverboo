@@ -1,7 +1,7 @@
 <template>
     <div>
         <main class="container text-start pt-3 px-3">
-            <router-link :to="{ name: 'home.index' }">
+            <router-link :to="{ name: 'search.index' }">
                 <a href="#" class="btn btn-secondary text-white my-btn">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -23,6 +23,45 @@
                 </a>
             </router-link>
 
+            <div
+                id="modal-cart"
+                style="z-index: 5"
+                tabindex="-1"
+                class="modal-bg position-fixed top-0 bottom-0 end-0 start-0 d-none align-items-center justify-content-center px-3"
+            >
+                <div class="modal-dialog bg-white rounded p-3">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">
+                                Hai degli elementi nel carrello
+                            </h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                Per accedere ad altro ristorante bisogna
+                                svuotare il carrello.
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <!-- button to close the modal -->
+                            <button
+                                class="btn btn-secondary"
+                                @click="closeModalCart()"
+                            >
+                                Continua sulla pagina
+                            </button>
+
+                            <button
+                                class="btn btn-danger mt-3"
+                                @click="removeAllFromSession()"
+                            >
+                                Svuota carrello
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="text-center pt-4">
                 <h2 class="text-orange name">{{ restaurant.name }}</h2>
                 <h3 class="text-yellow">{{ restaurant.address }}</h3>
@@ -41,8 +80,9 @@
                     <div class="row">
                         <div class="col-3 d-flex align-center">
                             <div class="img-box">
+                                <!-- use the function getImagePath(image) -->
                                 <img
-                                    :src="'/images/dishes/' + dish.img"
+                                    :src="getImagePath(dish.img)"
                                     :alt="dish.name"
                                     class="plate-img"
                                 />
@@ -93,7 +133,10 @@
                                 style="max-width: 400px"
                             >
                                 <img
-                                    :src="'/images/dishes/' + dish.img"
+                                    :src="
+                                        './storage/public/images/dishes/' +
+                                        dish.img
+                                    "
                                     :alt="dish.name"
                                     class="w-100"
                                 />
@@ -137,7 +180,7 @@
                         <div class="dish-image">
                             <!-- image of the dish -->
                             <img
-                                :src="'/images/dishes/' + dish.img"
+                                :src="getImagePath(dish.img)"
                                 :alt="dish.name"
                                 class="plate-img"
                             />
@@ -146,26 +189,23 @@
 
                     <div class="col-9 dish-information">
                         <div class="dish-and-price">
-                            <!-- title and price -->
                             <p class="text-orange">{{ dish.name }}</p>
                             <p class="ps-1 price text-nowrap">
-                                € {{ dish.price }}
+                                € {{ (dish.price * dish.quantity).toFixed(2) }}
                             </p>
                         </div>
 
-                        <!-- cart quantity handle -->
                         <div
                             class="d-flex align-items-center cart-quantity-button"
                         >
                             <!-- bin icon -->
-                            <a href="http://" @click="removeAllFromCart(dish)"
+                            <a
+                                class="no-decoration"
+                                @click="removeAllFromCart(dish)"
                                 ><i class="fa-solid fa-trash"></i
                             ></a>
                             <!-- add and remove item from cart  -->
-                            <div
-                                @click="removeFromCart(dish)"
-                                class="pill-button"
-                            >
+                            <div class="pill-button">
                                 <a
                                     @click="removeOneFromCart(dish)"
                                     class="no-decoration"
@@ -307,12 +347,12 @@
 import axios from "axios";
 
 export function round(number, precision) {
-    'use strict';
+    "use strict";
     precision = precision ? +precision : 0;
 
-    var sNumber     = number + '',
-        periodIndex = sNumber.indexOf('.'),
-        factor      = Math.pow(10, precision);
+    var sNumber = number + "",
+        periodIndex = sNumber.indexOf("."),
+        factor = Math.pow(10, precision);
 
     if (periodIndex === -1 || precision < 0) {
         return Math.round(number * factor) / factor;
@@ -361,11 +401,21 @@ export default {
             let modal = document.getElementById("modal-" + id);
             modal.classList.replace("d-flex", "d-none");
         },
+        getImagePath(img) {
+            return "/storage/public/images/dishes/" + img;
+        },
         addToCart(dish) {
-            if (sessionStorage.getItem("cart") == null) {
-                sessionStorage.setItem("cart", JSON.stringify([]));
+            if (
+                localStorage.getItem("cart") != null &&
+                this.cart[0].user_id != this.restaurant.id
+            ) {
+                this.checkCart();
+                this.addToCart().preventDefault();
             }
-            let cart = JSON.parse(sessionStorage.getItem("cart"));
+            if (localStorage.getItem("cart") == null) {
+                localStorage.setItem("cart", JSON.stringify([]));
+            }
+            let cart = JSON.parse(localStorage.getItem("cart"));
             let index = cart.findIndex((item) => item.id == dish.id);
             if (index == -1) {
                 dish.quantity = 1;
@@ -373,70 +423,132 @@ export default {
             } else {
                 cart[index].quantity++;
             }
-            sessionStorage.setItem("cart", JSON.stringify(cart));
-            this.cart = JSON.parse(sessionStorage.getItem("cart"));
-            this.partialTotal = round(this.cart.reduce(
-                (acc, dish) => acc + dish.price * dish.quantity,
-                0
-            ), 2);
-            sessionStorage.setItem(
+            localStorage.setItem("cart", JSON.stringify(cart));
+            this.cart = JSON.parse(localStorage.getItem("cart"));
+            this.partialTotal = round(
+                this.cart.reduce(
+                    (acc, dish) => acc + dish.price * dish.quantity,
+                    0
+                ),
+                2
+            );
+            localStorage.setItem(
                 "partialTotal",
                 JSON.stringify(this.partialTotal)
             );
-            this.total = this.partialTotal + this.restaurant.delivery_price;
-            sessionStorage.setItem("total", JSON.stringify(this.total));
+            this.total = round(
+                this.partialTotal + this.restaurant.delivery_price,
+                2
+            );
+            localStorage.setItem("total", JSON.stringify(this.total));
         },
-        removeOneFromCart(dish) {
-            let cart = JSON.parse(sessionStorage.getItem("cart"));
-            let index = cart.findIndex((item) => item.id == dish.id);
-            if (index !== -1) {
-                cart[index].quantity--;
-                if (cart[index].quantity == 0) {
-                    cart.splice(index, 1);
+        checkCart() {
+            if (this.cart.length > 0) {
+                if (this.cart[0].user_id != this.restaurant.id) {
+                    let modal = document.getElementById("modal-cart");
+                    modal.classList.replace("d-none", "d-flex");
                 }
             }
-            sessionStorage.setItem("cart", JSON.stringify(cart));
-            this.cart = JSON.parse(sessionStorage.getItem("cart"));
-            this.partialTotal = round(this.cart.reduce(
-                (acc, dish) =>
-                    acc + dish.price * dish.quantity,
-                0
-            ),2);
-            sessionStorage.setItem(
-                "partialTotal",
-                JSON.stringify(this.partialTotal)
-            );
-
-            this.total = this.partialTotal + this.restaurant.delivery_price;
-            sessionStorage.setItem("total", JSON.stringify(this.total));
+        },
+        closeModalCart() {
+            let modal = document.getElementById("modal-cart");
+            modal.classList.replace("d-flex", "d-none");
+        },
+        removeAllFromSession() {
+            localStorage.removeItem("cart");
+            localStorage.removeItem("partialTotal");
+            localStorage.removeItem("total");
+            this.cart = [];
+            this.partialTotal = 0;
+            this.total = 0;
+            this.closeModalCart();
+        },
+        removeOneFromCart(dish) {
+            if (this.cart && this.cart.length > 0) {
+                let cart = JSON.parse(localStorage.getItem("cart"));
+                let index = cart.findIndex((item) => item.id == dish.id);
+                if (index !== -1) {
+                    cart[index].quantity--;
+                    if (cart[index].quantity == 0) {
+                        cart.splice(index, 1);
+                    }
+                }
+                localStorage.setItem("cart", JSON.stringify(cart));
+                this.cart = JSON.parse(localStorage.getItem("cart"));
+                this.partialTotal = round(
+                    this.cart.reduce(
+                        (acc, dish) => acc + dish.price * dish.quantity,
+                        0
+                    ),
+                    2
+                );
+                localStorage.setItem(
+                    "partialTotal",
+                    JSON.stringify(this.partialTotal)
+                );
+                this.total = round(
+                    this.partialTotal + this.restaurant.delivery_price,
+                    2
+                );
+                localStorage.setItem("total", JSON.stringify(this.total));
+                if (this.cart.length == 0) {
+                    localStorage.removeItem("cart");
+                    localStorage.removeItem("partialTotal");
+                    localStorage.removeItem("total");
+                    this.partialTotal = 0;
+                    this.total = 0;
+                }
+            }
         },
         removeAllFromCart(dish) {
-            let cart = JSON.parse(sessionStorage.getItem("cart"));
+            let cart = JSON.parse(localStorage.getItem("cart"));
             let index = cart.findIndex((item) => item.id == dish.id);
             if (index !== -1) {
                 cart.splice(index, 1);
             }
-            sessionStorage.setItem("cart", JSON.stringify(cart));
-            this.cart = JSON.parse(sessionStorage.getItem("cart"));
-            this.partialTotal = round(this.cart.reduce(
-                (acc, dish) => acc + (dish.price * dish.quantity),
-                0
-            ), 2);
-            sessionStorage.setItem(
+            localStorage.setItem("cart", JSON.stringify(cart));
+            this.cart = JSON.parse(localStorage.getItem("cart"));
+            this.partialTotal = round(
+                this.cart.reduce(
+                    (acc, dish) => acc + dish.price * dish.quantity,
+                    0
+                ),
+                2
+            );
+            localStorage.setItem(
                 "partialTotal",
                 JSON.stringify(this.partialTotal)
             );
 
-            this.total = this.partialTotal + this.restaurant.delivery_price;
-            sessionStorage.setItem("total", JSON.stringify(this.total));
+            this.total = round(
+                this.partialTotal + this.restaurant.delivery_price,
+                2
+            );
+            localStorage.setItem("total", JSON.stringify(this.total));
+            if (this.cart.length == 0) {
+                localStorage.removeItem("cart");
+                localStorage.removeItem("partialTotal");
+                localStorage.removeItem("total");
+                this.partialTotal = 0;
+                this.total = 0;
+            }
+        },
+        dishSubtotals() {
+            if (this.cart && this.cart.length > 0) {
+                this.cart.forEach((dish) => {
+                    subtotals.push(dish.price * dish.quantity);
+                });
+            }
+            sessionStorage.setItem("subtotals", JSON.stringify(subtotals));
         },
     },
     mounted() {
         this.getRestaurant();
-        this.cart = JSON.parse(sessionStorage.getItem("cart"));
-        this.partialTotal = JSON.parse(sessionStorage.getItem("partialTotal"));
-        this.total = JSON.parse(sessionStorage.getItem("total"));
-    },
+        this.cart = JSON.parse(localStorage.getItem("cart"));
+        this.partialTotal = JSON.parse(localStorage.getItem("partialTotal"));
+        this.total = JSON.parse(localStorage.getItem("total"));
+        this.dishSubtotals();
+        },
 };
 </script>
 
