@@ -2,7 +2,6 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Restaurant from "./pages/TheRestaurant.vue";
 import Home from "./pages/TheMain.vue";
-import Cart from "./pages/TheCart.vue";
 import Search from "./pages/AdvancedSearch.vue";
 
 //put all the different pages below
@@ -23,14 +22,6 @@ const routes = [
         name: "home.index",
         meta: {
             title: "Deliveboo Homepage",
-        },
-    },
-    {
-        path: "/cart",
-        component: Cart,
-        name: "cart.index",
-        meta: {
-            title: "Deliveboo Cart",
         },
     },
     {
@@ -55,6 +46,9 @@ const router = new VueRouter({
     //it must contain an array of routes
 
     routes,
+    scrollBehavior (to, from, savedPosition) {
+        return { x: 0, y: 0, behavior: 'auto' }
+    },
     mode: "history",
 });
 
