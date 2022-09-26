@@ -4,7 +4,8 @@
         <div class="search-section bg-primary">
             <div class="container py-3">
                 <button class="btn btn-secondary large">
-                    <i class="fa fa-solid fa-search pe-2"></i> Cerca per categoria
+                <a @click="resetCategories()">
+                    <i class="fa fa-solid fa-search pe-2"></i> Cerca per categoria</a>
                 </button>
             </div>
         </div>
@@ -48,7 +49,15 @@
 import JumboTron from "../components/JumboTron.vue";
 import CategoriesSection from "../components/CategoriesSection.vue";
 import RestSection from "../components/RestSection.vue";
+import { state } from './../store'
+
 export default {
+    methods: {
+        resetCategories(){
+            state.selectedCategory = "";
+            this.$router.push("search");
+        }
+    },
     components: { JumboTron, CategoriesSection, RestSection },
 };
 </script>

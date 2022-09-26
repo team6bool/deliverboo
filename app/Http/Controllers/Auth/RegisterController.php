@@ -8,6 +8,7 @@ use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 
@@ -126,20 +127,21 @@ class RegisterController extends Controller
             'phone' => $data['phone'],
             'website' => $data['website'],
             'address' => $data['address'],
-            'img' => $data['img'],
+            'img'=> Storage::put('/public/images/restaurants', $data['img']),
             'description' => $data['description'],
             'p_iva' => $data['p_iva'],
             'delivery_price' => $data['delivery_price'],
             'slug' => $this->generateSlug($data['name']),
         ]);
 
-        if (request()->hasFile('img')) {
-            $file = request()->file('img');
-            $fileName = $file->getClientOriginalName();
-            $fileExtension = $file->getClientOriginalExtension();
-            $fileToStore = $fileName . '_' . time() . '.' . $fileExtension;
-            $path = $file->storeAs('public/images/restaurants', $fileToStore);
-        }
+        // if (request()->hasFile('img')) {
+        //     $file = request()->file('img');
+        //     $fileName = $file->getClientOriginalName();
+        //     $fileExtension = $file->getClientOriginalExtension();
+        //     $fileToStore = $fileName . '_' . time() . '.' . $fileExtension;
+        //     $path = $file->storeAs('public/images/restaurants', $fileToStore);
+        // }
+        
 
         $user->categories()->attach($data['categories']);
 

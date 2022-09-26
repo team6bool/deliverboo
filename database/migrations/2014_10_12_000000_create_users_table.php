@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('website', 200)->nullable();
             $table->string('slug', 200)->unique();
             $table->string('address', 100);
-            $table->string('img', 50);
+            $table->string('img');
             $table->text('description', 2000)->nullable();
             $table->char('p_iva', 11);
             $table->double('delivery_price', 4, 2);

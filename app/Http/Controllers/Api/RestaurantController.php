@@ -59,6 +59,10 @@ class RestaurantController extends Controller
 
         $restaurant->dishes = Dish::where('user_id', $restaurant->id)->get();
 
+        
+        $restaurant->img = asset("storage/" . $restaurant->img);
+        
+
 
         //return the restaurant
 
