@@ -406,16 +406,16 @@ export default {
         },
         addToCart(dish) {
             if (
-                sessionStorage.getItem("cart") != null &&
+                localStorage.getItem("cart") != null &&
                 this.cart[0].user_id != this.restaurant.id
             ) {
                 this.checkCart();
                 this.addToCart().preventDefault();
             }
-            if (sessionStorage.getItem("cart") == null) {
-                sessionStorage.setItem("cart", JSON.stringify([]));
+            if (localStorage.getItem("cart") == null) {
+                localStorage.setItem("cart", JSON.stringify([]));
             }
-            let cart = JSON.parse(sessionStorage.getItem("cart"));
+            let cart = JSON.parse(localStorage.getItem("cart"));
             let index = cart.findIndex((item) => item.id == dish.id);
             if (index == -1) {
                 dish.quantity = 1;
@@ -423,8 +423,8 @@ export default {
             } else {
                 cart[index].quantity++;
             }
-            sessionStorage.setItem("cart", JSON.stringify(cart));
-            this.cart = JSON.parse(sessionStorage.getItem("cart"));
+            localStorage.setItem("cart", JSON.stringify(cart));
+            this.cart = JSON.parse(localStorage.getItem("cart"));
             this.partialTotal = round(
                 this.cart.reduce(
                     (acc, dish) => acc + dish.price * dish.quantity,
@@ -432,7 +432,7 @@ export default {
                 ),
                 2
             );
-            sessionStorage.setItem(
+            localStorage.setItem(
                 "partialTotal",
                 JSON.stringify(this.partialTotal)
             );
@@ -440,7 +440,7 @@ export default {
                 this.partialTotal + this.restaurant.delivery_price,
                 2
             );
-            sessionStorage.setItem("total", JSON.stringify(this.total));
+            localStorage.setItem("total", JSON.stringify(this.total));
         },
         checkCart() {
             if (this.cart.length > 0) {
@@ -455,9 +455,9 @@ export default {
             modal.classList.replace("d-flex", "d-none");
         },
         removeAllFromSession() {
-            sessionStorage.removeItem("cart");
-            sessionStorage.removeItem("partialTotal");
-            sessionStorage.removeItem("total");
+            localStorage.removeItem("cart");
+            localStorage.removeItem("partialTotal");
+            localStorage.removeItem("total");
             this.cart = [];
             this.partialTotal = 0;
             this.total = 0;
@@ -465,7 +465,7 @@ export default {
         },
         removeOneFromCart(dish) {
             if (this.cart && this.cart.length > 0) {
-                let cart = JSON.parse(sessionStorage.getItem("cart"));
+                let cart = JSON.parse(localStorage.getItem("cart"));
                 let index = cart.findIndex((item) => item.id == dish.id);
                 if (index !== -1) {
                     cart[index].quantity--;
@@ -473,8 +473,8 @@ export default {
                         cart.splice(index, 1);
                     }
                 }
-                sessionStorage.setItem("cart", JSON.stringify(cart));
-                this.cart = JSON.parse(sessionStorage.getItem("cart"));
+                localStorage.setItem("cart", JSON.stringify(cart));
+                this.cart = JSON.parse(localStorage.getItem("cart"));
                 this.partialTotal = round(
                     this.cart.reduce(
                         (acc, dish) => acc + dish.price * dish.quantity,
@@ -482,7 +482,7 @@ export default {
                     ),
                     2
                 );
-                sessionStorage.setItem(
+                localStorage.setItem(
                     "partialTotal",
                     JSON.stringify(this.partialTotal)
                 );
@@ -490,24 +490,24 @@ export default {
                     this.partialTotal + this.restaurant.delivery_price,
                     2
                 );
-                sessionStorage.setItem("total", JSON.stringify(this.total));
+                localStorage.setItem("total", JSON.stringify(this.total));
                 if (this.cart.length == 0) {
-                    sessionStorage.removeItem("cart");
-                    sessionStorage.removeItem("partialTotal");
-                    sessionStorage.removeItem("total");
+                    localStorage.removeItem("cart");
+                    localStorage.removeItem("partialTotal");
+                    localStorage.removeItem("total");
                     this.partialTotal = 0;
                     this.total = 0;
                 }
             }
         },
         removeAllFromCart(dish) {
-            let cart = JSON.parse(sessionStorage.getItem("cart"));
+            let cart = JSON.parse(localStorage.getItem("cart"));
             let index = cart.findIndex((item) => item.id == dish.id);
             if (index !== -1) {
                 cart.splice(index, 1);
             }
-            sessionStorage.setItem("cart", JSON.stringify(cart));
-            this.cart = JSON.parse(sessionStorage.getItem("cart"));
+            localStorage.setItem("cart", JSON.stringify(cart));
+            this.cart = JSON.parse(localStorage.getItem("cart"));
             this.partialTotal = round(
                 this.cart.reduce(
                     (acc, dish) => acc + dish.price * dish.quantity,
@@ -515,7 +515,7 @@ export default {
                 ),
                 2
             );
-            sessionStorage.setItem(
+            localStorage.setItem(
                 "partialTotal",
                 JSON.stringify(this.partialTotal)
             );
@@ -524,17 +524,16 @@ export default {
                 this.partialTotal + this.restaurant.delivery_price,
                 2
             );
-            sessionStorage.setItem("total", JSON.stringify(this.total));
+            localStorage.setItem("total", JSON.stringify(this.total));
             if (this.cart.length == 0) {
-                sessionStorage.removeItem("cart");
-                sessionStorage.removeItem("partialTotal");
-                sessionStorage.removeItem("total");
+                localStorage.removeItem("cart");
+                localStorage.removeItem("partialTotal");
+                localStorage.removeItem("total");
                 this.partialTotal = 0;
                 this.total = 0;
             }
         },
         dishSubtotals() {
-            let subtotals = [];
             if (this.cart && this.cart.length > 0) {
                 this.cart.forEach((dish) => {
                     subtotals.push(dish.price * dish.quantity);
@@ -545,12 +544,11 @@ export default {
     },
     mounted() {
         this.getRestaurant();
-        this.cart = JSON.parse(sessionStorage.getItem("cart"));
-        this.partialTotal = JSON.parse(sessionStorage.getItem("partialTotal"));
-        this.total = JSON.parse(sessionStorage.getItem("total"));
+        this.cart = JSON.parse(localStorage.getItem("cart"));
+        this.partialTotal = JSON.parse(localStorage.getItem("partialTotal"));
+        this.total = JSON.parse(localStorage.getItem("total"));
         this.dishSubtotals();
-        console.log(window.sessionStorage);
-    },
+        },
 };
 </script>
 
