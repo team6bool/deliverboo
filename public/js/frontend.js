@@ -2656,7 +2656,7 @@ var staticRenderFns = [function () {
   return _c("div", {
     staticClass: "d-xl-flex flex-xl-column align-items-xl-center"
   }, [_c("img", {
-    staticClass: "logo pb-3",
+    staticClass: "logo pb-5",
     attrs: {
       src: "/images/DeliveBooLogo.png",
       alt: ""

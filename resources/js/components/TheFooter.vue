@@ -18,7 +18,7 @@
                 <div class="px-3">
                     <div class="d-xl-flex flex-xl-column align-items-xl-center">
                         <img
-                            class="logo pb-3"
+                            class="logo pb-5"
                             src="/images/DeliveBooLogo.png"
                             alt=""
                         />
