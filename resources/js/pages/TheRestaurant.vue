@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <main class="container text-start py-3 px-3">
+    <main>
+        <div class="container text-start py-3 px-3">
             <router-link :to="{ name: 'search.index' }">
                 <a href="#" class="btn btn-secondary text-white my-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -102,52 +102,52 @@
                     </div>
                 </div>
             </div>
-        </main>
+        </div>
         <div id="cart" class="d-none">
             <div class="d-flex flex-column justify-content-center">
                 <!-- cart header with logo image, restaurant name and restaurant street -->
-                <div class="row">
-                    <div class="col cart-header">
+                <div class="container">
+                    <div class="cart-header">
                         <h2 class="text-orange pt-5 pb-4">Carrello</h2>
                     </div>
-                </div>
-                <!-- dishes section -->
-                <!--
-                    Structure:
-                        - image on the left
-                        - description and price center
-                        - delete icon
-                        - remove and add icon with number at the center
-                    -->
-                <div v-for="dish in cart" :key="dish.id" class="row dish-container">
-                    <div class="col-3">
-                        <div class="dish-image">
-                            <!-- image of the dish -->
-                            <img :src="getImagePath(dish.img)" :alt="dish.name" class="plate-img" />
+                    <!-- dishes section -->
+                    <!--
+                        Structure:
+                            - image on the left
+                            - description and price center
+                            - delete icon
+                            - remove and add icon with number at the center
+                        -->
+                    <div v-for="dish in cart" :key="dish.id" class="row dish-container">
+                        <div class="col-3">
+                            <div class="dish-image">
+                                <!-- image of the dish -->
+                                <img :src="getImagePath(dish.img)" :alt="dish.name" class="plate-img" />
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="col-9 dish-information">
-                        <div class="dish-and-price">
-                            <p class="text-orange">{{ dish.name }}</p>
-                            <p class="ps-1 price text-nowrap">
-                                € {{ (dish.price * dish.quantity).toFixed(2) }}
-                            </p>
-                        </div>
-
-                        <div class="d-flex align-items-center cart-quantity-button">
-                            <!-- bin icon -->
-                            <a class="no-decoration" @click="removeAllFromCart(dish)"><i
-                                    class="fa-solid fa-trash"></i></a>
-                            <!-- add and remove item from cart  -->
-                            <div class="pill-button">
-                                <a @click="removeOneFromCart(dish)" class="no-decoration">-
-                                </a>
-
-                                <div class="display-num-pill-button">
-                                    {{ dish.quantity }}
+    
+                        <div class="col-9 dish-information">
+                            <div class="dish-and-price">
+                                <p class="text-orange">{{ dish.name }}</p>
+                                <p class="ps-1 price text-nowrap">
+                                    € {{ (dish.price * dish.quantity).toFixed(2) }}
+                                </p>
+                            </div>
+    
+                            <div class="d-flex align-items-center cart-quantity-button">
+                                <!-- bin icon -->
+                                <a class="no-decoration" @click="removeAllFromCart(dish)"><i
+                                        class="fa-solid fa-trash"></i></a>
+                                <!-- add and remove item from cart  -->
+                                <div class="pill-button">
+                                    <a @click="removeOneFromCart(dish)" class="no-decoration">-
+                                    </a>
+    
+                                    <div class="display-num-pill-button">
+                                        {{ dish.quantity }}
+                                    </div>
+                                    <a @click="addToCart(dish)" class="no-decoration">+</a>
                                 </div>
-                                <a @click="addToCart(dish)" class="no-decoration">+</a>
                             </div>
                         </div>
                     </div>
@@ -229,7 +229,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 </template>
 
 <script>
