@@ -23,3 +23,5 @@ Route::get("/restaurants", "Api\RestaurantController@index");
 Route::get("/restaurants/{slug}", "Api\RestaurantController@show");
 
 Route::get('/cart', 'CartController@index');
+
+Route::post('/orders/store', 'Api\OrderController@store');
