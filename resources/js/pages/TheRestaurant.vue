@@ -3,9 +3,18 @@
         <main class="container text-start py-3 px-3">
             <router-link :to="{ name: 'search.index' }">
                 <a href="#" class="btn btn-secondary text-white my-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="feather feather-activity">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="feather feather-activity"
+                    >
                         -
                         <line x1="20" y1="12" x2="4" y2="12"></line>
                         <polyline points="10 18 4 12 10 6"></polyline>
@@ -14,8 +23,12 @@
                 </a>
             </router-link>
 
-            <div id="modal-cart" style="z-index: 5" tabindex="-1"
-                class="modal-bg position-fixed top-0 bottom-0 end-0 start-0 d-none align-items-center justify-content-center px-3">
+            <div
+                id="modal-cart"
+                style="z-index: 5"
+                tabindex="-1"
+                class="modal-bg position-fixed top-0 bottom-0 end-0 start-0 d-none align-items-center justify-content-center px-3"
+            >
                 <div class="modal-dialog bg-white rounded p-3">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -31,12 +44,43 @@
                         </div>
                         <div class="modal-footer">
                             <!-- button to close the modal -->
-                            <button class="btn btn-secondary" @click="closeModalCart()">
+                            <button
+                                class="btn btn-secondary"
+                                @click="closeModalCart()"
+                            >
                                 Continua sulla pagina
                             </button>
 
-                            <button class="btn btn-danger mt-3" @click="removeAllFromSession()">
+                            <button
+                                class="btn btn-danger mt-3"
+                                @click="removeAllFromSession()"
+                            >
                                 Svuota carrello
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                id="modal-success"
+                style="z-index: 5"
+                tabindex="-1"
+                class="modal-bg position-fixed top-0 bottom-0 end-0 start-0 d-none align-items-center justify-content-center px-3"
+            >
+                <div class="modal-dialog bg-white rounded p-3">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Ordine ricevuto!</h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>Grazie per aver effettuato l'ordine.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button
+                                class="btn btn-success mt-3"
+                                @click="goAllRestaurantPage()"
+                            >
+                                Yayy!!!
                             </button>
                         </div>
                     </div>
@@ -53,16 +97,26 @@
 
             <div class="text-center pt-2">
                 <h2 class="text-yellow">I nostri piatti</h2>
-                <div v-for="dish in restaurant.dishes" :key="dish.id" class="card-box mt-4">
+                <div
+                    v-for="dish in restaurant.dishes"
+                    :key="dish.id"
+                    class="card-box mt-4"
+                >
                     <div class="row">
                         <div class="col-3 d-flex align-center">
                             <div class="img-box">
                                 <!-- use the function getImagePath(image) -->
-                                <img :src="getImagePath(dish.img)" :alt="dish.name" class="plate-img" />
+                                <img
+                                    :src="getImagePath(dish.img)"
+                                    :alt="dish.name"
+                                    class="plate-img"
+                                />
                             </div>
                         </div>
                         <div class="col-9 text-start ps-0 pt-2">
-                            <div class="d-flex align-items-center justify-content-between px-2">
+                            <div
+                                class="d-flex align-items-center justify-content-between px-2"
+                            >
                                 <p class="text-orange plate-name">
                                     {{ dish.name }}
                                 </p>
@@ -70,32 +124,57 @@
                                     € {{ dish.price }}
                                 </p>
                             </div>
-                            <div class="d-flex align-items-center justify-content-around px-2">
-                                <a href="#" class="btn btn-secondary show-btn text-small" @click="showDetails(dish.id)">
+                            <div
+                                class="d-flex align-items-center justify-content-around px-2"
+                            >
+                                <a
+                                    href="#"
+                                    class="btn btn-secondary show-btn text-small"
+                                    @click="showDetails(dish.id)"
+                                >
                                     Dettagli
                                 </a>
                                 <!-- add a button that on click add item to the cart on the same page -->
-                                <button class="btn btn-primary show-btn text-small" @click="addToCart(dish)">
+                                <button
+                                    class="btn btn-primary show-btn text-small"
+                                    @click="addToCart(dish)"
+                                >
                                     Aggiungi
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <div :id="'modal-' + dish.id" style="z-index: 5"
-                        class="modal-bg position-fixed top-0 bottom-0 end-0 start-0 d-none align-items-center justify-content-center px-3">
-                        <div class="bg-white rounded p-3" style="max-width: 600px">
-                            <div class="rounded overflow-hidden mx-5 mb-3" style="max-width: 400px">
-                                <img :src="
-                                    './storage/public/images/dishes/' +
-                                    dish.img
-                                " :alt="dish.name" class="w-100" />
+                    <div
+                        :id="'modal-' + dish.id"
+                        style="z-index: 5"
+                        class="modal-bg position-fixed top-0 bottom-0 end-0 start-0 d-none align-items-center justify-content-center px-3"
+                    >
+                        <div
+                            class="bg-white rounded p-3"
+                            style="max-width: 600px"
+                        >
+                            <div
+                                class="rounded overflow-hidden mx-5 mb-3"
+                                style="max-width: 400px"
+                            >
+                                <img
+                                    :src="
+                                        './storage/public/images/dishes/' +
+                                        dish.img
+                                    "
+                                    :alt="dish.name"
+                                    class="w-100"
+                                />
                             </div>
                             <h3 class="text-orange fw-bold">{{ dish.name }}</h3>
                             <h3 class="text-yellow fw-bold">
                                 € {{ dish.price }}
                             </h3>
                             <p>{{ dish.description }}</p>
-                            <button class="btn btn-secondary mt-3" @click="hideDetails(dish.id)">
+                            <button
+                                class="btn btn-secondary mt-3"
+                                @click="hideDetails(dish.id)"
+                            >
                                 Nascondi
                             </button>
                         </div>
@@ -119,11 +198,19 @@
                         - delete icon
                         - remove and add icon with number at the center
                     -->
-                <div v-for="dish in cart" :key="dish.id" class="row dish-container">
+                <div
+                    v-for="dish in cart"
+                    :key="dish.id"
+                    class="row dish-container"
+                >
                     <div class="col-3">
                         <div class="dish-image">
                             <!-- image of the dish -->
-                            <img :src="getImagePath(dish.img)" :alt="dish.name" class="plate-img" />
+                            <img
+                                :src="getImagePath(dish.img)"
+                                :alt="dish.name"
+                                class="plate-img"
+                            />
                         </div>
                     </div>
 
@@ -135,31 +222,49 @@
                             </p>
                         </div>
 
-                        <div class="d-flex align-items-center cart-quantity-button">
+                        <div
+                            class="d-flex align-items-center cart-quantity-button"
+                        >
                             <!-- bin icon -->
-                            <a class="no-decoration" @click="removeAllFromCart(dish)"><i
-                                    class="fa-solid fa-trash"></i></a>
+                            <a
+                                class="no-decoration"
+                                @click="removeAllFromCart(dish)"
+                                ><i class="fa-solid fa-trash"></i
+                            ></a>
                             <!-- add and remove item from cart  -->
                             <div class="pill-button">
-                                <a @click="removeOneFromCart(dish)" class="no-decoration">-
+                                <a
+                                    @click="removeOneFromCart(dish)"
+                                    class="no-decoration"
+                                    >-
                                 </a>
 
                                 <div class="display-num-pill-button">
                                     {{ dish.quantity }}
                                 </div>
-                                <a @click="addToCart(dish)" class="no-decoration">+</a>
+                                <a
+                                    @click="addToCart(dish)"
+                                    class="no-decoration"
+                                    >+</a
+                                >
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div>
-                <img class="w-100" src="/images/checkout-bg.svg" alt="checkout-bg" />
+                <img
+                    class="w-100"
+                    src="/images/checkout-bg.svg"
+                    alt="checkout-bg"
+                />
                 <div class="checkout-section bg-soft">
                     <div class="container py-3">
                         <div class="row gy-3">
                             <div class="col-6">
-                                <div class="text-start text-checkout-start fs-5">
+                                <div
+                                    class="text-start text-checkout-start fs-5"
+                                >
                                     Consegna
                                 </div>
                             </div>
@@ -169,7 +274,9 @@
                                 </div>
                             </div>
                             <div class="col-6">
-                                <div class="text-start text-checkout-start fs-5">
+                                <div
+                                    class="text-start text-checkout-start fs-5"
+                                >
                                     Prodotti
                                 </div>
                             </div>
@@ -180,7 +287,9 @@
                             </div>
                             <div class="total-line"></div>
                             <div class="col-6">
-                                <div class="text-start text-checkout-start fs-2">
+                                <div
+                                    class="text-start text-checkout-start fs-2"
+                                >
                                     Totale
                                 </div>
                             </div>
@@ -190,39 +299,139 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-primary my-3 d-inline-block" id="checkoutBtn"
-                            @click="checkoutSectionShow()">Procedi al checkout</button>
+                        <button
+                            class="btn btn-primary my-3 d-inline-block"
+                            id="checkoutBtn"
+                            @click="checkoutSectionShow()"
+                        >
+                            Procedi al checkout
+                        </button>
 
                         <div class="d-none mt-3 checkout-open" id="checkout">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <h2 class="pt-3 text-white text-shadow ps-3">Checkout</h2>
-                                <i class="fa fa-solid fa-x pe-2 text-orange" @click="hideCheckout()"></i>
+                            <div
+                                class="d-flex align-items-center justify-content-between"
+                            >
+                                <h2 class="pt-3 text-white text-shadow ps-3">
+                                    Checkout
+                                </h2>
+                                <i
+                                    class="fa fa-solid fa-x pe-2 text-orange"
+                                    @click="hideCheckout()"
+                                ></i>
                             </div>
-                            <form action="" method="post" enctype="multipart/form-data">
-                                <div class="form-group my-3">
-                                    <label class="fw-semibold text-orange fs-5 pb-1">Nome*</label>
-                                    <input type="text" name="name" class="form-control" required />
+                            <!-- checkout form to save client information  -->
+                            <form
+                                @submit.prevent="submitNewOrder()"
+                                class="mt-3"
+                            >
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group my-3">
+                                            <label
+                                                class="fw-semibold text-orange fs-5 pb-1"
+                                                for="name"
+                                                >Nome*</label
+                                            >
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                id="name"
+                                                name="name"
+                                                v-model="client.name"
+                                                placeholder="Inserisci il tuo nome"
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group my-3">
+                                            <label
+                                                class="fw-semibold text-orange fs-5 pb-1"
+                                                for="surname"
+                                                >Cognome*</label
+                                            >
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                id="surname"
+                                                name="surname"
+                                                placeholder="Inserisci il tuo cognome"
+                                                required
+                                                v-model="client.surname"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group my-3">
+                                            <label
+                                                class="fw-semibold text-orange fs-5 pb-1"
+                                                for="email"
+                                                >Email*</label
+                                            >
+                                            <input
+                                                type="email"
+                                                class="form-control"
+                                                id="email"
+                                                name="email"
+                                                placeholder="Inserisci la tua email"
+                                                required
+                                                v-model="client.email"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group my-3">
+                                            <label
+                                                class="fw-semibold text-orange fs-5 pb-1"
+                                                for="phone"
+                                                >Telefono*</label
+                                            >
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                id="phone"
+                                                name="phone"
+                                                placeholder="Inserisci il tuo numero di telefono"
+                                                required
+                                                v-model="client.phone"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group my-3">
+                                            <label
+                                                class="fw-semibold text-orange fs-5 pb-1"
+                                                for="address"
+                                                >Indirizzo*</label
+                                            >
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                id="address"
+                                                name="address"
+                                                placeholder="Inserisci il tuo indirizzo"
+                                                required
+                                                v-model="client.address"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group my-3">
+                                            <div
+                                                id="dropin-container"
+                                                required
+                                            ></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button
+                                            type="submit"
+                                            class="btn btn-primary"
+                                        >
+                                            Conferma ordine
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="form-group my-3">
-                                    <label class="fw-semibold text-orange fs-5 pb-1">Cognome*</label>
-                                    <input type="text" name="lastname" class="form-control" required />
-                                </div>
-                                <div class="form-group my-3">
-                                    <label class="fw-semibold text-orange fs-5 pb-1">Indirizzo*</label>
-                                    <input type="text" name="address" class="form-control" required />
-                                </div>
-                                <div class="form-group my-3">
-                                    <label class="fw-semibold text-orange fs-5 pb-1">Email*</label>
-                                    <input type="text" name="email" class="form-control" required />
-                                </div>
-                                <div class="form-group my-3">
-                                    <label class="fw-semibold text-orange fs-5 pb-1">Numero di telefono*</label>
-                                    <input type="text" name="phone" class="form-control" required />
-                                </div>
-                                <div id="dropin-container"></div>
-                                <button id="submit-button" type="submit" class="btn btn-primary">
-                                    Ordina
-                                </button>
                             </form>
                         </div>
                     </div>
@@ -269,6 +478,13 @@ export default {
             quantity: 1,
             partialTotal: 0,
             total: 0,
+            client: {
+                name: "",
+                surname: "",
+                email: "",
+                phone: "",
+                address: "",
+            }
         };
     },
     methods: {
@@ -340,7 +556,7 @@ export default {
                     let modal = document.getElementById("modal-cart");
                     modal.classList.replace("d-none", "d-flex");
                 }
-            };
+            }
             this.CartSectionShow();
         },
         closeModalCart() {
@@ -392,7 +608,7 @@ export default {
                     this.partialTotal = 0;
                     this.total = 0;
                 }
-            };
+            }
             this.CartSectionShow();
         },
         removeAllFromCart(dish) {
@@ -426,7 +642,7 @@ export default {
                 localStorage.removeItem("total");
                 this.partialTotal = 0;
                 this.total = 0;
-            };
+            }
             this.CartSectionShow();
         },
         CartSectionShow() {
@@ -450,30 +666,66 @@ export default {
             button.classList.replace("d-none", "d-inline-block");
         },
         purchase() {
-            var button = document.querySelector('#submit-button');
+            var button = document.querySelector("#submit-button");
 
-            braintree.dropin.create({
-                authorization: 'sandbox_g42y39zw_348pk9cgf3bgyw2b',
-                selector: '#dropin-container'
-            }, function (err, instance) {
-                if (err) {
-                    // An error in the create call is likely due to
-                    // incorrect configuration values or network issues
-                    return;
-                }
+            braintree.dropin.create(
+                {
+                    authorization: "sandbox_g42y39zw_348pk9cgf3bgyw2b",
+                    selector: "#dropin-container",
+                },
+                function (err, instance) {
+                    if (err) {
+                        // An error in the create call is likely due to
+                        // incorrect configuration values or network issues
+                        return;
+                    }
 
-                button.addEventListener('click', function () {
-                    instance.requestPaymentMethod(function (err, payload) {
-                        if (err) {
-                            // An appropriate error will be shown in the UI
-                            return;
-                        }
+                    button.addEventListener("click", function () {
+                        instance.requestPaymentMethod(function (err, payload) {
+                            if (err) {
+                                // An appropriate error will be shown in the UI
+                                return;
+                            }
 
-                        // Submit payload.nonce to your server
+                            // Submit payload.nonce to your server
+                        });
                     });
-                })
+                }
+            );
+        },
+        submitNewOrder() {
+            let order_client = {
+                user_id: this.restaurant.id,
+                name: this.client.name,
+                lastname: this.client.surname,
+                address: this.client.address,
+                phone: this.client.phone,
+                email: this.client.email,
+                total: this.total,
+            };
+
+            //do a loop of the cart to fetch all the dishes
+            let order_dishes = [];
+            this.cart.forEach((dish) => {
+                order_dishes.push({
+                    dish_id: dish.id,
+                    quantity: dish.quantity,
+                    subtotal: dish.price * dish.quantity,
+                });
             });
-        }
+
+            axios
+                .post("/api/orders/store", order_client)
+                .post("/api/orders/store", order_dishes)
+                .then((response) => {
+                    this.removeAllFromSession();
+                    this.hideCheckout();
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+
+        },
     },
     mounted() {
         this.getRestaurant();
