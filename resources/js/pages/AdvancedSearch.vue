@@ -14,9 +14,14 @@
 
                 <ul class="dropdown-menu bg-soft m-auto">
                     <li v-for="category in categories" :key="category"><a class="dropdown-item text-orange fw-semibold text-center" href="#"
-                            @click="changeCategory(category)">{{category}}</a></li>
+                            @click="addCategories(category)">{{category}}</a></li>
                 </ul>
             </div>
+            
+            <div class="btn btn-secondary mt-2">
+                <a href="#" class="text-decoration-none" @click="clearRestaurants()">Annulla</a>
+            </div>
+            
             <div class="row gap-3 px-2 mt-4">
                 <div v-for="restaurant in restaurants" :key="restaurant.id"
                     class="col-12 col-md-6 col-lg-4 col-xl-3 p-3 rounded shadow bg-white">
@@ -63,12 +68,16 @@ export default {
     methods: {
         fetchRestaurants() {
             const th = this;
+            
             axios.get("/api/restaurants")
                 .then(resp => {
                     const data = resp.data;
+
                     for (let i = 0; i < data.length; i++) {
                         for (let j = 0; j < data[i].categories.length; j++) {
-                            if (data[i].categories[j].name === th.selectedCategory) {
+                            const index = th.restaurants.findIndex(object => object.id === data[i].id);
+                            
+                            if (data[i].categories[j].name === th.selectedCategory && index === -1) {
                                 th.restaurants.push(data[i]);
                             }
                         }
@@ -84,11 +93,15 @@ export default {
                 })
         },
 
-        changeCategory(value) {
+        addCategories(value) {
             this.selectedCategory = value;
-            this.restaurants = [];
             this.fetchRestaurants();
         },
+
+        clearRestaurants() {
+            this.restaurants = [];
+        },
+
         categoryImageChange(){
             const th = this;
             let data = [];
@@ -105,7 +118,7 @@ export default {
                 };
                 th.jumbo = data[counter].img;
             },1000)
-        }
+        },
 
     },
     mounted() {
