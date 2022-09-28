@@ -90,93 +90,101 @@
             <div class="text-center pt-4">
                 <h2 class="text-orange name">{{ restaurant.name }}</h2>
                 <h3 class="text-yellow">{{ restaurant.address }}</h3>
-                <p class="text-start pt-4">
+                <p class="text-start pt-4 px-lg-5">
                     {{ restaurant.description }}
                 </p>
             </div>
 
-            <div class="text-center pt-2">
-                <h2 class="text-yellow">I nostri piatti</h2>
+            <div class="pt-2 row">
+                <h2 class="text-yellow d-flex justify-content-center">
+                    I nostri piatti
+                </h2>
                 <div
                     v-for="dish in restaurant.dishes"
                     :key="dish.id"
-                    class="card-box mt-4"
+                    class="mt-4 col-12 col-md-6 col-lg-4"
                 >
-                    <div class="row">
-                        <div class="col-3 d-flex align-center">
-                            <div class="img-box">
-                                <!-- use the function getImagePath(image) -->
-                                <img
-                                    :src="getImagePath(dish.img)"
-                                    :alt="dish.name"
-                                    class="plate-img"
-                                />
-                            </div>
-                        </div>
-                        <div class="col-9 text-start ps-0 pt-2">
-                            <div
-                                class="d-flex align-items-center justify-content-between px-2"
-                            >
-                                <p class="text-orange plate-name">
-                                    {{ dish.name }}
-                                </p>
-                                <p class="ps-1 price text-nowrap">
-                                    € {{ dish.price }}
-                                </p>
+                    <div class="card-box h-100">
+                        <div class="row h-100">
+                            <div class="col-2 d-flex align-center">
+                                <div class="img-box">
+                                    <!-- use the function getImagePath(image) -->
+                                    <img
+                                        :src="getImagePath(dish.img)"
+                                        :alt="dish.name"
+                                        class="plate-img"
+                                    />
+                                </div>
                             </div>
                             <div
-                                class="d-flex align-items-center justify-content-around px-2"
+                                class="col-9 text-start ps-0 pt-2 d-flex flex-column justify-content-between"
                             >
-                                <a
-                                    href="#"
-                                    class="btn btn-secondary show-btn text-small"
-                                    @click="showDetails(dish.id)"
+                                <div
+                                    class="d-flex justify-content-between px-2 flex-row"
                                 >
-                                    Dettagli
-                                </a>
-                                <!-- add a button that on click add item to the cart on the same page -->
-                                <button
-                                    class="btn btn-primary show-btn text-small"
-                                    @click="addToCart(dish)"
+                                    <p class="text-orange plate-name ps-3">
+                                        {{ dish.name | truncate(25) }}...
+                                    </p>
+                                    <p class="ps-1 price text-nowrap">
+                                        € {{ dish.price }}
+                                    </p>
+                                </div>
+                                <div
+                                    class="d-flex justify-content-end px-2 flex-row"
                                 >
-                                    Aggiungi
-                                </button>
+                                    <a
+                                        href="#"
+                                        class="btn btn-secondary show-btn text-small me-3"
+                                        @click="showDetails(dish.id)"
+                                    >
+                                        Dettagli
+                                    </a>
+                                    <!-- add a button that on click add item to the cart on the same page -->
+                                    <button
+                                        class="btn btn-primary show-btn text-small"
+                                        @click="addToCart(dish)"
+                                    >
+                                        Aggiungi
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div
-                        :id="'modal-' + dish.id"
-                        style="z-index: 5"
-                        class="modal-bg position-fixed top-0 bottom-0 end-0 start-0 d-none align-items-center justify-content-center px-3"
-                    >
                         <div
-                            class="bg-white rounded p-3"
-                            style="max-width: 600px"
+                            :id="'modal-' + dish.id"
+                            style="z-index: 5"
+                            class="modal-bg position-fixed top-0 bottom-0 end-0 start-0 d-none align-items-center justify-content-center px-3"
                         >
                             <div
-                                class="rounded overflow-hidden mx-5 mb-3"
-                                style="max-width: 400px"
+                                class="bg-white rounded p-3"
+                                style="max-width: 600px"
                             >
-                                <img
-                                    :src="
-                                        './storage/public/images/dishes/' +
-                                        dish.img
-                                    "
-                                    :alt="dish.name"
-                                    class="w-100"
-                                />
+                                <div
+                                    class="rounded overflow-hidden mx-5 mb-3"
+                                    style="max-width: 400px"
+                                >
+                                    <img
+                                        :src="
+                                            './storage/public/images/dishes/' +
+                                            dish.img
+                                        "
+                                        :alt="dish.name"
+                                        class="w-100"
+                                    />
+                                </div>
+                                <h3 class="text-orange fw-bold">
+                                    {{ dish.name }}
+                                </h3>
+                                <h3 class="text-yellow fw-bold">
+                                    € {{ dish.price }}
+                                </h3>
+                                <p>{{ dish.description }}</p>
+                                <button
+                                    class="btn btn-secondary mt-3"
+                                    @click="hideDetails(dish.id)"
+                                >
+                                    Nascondi
+                                </button>
                             </div>
-                            <h3 class="text-orange fw-bold">{{ dish.name }}</h3>
-                            <h3 class="text-yellow fw-bold">
-                                € {{ dish.price }}
-                            </h3>
-                            <p>{{ dish.description }}</p>
-                            <button
-                                class="btn btn-secondary mt-3"
-                                @click="hideDetails(dish.id)"
-                            >
-                                Nascondi
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -185,8 +193,8 @@
         <div id="cart" class="d-none">
             <div class="d-flex flex-column justify-content-center">
                 <!-- cart header with logo image, restaurant name and restaurant street -->
-                <div class="container">
-                    <div class="cart-header">
+                <div class="row">
+                    <div class="col cart-header text-center">
                         <h2 class="text-orange pt-5 pb-4">Carrello</h2>
                     </div>
                 </div>
@@ -252,60 +260,57 @@
                     </div>
                 </div>
             </div>
-            <div>
+        </main>
+        <div>
+            <div class="d-flex">
                 <img
-                    class="w-100"
+                    class="w-50"
                     src="/images/checkout-bg.svg"
                     alt="checkout-bg"
                 />
-                <div class="checkout-section bg-soft">
-                    <div class="container py-3">
-                        <div class="row gy-3">
-                            <div class="col-6">
-                                <div
-                                    class="text-start text-checkout-start fs-5"
-                                >
-                                    Consegna
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="text-end fs-5 text-checkout-end">
-                                    € {{ (restaurant.delivery_price) ? (restaurant.delivery_price).toFixed(2) : 0 }}
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div
-                                    class="text-start text-checkout-start fs-5"
-                                >
-                                    Prodotti
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="text-end text-checkout-end fs-5">
-                                    € {{ partialTotal }}
-                                </div>
-                            </div>
-                            <div class="total-line"></div>
-                            <div class="col-6">
-                                <div
-                                    class="text-start text-checkout-start fs-2"
-                                >
-                                    Totale
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="text-end text-checkout-end fs-2">
-                                    € {{ total }}
-                                </div>
+                <img
+                    class="w-50"
+                    style="margin-left: -1px;"
+                    src="/images/checkout-bg.svg"
+                    alt="checkout-bg"
+                />
+            </div>
+
+            <div class="checkout-section bg-soft">
+                <div class="container py-3">
+                    <div class="row gy-3">
+                        <div class="col-6">
+                            <div class="text-start text-checkout-start fs-5">
+                                Consegna
                             </div>
                         </div>
-                        <button
-                            class="btn btn-primary my-3 d-inline-block"
-                            id="checkoutBtn"
-                            @click="checkoutSectionShow()"
-                        >
-                            Procedi al checkout
-                        </button>
+                        <div class="col-6">
+                            <div class="text-end fs-5 text-checkout-end">
+                                € {{ restaurant.delivery_price }}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-start text-checkout-start fs-5">
+                                Prodotti
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-end text-checkout-end fs-5">
+                                € {{ partialTotal }}
+                            </div>
+                        </div>
+                        <div class="total-line"></div>
+                        <div class="col-6">
+                            <div class="text-start text-checkout-start fs-2">
+                                Totale
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-end text-checkout-end fs-2">
+                                € {{ total }}
+                            </div>
+                        </div>
+                    </div>
 
                         <div class="d-none mt-3 checkout-open" id="checkout">
                             <div
@@ -483,6 +488,12 @@ export default {
                 address: "",
             }
         };
+    },
+    filters: {
+        truncate: function (data, num) {
+            const reqdString = data.split("").slice(0, num).join("");
+            return reqdString;
+        },
     },
     methods: {
         //get the restaurant and the dishes with axios call and set the data
@@ -764,7 +775,7 @@ p {
     border-radius: 50%;
     overflow: hidden;
     height: 3.7rem;
-    width: 3.7rem;
+    min-width: 3.7rem;
 }
 
 .plate-img {

@@ -1,5 +1,5 @@
 <template>
-    <footer class="bg-primary pt-1">
+    <footer>
         <svg
             class="wave"
             width="320"
@@ -115,6 +115,9 @@ export default {
 
 <style scoped lang="scss">
 footer {
+    margin-top: -50px;
+    position: relative;
+    z-index: 5;
     .wave {
         width: 100vw;
         height: 65px;

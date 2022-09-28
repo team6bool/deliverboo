@@ -1,5 +1,5 @@
 <template>
-    <main class="">
+    <main>
         <JumboTron />
         <div class="search-section bg-primary">
             <div class="container py-3">
