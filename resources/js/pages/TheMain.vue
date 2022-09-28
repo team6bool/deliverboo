@@ -1,5 +1,5 @@
 <template>
-    <main class="">
+    <main>
         <JumboTron />
         <div class="search-section bg-primary">
             <div class="container py-3">
@@ -10,8 +10,8 @@
             </div>
         </div>
         <div class="decoration position-relative upper">
-            <svg class="up-down" version="1.1" xmlns="http://www.w3.org/2000/svg" width="100%" height="145px"
-                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 320 123" xml:space="preserve">
+            <svg class="up-down img-fluid responsive-svg" version="1.1" xmlns="http://www.w3.org/2000/svg" width="100%" height="145px"
+                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 320 123" xml:space="preserve" preserveAspectRatio="none">
                 <path class="swish" d="M0.2,0c0,0,0,59.5,105.1,80.9S320,101,320,101v22H0L0.2,0z" />
             </svg>
             <svg class="burger" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -25,9 +25,9 @@
         </div>
         <CategoriesSection />
         <div class="decoration position-relative lower">
-            <svg class="w-100" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            <svg class="w-100 responsive-svg" version="1.1" xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 320 123"
-                style="enable-background: new 0 0 320 123" xml:space="preserve">
+                style="enable-background: new 0 0 320 123" xml:space="preserve" preserveAspectRatio="none">
                 <path class="swish" d="M0.2,0c0,0,0,59.5,105.1,80.9S320,101,320,101v22H0L0.2,0z" />
             </svg>
             <svg class="pizza" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -131,5 +131,21 @@ export default {
 
 .up-down {
     transform: rotate(180deg);
+}
+
+@media screen and (min-width: 576px) {
+    .responsive-svg {
+        height: 150px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .responsive-svg {
+        height: 100px;
+    }
+
+    .decoration {
+        --margin: -4rem;
+    }
 }
 </style>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Dish;
 use App\Http\Controllers\Controller;
 use App\Order;
+use App\Mail\CustomerMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -63,10 +64,12 @@ class OrderController extends Controller
 
         $order->save();
 
-        //attach dishes to order
+
         foreach ($request->dishes as $dish) {
             $order->dishes()->attach($dish, ['quantity' => $dish, 'subtotal' => $dish]);
         }
+
+        Mail::to($order->user->email)->send(new CustomerMail($order));
 
         return redirect()->route("admin.orders.show", $order->id);
     }
