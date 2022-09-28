@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <main class="container text-start pt-3 px-3">
+    <main>
+        <div class="container text-start pt-3 pb-5 px-3">
             <router-link :to="{ name: 'search.index' }">
                 <a href="#" class="btn btn-secondary text-white my-btn">
                     <svg
@@ -61,6 +61,31 @@
                     </div>
                 </div>
             </div>
+            <div
+                id="modal-success"
+                style="z-index: 5"
+                tabindex="-1"
+                class="modal-bg position-fixed top-0 bottom-0 end-0 start-0 d-none align-items-center justify-content-center px-3"
+            >
+                <div class="modal-dialog bg-white rounded p-3">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Ordine ricevuto!</h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>Grazie per aver effettuato l'ordine.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button
+                                class="btn btn-success mt-3"
+                                @click="goAllRestaurantPage()"
+                            >
+                                Yayy!!!
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="text-center pt-4">
                 <h2 class="text-orange name">{{ restaurant.name }}</h2>
@@ -70,7 +95,7 @@
                 </p>
             </div>
 
-            <div class="pt-2 row">
+            <div class="pt-2 row pb-5">
                 <h2 class="text-yellow d-flex justify-content-center">
                     I nostri piatti
                 </h2>
@@ -164,11 +189,13 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div id="cart" class="d-none">
             <div class="d-flex flex-column justify-content-center">
                 <!-- cart header with logo image, restaurant name and restaurant street -->
                 <div class="row">
                     <div class="col cart-header text-center">
-                        <h2 class="text-orange pt-5 pb-4">Carrello</h2>
+                        <h2 class="text-orange pb-4">Carrello</h2>
                     </div>
                 </div>
                 <!-- dishes section -->
@@ -179,184 +206,257 @@
                         - delete icon
                         - remove and add icon with number at the center
                     -->
-                <div
-                    v-for="dish in cart"
-                    :key="dish.id"
-                    class="row dish-container"
-                >
-                    <div class="col-3">
-                        <div class="dish-image">
-                            <!-- image of the dish -->
-                            <img
-                                :src="getImagePath(dish.img)"
-                                :alt="dish.name"
-                                class="plate-img"
-                            />
-                        </div>
-                    </div>
-
-                    <div class="col-9 dish-information">
-                        <div class="dish-and-price">
-                            <p class="text-orange">{{ dish.name }}</p>
-                            <p class="ps-1 price text-nowrap">
-                                € {{ (dish.price * dish.quantity).toFixed(2) }}
-                            </p>
+                <div class="container">
+                    <div
+                        v-for="dish in cart"
+                        :key="dish.id"
+                        class="row dish-container"
+                    >
+                        <div class="col-3">
+                            <div class="dish-image">
+                                <!-- image of the dish -->
+                                <img
+                                    :src="getImagePath(dish.img)"
+                                    :alt="dish.name"
+                                    class="plate-img"
+                                />
+                            </div>
                         </div>
 
-                        <div
-                            class="d-flex align-items-center cart-quantity-button"
-                        >
-                            <!-- bin icon -->
-                            <a
-                                class="no-decoration"
-                                @click="removeAllFromCart(dish)"
-                                ><i class="fa-solid fa-trash"></i
-                            ></a>
-                            <!-- add and remove item from cart  -->
-                            <div class="pill-button">
+                        <div class="col-9 dish-information">
+                            <div class="dish-and-price">
+                                <p class="text-orange">{{ dish.name }}</p>
+                                <p class="ps-1 price text-nowrap">
+                                    €
+                                    {{
+                                        (dish.price * dish.quantity).toFixed(2)
+                                    }}
+                                </p>
+                            </div>
+
+                            <div
+                                class="d-flex align-items-center cart-quantity-button"
+                            >
+                                <!-- bin icon -->
                                 <a
-                                    @click="removeOneFromCart(dish)"
                                     class="no-decoration"
-                                    >-
-                                </a>
+                                    @click="removeAllFromCart(dish)"
+                                    ><i class="fa-solid fa-trash"></i
+                                ></a>
+                                <!-- add and remove item from cart  -->
+                                <div class="pill-button">
+                                    <a
+                                        @click="removeOneFromCart(dish)"
+                                        class="no-decoration"
+                                        >-
+                                    </a>
 
-                                <div class="display-num-pill-button">
-                                    {{ dish.quantity }}
+                                    <div class="display-num-pill-button">
+                                        {{ dish.quantity }}
+                                    </div>
+                                    <a
+                                        @click="addToCart(dish)"
+                                        class="no-decoration"
+                                        >+</a
+                                    >
                                 </div>
-                                <a
-                                    @click="addToCart(dish)"
-                                    class="no-decoration"
-                                    >+</a
-                                >
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </main>
-        <div>
-            <div class="d-flex">
-                <img
-                    class="w-50"
-                    src="/images/checkout-bg.svg"
-                    alt="checkout-bg"
-                />
-                <img
-                    class="w-50"
-                    style="margin-left: -1px;"
-                    src="/images/checkout-bg.svg"
-                    alt="checkout-bg"
-                />
-            </div>
+            <div>
+                <div class="d-flex">
+                    <img
+                        class="w-50"
+                        src="/images/checkout-bg.svg"
+                        alt="checkout-bg"
+                    />
+                    <img
+                        class="w-50"
+                        style="margin-left: -1px"
+                        src="/images/checkout-bg.svg"
+                        alt="checkout-bg"
+                    />
+                </div>
 
-            <div class="checkout-section bg-soft">
-                <div class="container py-3">
-                    <div class="row gy-3">
-                        <div class="col-6">
-                            <div class="text-start text-checkout-start fs-5">
-                                Consegna
+                <div class="checkout-section bg-soft pb-5">
+                    <div class="container py-3">
+                        <div class="row gy-3">
+                            <div class="col-6">
+                                <div
+                                    class="text-start text-checkout-start fs-5"
+                                >
+                                    Consegna
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-end fs-5 text-checkout-end">
+                                    € {{ restaurant.delivery_price }}
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div
+                                    class="text-start text-checkout-start fs-5"
+                                >
+                                    Prodotti
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-end text-checkout-end fs-5">
+                                    € {{ partialTotal }}
+                                </div>
+                            </div>
+                            <div class="total-line"></div>
+                            <div class="col-6">
+                                <div
+                                    class="text-start text-checkout-start fs-2"
+                                >
+                                    Totale
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-end text-checkout-end fs-2">
+                                    € {{ total }}
+                                </div>
                             </div>
                         </div>
-                        <div class="col-6">
-                            <div class="text-end fs-5 text-checkout-end">
-                                € {{ restaurant.delivery_price }}
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-start text-checkout-start fs-5">
-                                Prodotti
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-end text-checkout-end fs-5">
-                                € {{ partialTotal }}
-                            </div>
-                        </div>
-                        <div class="total-line"></div>
-                        <div class="col-6">
-                            <div class="text-start text-checkout-start fs-2">
-                                Totale
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-end text-checkout-end fs-2">
-                                € {{ total }}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="checkout-open mt-3 pb-5">
-                        <h2 class="pt-3 text-white text-shadow">Checkout</h2>
-                        <form
-                            action=""
-                            method="post"
-                            enctype="multipart/form-data"
+                        <button
+                            id="checkoutBtn"
+                            class="btn-primary my-3 d-inline-block"
+                            @click="checkoutSectionShow()"
                         >
-                            <div class="form-group my-3">
-                                <label class="fw-semibold text-orange fs-5 pb-1"
-                                    >Nome*</label
-                                >
-                                <input
-                                    type="text"
-                                    name="name"
-                                    class="form-control"
-                                    required
-                                />
+                            Procedi al checkout
+                        </button>
+                        <div class="d-none mt-3 checkout-open" id="checkout">
+                            <div
+                                class="d-flex align-items-center justify-content-between"
+                            >
+                                <h2 class="pt-3 text-white text-shadow ps-3">
+                                    Checkout
+                                </h2>
+                                <i
+                                    class="fa fa-solid fa-x pe-2 text-orange"
+                                    @click="hideCheckout()"
+                                ></i>
                             </div>
-                            <div class="form-group my-3">
-                                <label class="fw-semibold text-orange fs-5 pb-1"
-                                    >Cognome*</label
-                                >
-                                <input
-                                    type="text"
-                                    name="lastname"
-                                    class="form-control"
-                                    required
-                                />
-                            </div>
-                            <div class="form-group my-3">
-                                <label class="fw-semibold text-orange fs-5 pb-1"
-                                    >Indirizzo*</label
-                                >
-                                <input
-                                    type="text"
-                                    name="address"
-                                    class="form-control"
-                                    required
-                                />
-                            </div>
-                            <div class="form-group my-3">
-                                <label class="fw-semibold text-orange fs-5 pb-1"
-                                    >Email*</label
-                                >
-                                <input
-                                    type="text"
-                                    name="email"
-                                    class="form-control"
-                                    required
-                                />
-                            </div>
-                            <div class="form-group my-3">
-                                <label class="fw-semibold text-orange fs-5 pb-1"
-                                    >Numero di telefono*</label
-                                >
-                                <input
-                                    type="text"
-                                    name="phone"
-                                    class="form-control"
-                                    required
-                                />
-                            </div>
-                            <div id="dropin-container"></div>
-                            <button id="submit-button" class="btn btn-primary">
-                                Ordina
-                            </button>
-                        </form>
+                            <!-- checkout form to save client information  -->
+                            <form
+                                @submit.prevent="submitNewOrder()"
+                                class="mt-3"
+                            >
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group my-3">
+                                            <label
+                                                class="fw-semibold text-orange fs-5 pb-1"
+                                                for="name"
+                                                >Nome*</label
+                                            >
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                id="name"
+                                                name="name"
+                                                v-model="client.name"
+                                                placeholder="Inserisci il tuo nome"
+                                                required
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group my-3">
+                                            <label
+                                                class="fw-semibold text-orange fs-5 pb-1"
+                                                for="surname"
+                                                >Cognome*</label
+                                            >
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                id="surname"
+                                                name="surname"
+                                                placeholder="Inserisci il tuo cognome"
+                                                required
+                                                v-model="client.surname"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group my-3">
+                                            <label
+                                                class="fw-semibold text-orange fs-5 pb-1"
+                                                for="email"
+                                                >Email*</label
+                                            >
+                                            <input
+                                                type="email"
+                                                class="form-control"
+                                                id="email"
+                                                name="email"
+                                                placeholder="Inserisci la tua email"
+                                                required
+                                                v-model="client.email"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group my-3">
+                                            <label
+                                                class="fw-semibold text-orange fs-5 pb-1"
+                                                for="phone"
+                                                >Telefono*</label
+                                            >
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                id="phone"
+                                                name="phone"
+                                                placeholder="Inserisci il tuo numero di telefono"
+                                                required
+                                                v-model="client.phone"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group my-3">
+                                            <label
+                                                class="fw-semibold text-orange fs-5 pb-1"
+                                                for="address"
+                                                >Indirizzo*</label
+                                            >
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                id="address"
+                                                name="address"
+                                                placeholder="Inserisci il tuo indirizzo"
+                                                required
+                                                v-model="client.address"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group my-3">
+                                            <!-- braintree -->
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button
+                                            type="submit"
+                                            class="btn btn-primary"
+                                        >
+                                            Conferma ordine
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 </template>
 
 <script>
@@ -392,10 +492,17 @@ export default {
     data() {
         return {
             restaurant: {},
-            cart: {},
+            cart: [],
             quantity: 1,
             partialTotal: 0,
             total: 0,
+            client: {
+                name: "",
+                surname: "",
+                email: "",
+                phone: "",
+                address: "",
+            },
         };
     },
     filters: {
@@ -415,6 +522,7 @@ export default {
                 .catch((error) => {
                     console.log(error);
                 });
+            this.CartSectionShow();
         },
         showDetails(id) {
             let modal = document.getElementById("modal-" + id);
@@ -464,6 +572,7 @@ export default {
                 2
             );
             localStorage.setItem("total", JSON.stringify(this.total));
+            this.CartSectionShow();
         },
         checkCart() {
             if (this.cart.length > 0) {
@@ -472,10 +581,12 @@ export default {
                     modal.classList.replace("d-none", "d-flex");
                 }
             }
+            this.CartSectionShow();
         },
         closeModalCart() {
             let modal = document.getElementById("modal-cart");
             modal.classList.replace("d-flex", "d-none");
+            this.CartSectionShow();
         },
         removeAllFromSession() {
             localStorage.removeItem("cart");
@@ -522,6 +633,7 @@ export default {
                     this.total = 0;
                 }
             }
+            this.CartSectionShow();
         },
         removeAllFromCart(dish) {
             let cart = JSON.parse(localStorage.getItem("cart"));
@@ -555,14 +667,60 @@ export default {
                 this.partialTotal = 0;
                 this.total = 0;
             }
+            this.CartSectionShow();
         },
-        dishSubtotals() {
-            if (this.cart && this.cart.length > 0) {
-                this.cart.forEach((dish) => {
-                    subtotals.push(dish.price * dish.quantity);
-                });
+        CartSectionShow() {
+            const cart = document.getElementById("cart");
+            if (this.cart.length > 0) {
+                cart.classList.replace("d-none", "d-block");
+            } else {
+                cart.classList.replace("d-block", "d-none");
             }
-            sessionStorage.setItem("subtotals", JSON.stringify(subtotals));
+        },
+        checkoutSectionShow() {
+            const section = document.getElementById("checkout");
+            const button = document.getElementById("checkoutBtn");
+            section.classList.replace("d-none", "d-block");
+            button.classList.replace("d-inline-block", "d-none");
+        },
+        hideCheckout() {
+            const section = document.getElementById("checkout");
+            const button = document.getElementById("checkoutBtn");
+            section.classList.replace("d-block", "d-none");
+            button.classList.replace("d-none", "d-inline-block");
+        },
+        submitNewOrder() {
+            let order_client = {
+                name: this.client.name,
+                lastname: this.client.surname,
+                address: this.client.address,
+                phone: this.client.phone,
+                email: this.client.email,
+                total: this.total,
+                user_id: this.restaurant.id,
+            };
+
+            //push all the dishes in the cart in a new array
+            let dishes = [];
+            this.cart.forEach((dish) => {
+                dishes.push({
+                    quantity: dish.quantity,
+                    subtotal: round(dish.price * dish.quantity, 2),
+                    dish_id: dish.id,
+                });
+            });
+            console.log(dishes);
+
+            axios
+                .post("/api/orders/store", { dishes: dishes, ...order_client })
+                .then((response) => {
+                    console.log(response);
+                    this.removeAllFromSession();
+                    this.hideCheckout();
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         },
     },
     mounted() {
@@ -570,7 +728,7 @@ export default {
         this.cart = JSON.parse(localStorage.getItem("cart"));
         this.partialTotal = JSON.parse(localStorage.getItem("partialTotal"));
         this.total = JSON.parse(localStorage.getItem("total"));
-        this.dishSubtotals();
+        this.CartSectionShow();
     },
 };
 </script>
