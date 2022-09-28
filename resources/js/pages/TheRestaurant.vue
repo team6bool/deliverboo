@@ -1,5 +1,6 @@
 <template>
     <div>
+
         <main class="container text-start py-3 px-3">
             <router-link :to="{ name: 'search.index' }">
                 <a href="#" class="btn btn-secondary text-white my-btn">
@@ -270,7 +271,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="text-end fs-5 text-checkout-end">
-                                    € {{ restaurant.delivery_price }}
+                                    € {{ (restaurant.delivery_price) ? (restaurant.delivery_price).toFixed(2) : 0 }}
                                 </div>
                             </div>
                             <div class="col-6">
@@ -417,10 +418,7 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group my-3">
-                                            <div
-                                                id="dropin-container"
-                                                required
-                                            ></div>
+                                            <!-- braintree -->
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -665,66 +663,38 @@ export default {
             section.classList.replace("d-block", "d-none");
             button.classList.replace("d-none", "d-inline-block");
         },
-        purchase() {
-            var button = document.querySelector("#submit-button");
-
-            braintree.dropin.create(
-                {
-                    authorization: "sandbox_g42y39zw_348pk9cgf3bgyw2b",
-                    selector: "#dropin-container",
-                },
-                function (err, instance) {
-                    if (err) {
-                        // An error in the create call is likely due to
-                        // incorrect configuration values or network issues
-                        return;
-                    }
-
-                    button.addEventListener("click", function () {
-                        instance.requestPaymentMethod(function (err, payload) {
-                            if (err) {
-                                // An appropriate error will be shown in the UI
-                                return;
-                            }
-
-                            // Submit payload.nonce to your server
-                        });
-                    });
-                }
-            );
-        },
         submitNewOrder() {
             let order_client = {
-                user_id: this.restaurant.id,
                 name: this.client.name,
                 lastname: this.client.surname,
                 address: this.client.address,
                 phone: this.client.phone,
                 email: this.client.email,
                 total: this.total,
+                user_id: this.restaurant.id,
             };
 
-            //do a loop of the cart to fetch all the dishes
-            let order_dishes = [];
+            //push all the dishes in the cart in a new array
+            let dishes = [];
             this.cart.forEach((dish) => {
-                order_dishes.push({
-                    dish_id: dish.id,
+                dishes.push({
                     quantity: dish.quantity,
-                    subtotal: dish.price * dish.quantity,
+                    subtotal: round(dish.price * dish.quantity, 2),
+                    dish_id: dish.id,
                 });
             });
+            console.log(dishes);
 
-            axios
-                .post("/api/orders/store", order_client)
-                .post("/api/orders/store", order_dishes)
+                axios
+                .post("/api/orders/store", {dishes:dishes, ...order_client})
                 .then((response) => {
+                    console.log(response);
                     this.removeAllFromSession();
                     this.hideCheckout();
                 })
                 .catch((error) => {
                     console.log(error);
                 });
-
         },
     },
     mounted() {

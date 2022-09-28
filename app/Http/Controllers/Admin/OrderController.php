@@ -63,7 +63,7 @@ class OrderController extends Controller
 
         $order->save();
 
-        //attach dishes to order
+
         foreach ($request->dishes as $dish) {
             $order->dishes()->attach($dish, ['quantity' => $dish, 'subtotal' => $dish]);
         }

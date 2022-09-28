@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Order;
+use App\User;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-                /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -47,18 +48,19 @@ class OrderController extends Controller
             'total' => 'required|numeric',
         ]);
 
-        $validatedOrderDishesData = $request->validate([
-            'dishes' => 'required|array',
-            'dishes.*.id' => 'required|exists:dishes,id',
-            'dishes.*.quantity' => 'required|numeric',
-        ]);
 
         $newOrder = new Order();
         $newOrder->fill($validatedOrderData);
-        $newOrder->dishes()->attach($validatedOrderDishesData['dishes']);
         $newOrder->save();
 
-
+        if (is_array($request->dishes) || is_object($request->dishes)) {
+            foreach ($request->dishes as $dish) {
+                $newOrder->dishes()->attach($dish['dish_id'], ['quantity' => $dish['quantity'], 'subtotal' => $dish['subtotal']]);
+            }
+        } else
+        {
+            echo "Unfortunately, an error occured.";
+        }
     }
 
     /**
