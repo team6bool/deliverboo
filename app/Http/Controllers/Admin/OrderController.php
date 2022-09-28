@@ -69,9 +69,9 @@ class OrderController extends Controller
             $order->dishes()->attach($dish, ['quantity' => $dish, 'subtotal' => $dish]);
         }
 
-        return redirect()->route("admin.orders.show", $order->id);
-
         Mail::to($order->user->email)->send(new CustomerMail($order));
+
+        return redirect()->route("admin.orders.show", $order->id);
     }
 
     /**

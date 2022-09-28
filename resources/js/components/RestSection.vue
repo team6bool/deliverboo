@@ -1,6 +1,6 @@
 <template>
     <div class="section bg-primary pb-5">
-        <div class="container">
+        <div class="container pb-5">
             <div class="row">
                 <div class="col-lg-6">
                     <img class="w-100" src="/images/icons/rest-section.svg" alt="">
