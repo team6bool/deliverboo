@@ -32,13 +32,18 @@
                     </li>
                 </ul>
             </div>
-            
+
             <div class="btn btn-secondary mt-2">
-                <a href="#" class="text-decoration-none" @click="clearRestaurants()">Annulla</a>
+                <a
+                    href="#"
+                    class="text-decoration-none"
+                    @click="clearRestaurants()"
+                    >Annulla</a
+                >
             </div>
-            
+
             <div class="d-flex justify-content-center pt-3">
-                <hr>
+                <hr />
             </div>
             <div class="row px-2 mt-4 pb-5">
                 <div
@@ -73,7 +78,11 @@
                                 <div class="d-flex align-items-center">
                                     <p class="text-orange pb-0 pe-1">
                                         €{{
-                                            (restaurant.delivery_price) ? (restaurant.delivery_price).toFixed(2) : 0
+                                            restaurant.delivery_price
+                                                ? restaurant.delivery_price.toFixed(
+                                                      2
+                                                  )
+                                                : 0
                                         }}
                                     </p>
                                     <svg
@@ -98,6 +107,7 @@
                     </div>
                 </div>
             </div>
+        </div>
     </div>
 </template>
 
@@ -117,21 +127,26 @@ export default {
     methods: {
         fetchRestaurants() {
             const th = this;
-            
-            axios.get("/api/restaurants")
-                .then(resp => {
-                    const data = resp.data;
 
-                    for (let i = 0; i < data.length; i++) {
-                        for (let j = 0; j < data[i].categories.length; j++) {
-                            const index = th.restaurants.findIndex(object => object.id === data[i].id);
-                            
-                            if (data[i].categories[j].name === th.selectedCategory && index === -1) {
-                                th.restaurants.push(data[i]);
-                            }
+            axios.get("/api/restaurants").then((resp) => {
+                const data = resp.data;
+
+                for (let i = 0; i < data.length; i++) {
+                    for (let j = 0; j < data[i].categories.length; j++) {
+                        const index = th.restaurants.findIndex(
+                            (object) => object.id === data[i].id
+                        );
+
+                        if (
+                            data[i].categories[j].name ===
+                                th.selectedCategory &&
+                            index === -1
+                        ) {
+                            th.restaurants.push(data[i]);
                         }
                     }
-                })
+                }
+            });
         },
         fetchCategories() {
             axios.get("/api/categories").then((resp) => {
@@ -150,7 +165,7 @@ export default {
             this.restaurants = [];
         },
 
-        categoryImageChange(){
+        categoryImageChange() {
             const th = this;
             let data = [];
             axios.get("/api/categories").then((resp) => {
@@ -164,9 +179,8 @@ export default {
                     counter = 0;
                 }
                 th.jumbo = data[counter].img;
-            },1000)
+            }, 1000);
         },
-
     },
     mounted() {
         this.fetchRestaurants(),

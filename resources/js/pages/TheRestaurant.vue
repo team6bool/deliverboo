@@ -1,6 +1,6 @@
 <template>
     <main>
-        <div class="container text-start py-3 px-3">
+        <div class="container text-start pt-3 pb-5 px-3">
             <router-link :to="{ name: 'search.index' }">
                 <a href="#" class="btn btn-secondary text-white my-btn">
                     <svg
@@ -95,7 +95,7 @@
                 </p>
             </div>
 
-            <div class="pt-2 row">
+            <div class="pt-2 row pb-5">
                 <h2 class="text-yellow d-flex justify-content-center">
                     I nostri piatti
                 </h2>
@@ -195,7 +195,7 @@
                 <!-- cart header with logo image, restaurant name and restaurant street -->
                 <div class="row">
                     <div class="col cart-header text-center">
-                        <h2 class="text-orange pt-5 pb-4">Carrello</h2>
+                        <h2 class="text-orange pb-4">Carrello</h2>
                     </div>
                 </div>
                 <!-- dishes section -->
@@ -206,112 +206,128 @@
                         - delete icon
                         - remove and add icon with number at the center
                     -->
-                <div
-                    v-for="dish in cart"
-                    :key="dish.id"
-                    class="row dish-container"
-                >
-                    <div class="col-3">
-                        <div class="dish-image">
-                            <!-- image of the dish -->
-                            <img
-                                :src="getImagePath(dish.img)"
-                                :alt="dish.name"
-                                class="plate-img"
-                            />
-                        </div>
-                    </div>
-
-                    <div class="col-9 dish-information">
-                        <div class="dish-and-price">
-                            <p class="text-orange">{{ dish.name }}</p>
-                            <p class="ps-1 price text-nowrap">
-                                € {{ (dish.price * dish.quantity).toFixed(2) }}
-                            </p>
+                <div class="container">
+                    <div
+                        v-for="dish in cart"
+                        :key="dish.id"
+                        class="row dish-container"
+                    >
+                        <div class="col-3">
+                            <div class="dish-image">
+                                <!-- image of the dish -->
+                                <img
+                                    :src="getImagePath(dish.img)"
+                                    :alt="dish.name"
+                                    class="plate-img"
+                                />
+                            </div>
                         </div>
 
-                        <div
-                            class="d-flex align-items-center cart-quantity-button"
-                        >
-                            <!-- bin icon -->
-                            <a
-                                class="no-decoration"
-                                @click="removeAllFromCart(dish)"
-                                ><i class="fa-solid fa-trash"></i
-                            ></a>
-                            <!-- add and remove item from cart  -->
-                            <div class="pill-button">
+                        <div class="col-9 dish-information">
+                            <div class="dish-and-price">
+                                <p class="text-orange">{{ dish.name }}</p>
+                                <p class="ps-1 price text-nowrap">
+                                    €
+                                    {{
+                                        (dish.price * dish.quantity).toFixed(2)
+                                    }}
+                                </p>
+                            </div>
+
+                            <div
+                                class="d-flex align-items-center cart-quantity-button"
+                            >
+                                <!-- bin icon -->
                                 <a
-                                    @click="removeOneFromCart(dish)"
                                     class="no-decoration"
-                                    >-
-                                </a>
+                                    @click="removeAllFromCart(dish)"
+                                    ><i class="fa-solid fa-trash"></i
+                                ></a>
+                                <!-- add and remove item from cart  -->
+                                <div class="pill-button">
+                                    <a
+                                        @click="removeOneFromCart(dish)"
+                                        class="no-decoration"
+                                        >-
+                                    </a>
 
-                                <div class="display-num-pill-button">
-                                    {{ dish.quantity }}
+                                    <div class="display-num-pill-button">
+                                        {{ dish.quantity }}
+                                    </div>
+                                    <a
+                                        @click="addToCart(dish)"
+                                        class="no-decoration"
+                                        >+</a
+                                    >
                                 </div>
-                                <a
-                                    @click="addToCart(dish)"
-                                    class="no-decoration"
-                                    >+</a
-                                >
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </main>
-        <div>
-            <div class="d-flex">
-                <img
-                    class="w-50"
-                    src="/images/checkout-bg.svg"
-                    alt="checkout-bg"
-                />
-                <img
-                    class="w-50"
-                    style="margin-left: -1px;"
-                    src="/images/checkout-bg.svg"
-                    alt="checkout-bg"
-                />
-            </div>
+            <div>
+                <div class="d-flex">
+                    <img
+                        class="w-50"
+                        src="/images/checkout-bg.svg"
+                        alt="checkout-bg"
+                    />
+                    <img
+                        class="w-50"
+                        style="margin-left: -1px"
+                        src="/images/checkout-bg.svg"
+                        alt="checkout-bg"
+                    />
+                </div>
 
-            <div class="checkout-section bg-soft">
-                <div class="container py-3">
-                    <div class="row gy-3">
-                        <div class="col-6">
-                            <div class="text-start text-checkout-start fs-5">
-                                Consegna
+                <div class="checkout-section bg-soft pb-5">
+                    <div class="container py-3">
+                        <div class="row gy-3">
+                            <div class="col-6">
+                                <div
+                                    class="text-start text-checkout-start fs-5"
+                                >
+                                    Consegna
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-end fs-5 text-checkout-end">
+                                    € {{ restaurant.delivery_price }}
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div
+                                    class="text-start text-checkout-start fs-5"
+                                >
+                                    Prodotti
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-end text-checkout-end fs-5">
+                                    € {{ partialTotal }}
+                                </div>
+                            </div>
+                            <div class="total-line"></div>
+                            <div class="col-6">
+                                <div
+                                    class="text-start text-checkout-start fs-2"
+                                >
+                                    Totale
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-end text-checkout-end fs-2">
+                                    € {{ total }}
+                                </div>
                             </div>
                         </div>
-                        <div class="col-6">
-                            <div class="text-end fs-5 text-checkout-end">
-                                € {{ restaurant.delivery_price }}
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-start text-checkout-start fs-5">
-                                Prodotti
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-end text-checkout-end fs-5">
-                                € {{ partialTotal }}
-                            </div>
-                        </div>
-                        <div class="total-line"></div>
-                        <div class="col-6">
-                            <div class="text-start text-checkout-start fs-2">
-                                Totale
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-end text-checkout-end fs-2">
-                                € {{ total }}
-                            </div>
-                        </div>
-                    </div>
-
+                        <button
+                            id="checkoutBtn"
+                            class="btn-primary my-3 d-inline-block"
+                            @click="checkoutSectionShow()"
+                        >
+                            Procedi al checkout
+                        </button>
                         <div class="d-none mt-3 checkout-open" id="checkout">
                             <div
                                 class="d-flex align-items-center justify-content-between"
@@ -486,7 +502,7 @@ export default {
                 email: "",
                 phone: "",
                 address: "",
-            }
+            },
         };
     },
     filters: {
@@ -695,8 +711,8 @@ export default {
             });
             console.log(dishes);
 
-                axios
-                .post("/api/orders/store", {dishes:dishes, ...order_client})
+            axios
+                .post("/api/orders/store", { dishes: dishes, ...order_client })
                 .then((response) => {
                     console.log(response);
                     this.removeAllFromSession();
