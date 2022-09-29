@@ -13,4 +13,6 @@ const mix = require("laravel-mix");
 
 mix.js("resources/js/app.js", "public/js")
     .js("resources/js/frontend.js", "public/js")
-    .sass("resources/sass/app.scss", "public/css");
+    .sass("resources/sass/app.scss", "public/css")
+    .copy('node_modules/chart.js/dist/chart.js', 'public/chart.js/chart.js')
+    .copy('node_modules/chartjs-plugin-zoom/dist/chartjs-plugin-zoom.js', 'public/chartjs-zoom/chartjs-zoom.js');

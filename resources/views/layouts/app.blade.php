@@ -11,7 +11,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    @yield('tagscript')
     <script>@yield('script')</script>
 
     <!-- Fonts -->
@@ -85,6 +86,7 @@
             @yield('content')
         </main>
     </div>
+    <script>@yield('bottomscript')</script>
 </body>
 
 </html>

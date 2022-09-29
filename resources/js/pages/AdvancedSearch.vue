@@ -9,37 +9,30 @@
                 />
             </div>
 
-            <div class="dropdown dropdown-center">
-                <a
-                    class="btn btn-primary dropdown-toggle"
-                    href="#"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                >
-                    <i class="fa fa-solid fa-search pe-3"></i> Seleziona una
-                    categoria
+            <div class="dropdown dropdown-center mb-2">
+                <a class="btn btn-primary dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <i class="fa fa-solid fa-search pe-3"></i> Seleziona una categoria
                 </a>
 
                 <ul class="dropdown-menu bg-soft m-auto">
-                    <li v-for="category in categories" :key="category">
-                        <a
-                            class="dropdown-item text-orange fw-semibold text-center"
-                            href="#"
-                            @click="addCategories(category)"
-                            >{{ category }}</a
-                        >
-                    </li>
+                    <li v-for="category in categories" :key="category"><a class="dropdown-item text-orange fw-semibold text-center" href="javascript:void(0)"
+                            @click="addCategories(category)">{{category}}</a></li>
                 </ul>
             </div>
 
-            <div class="btn btn-secondary mt-2">
-                <a
-                    href="#"
-                    class="text-decoration-none"
-                    @click="clearRestaurants()"
-                    >Annulla</a
-                >
+            <div class="mx-auto">
+                <ul class="categories-container bg-white m-auto row gap-2 justify-content-evenly">
+                    <li v-for="(list, i) in selectedCategories" :key="list" class="list-unstyled d-inline col-4 bg-sand categories-style">{{list}}
+                        <!-- <span @click="clearCategory(i)" class="py-1">
+                            <i class="fa-solid fa-xmark"></i>
+                        </span> -->
+                    </li>
+                    <div class="btn btn-secondary my-2 w-75 " @click="clearRestaurants()">
+                        <a href="javascript:void(0)" class="text-decoration-none">Cancella tutto</a>
+                    </div>
+                </ul>
+                
             </div>
 
             <div class="d-flex justify-content-center pt-3">
@@ -121,6 +114,7 @@ export default {
             restaurants: [],
             categories: [],
             selectedCategory: state.selectedCategory,
+            selectedCategories: [],
             jumbo: "sushi.png",
         };
     },
@@ -148,6 +142,7 @@ export default {
                 }
             });
         },
+
         fetchCategories() {
             axios.get("/api/categories").then((resp) => {
                 for (let i = 0; i < resp.data.length; i++) {
@@ -159,13 +154,37 @@ export default {
         addCategories(value) {
             this.selectedCategory = value;
             this.fetchRestaurants();
+            this.arrCategories();
+
+            console.log(this.selectedCategories)
+        },
+
+        arrCategories() {
+            if(!this.selectedCategories.includes(this.selectedCategory))
+            this.selectedCategories.push(this.selectedCategory);
         },
 
         clearRestaurants() {
             this.restaurants = [];
+            this.selectedCategories = [];
         },
 
-        categoryImageChange() {
+        clearCategory(i) {
+            this.selectedCategories.splice(i, 1);
+            this.clearRestaurant();
+        },
+
+        clearRestaurant() {
+            for (let i = 0; i < this.restaurants.length; i ++) {
+                for (let j = 0; j < this.restaurants[i].categories.length; j++) {
+                    if(this.restaurants[i].categories[j].name === this.selectedCategory) {
+                        this.restaurants.splice(i, 1);
+                    }               
+                }
+            }
+        },
+
+        categoryImageChange(){
             const th = this;
             let data = [];
             axios.get("/api/categories").then((resp) => {
@@ -185,8 +204,9 @@ export default {
     mounted() {
         this.fetchRestaurants(),
             this.fetchCategories(),
-            this.categoryImageChange();
+            this.categoryImageChange()
     },
+
 };
 </script>
 
@@ -241,10 +261,28 @@ export default {
                 }
             }
         }
-    }
-}
+        .categories-container {
+            //border of the container border
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+            border-radius: 15px;
+            padding: 0.5rem;
+            max-width: 400px;
 
-hr {
-    width: 90%;
+            .categories-style {
+                border-radius: 15px;
+                color: white;
+
+                .fa-xmark {
+                    cursor: pointer;
+                }
+            }
+        }
+        
+    }
+
+    hr {
+        width: 90%;
+    }
+
 }
 </style>
