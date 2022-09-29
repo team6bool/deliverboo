@@ -281,7 +281,7 @@
                 </div>
 
                 <div class="checkout-section bg-soft pb-5">
-                    <div class="container py-3">
+                    <div class="container pt-3 pb-5">
                         <div class="row gy-3">
                             <div class="col-6">
                                 <div
