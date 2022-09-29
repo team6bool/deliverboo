@@ -32,7 +32,7 @@
                         <a href="javascript:void(0)" class="text-decoration-none">Cancella tutto</a>
                     </div>
                 </ul>
-                
+
             </div>
 
             <div class="d-flex justify-content-center pt-3">
@@ -173,13 +173,12 @@ export default {
             this.selectedCategories.splice(i, 1);
             this.clearRestaurant();
         },
-
         clearRestaurant() {
             for (let i = 0; i < this.restaurants.length; i ++) {
                 for (let j = 0; j < this.restaurants[i].categories.length; j++) {
                     if(this.restaurants[i].categories[j].name === this.selectedCategory) {
                         this.restaurants.splice(i, 1);
-                    }               
+                    }
                 }
             }
         },
@@ -277,7 +276,7 @@ export default {
                 }
             }
         }
-        
+
     }
 
     hr {
