@@ -115,7 +115,7 @@ export default {
 
 <style scoped lang="scss">
 footer {
-    margin-top: -50px;
+    margin-top: -70px;
     position: relative;
     z-index: 5;
     .wave {

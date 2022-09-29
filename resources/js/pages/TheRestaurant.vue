@@ -281,7 +281,7 @@
                 </div>
 
                 <div class="checkout-section bg-soft pb-5">
-                    <div class="container py-3">
+                    <div class="container pt-3 pb-5">
                         <div class="row gy-3">
                             <div class="col-6">
                                 <div
@@ -335,10 +335,10 @@
                                 <h2 class="pt-3 text-white text-shadow ps-3">
                                     Checkout
                                 </h2>
-                                <i
-                                    class="fa fa-solid fa-x pe-2 text-orange"
+                                <a href="javascript:void(0)"
+                                    class="fa fa-solid fa-x pe-2 text-orange no-decoration"
                                     @click="hideCheckout()"
-                                ></i>
+                                ></a>
                             </div>
                             <!-- checkout form to save client information  -->
                             <form
