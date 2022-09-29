@@ -335,10 +335,10 @@
                                 <h2 class="pt-3 text-white text-shadow ps-3">
                                     Checkout
                                 </h2>
-                                <i
-                                    class="fa fa-solid fa-x pe-2 text-orange"
+                                <a href="javascript:void(0)"
+                                    class="fa fa-solid fa-x pe-2 text-orange no-decoration"
                                     @click="hideCheckout()"
-                                ></i>
+                                ></a>
                             </div>
                             <!-- checkout form to save client information  -->
                             <form

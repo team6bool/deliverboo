@@ -28,8 +28,8 @@
                             <i class="fa-solid fa-xmark"></i>
                         </span> -->
                     </li>
-                    <div class="btn btn-secondary my-2 w-75">
-                        <a href="javascript:void(0)" class="text-decoration-none" @click="clearRestaurants()">Cancella tutto</a>
+                    <div class="btn btn-secondary my-2 w-75 " @click="clearRestaurants()">
+                        <a href="javascript:void(0)" class="text-decoration-none">Cancella tutto</a>
                     </div>
                 </ul>
                 
