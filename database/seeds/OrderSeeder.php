@@ -265,12 +265,12 @@ class OrderSeeder extends Seeder
             'Via Mazzelli, 105',
     ];
 
-    for ($i = 0; $i < 10; $i++) {
+    for ($i = 0; $i < 100; $i++) {
         $randomAddresses = Arr::random($addresses);
         $randomNames = Arr::random($names);
         $randomLastnames = Arr::random($lastnames);
         $newOrder = new Order();
-        $newOrder->user_id = 9;
+        $newOrder->user_id = 1;
         $newOrder->name = $randomNames;
         $newOrder->lastname = $randomLastnames;
         $newOrder->email = $faker->email();
