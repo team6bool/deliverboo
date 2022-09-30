@@ -25,6 +25,7 @@
     "dependencies": {
         "chart.js": "^3.9.1",
         "chartjs-plugin-zoom": "^1.2.1",
+        "vue-braintree": "^2.1.0",
         "vue-router": "^3.6.5"
     }
 }

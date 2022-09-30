@@ -61,10 +61,76 @@
                     </div>
                 </div>
             </div>
+
+            <div
+                id="modal-form-email-error"
+                style="z-index: 10"
+                class="modal-bg position-fixed top-0 bottom-0 end-0 start-0 d-none align-items-center justify-content-center px-3"
+            >
+                <div class="modal-dialog bg-white rounded p-3">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">
+                                Inserire una mail valida
+                            </h5>
+                        </div>
+                        <button
+                            @click="closeModalFormErrorEmail()"
+                            class="btn btn-secondary mt-3"
+                        >
+                            Ok
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                id="modal-form-phone-error"
+                style="z-index: 10"
+                class="modal-bg position-fixed top-0 bottom-0 end-0 start-0 d-none align-items-center justify-content-center px-3"
+            >
+                <div class="modal-dialog bg-white rounded p-3">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">
+                                Inserire un numero di telefono valido
+                            </h5>
+                        </div>
+                        <button
+                            @click="closeModalFormErrorNumber()"
+                            class="btn btn-secondary mt-3"
+                        >
+                            Ok
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                id="modal-form-field-error"
+                style="z-index: 10"
+                class="modal-bg position-fixed top-0 bottom-0 end-0 start-0 d-none align-items-center justify-content-center px-3"
+            >
+                <div class="modal-dialog bg-white rounded p-3">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">
+                                Inserire tutti i dati nel form
+                            </h5>
+                        </div>
+                        <button
+                            @click="closeModalFormErrorField()"
+                            class="btn btn-secondary mt-3"
+                        >
+                            Ok
+                        </button>
+                    </div>
+                </div>
+            </div>
+
             <div
                 id="modal-success"
-                style="z-index: 5"
-                tabindex="-1"
+                style="z-index: 10"
                 class="modal-bg position-fixed top-0 bottom-0 end-0 start-0 d-none align-items-center justify-content-center px-3"
             >
                 <div class="modal-dialog bg-white rounded p-3">
@@ -75,9 +141,20 @@
                         <div class="modal-body">
                             <p>Grazie per aver effettuato l'ordine.</p>
                         </div>
+                        <div style="height=200px; width=200px">
+                            <img
+                                style="
+                                    object-fit: cover;
+                                    height: 100%;
+                                    width: 100%;
+                                "
+                                src="https://delivery.glovoapp.com/ke/wp-content/uploads/sites/25/2021/02/Gas.gif"
+                                alt=""
+                            />
+                        </div>
                         <div class="modal-footer">
                             <button
-                                class="btn btn-success mt-3"
+                                class="btn btn-primary mt-3"
                                 @click="goAllRestaurantPage()"
                             >
                                 Yayy!!!
@@ -190,23 +267,25 @@
                 </div>
             </div>
         </div>
+
         <div id="cart" class="d-none">
-            <div class="d-flex flex-column justify-content-center">
-                <!-- cart header with logo image, restaurant name and restaurant street -->
-                <div class="row">
-                    <div class="col cart-header text-center">
-                        <h2 class="text-orange pb-4">Carrello</h2>
+            <div class="container">
+                <div class="d-flex flex-column justify-content-center">
+                    <!-- cart header with logo image, restaurant name and restaurant street -->
+                    <div class="row">
+                        <div class="col cart-header text-center">
+                            <h2 class="text-orange pb-4">Carrello</h2>
+                        </div>
                     </div>
-                </div>
-                <!-- dishes section -->
-                <!--
+                    <!-- dishes section -->
+                    <!--
                     Structure:
                         - image on the left
                         - description and price center
                         - delete icon
                         - remove and add icon with number at the center
                     -->
-                <div class="container">
+
                     <div
                         v-for="dish in cart"
                         :key="dish.id"
@@ -268,13 +347,12 @@
             <div>
                 <div class="d-flex">
                     <img
-                        class="w-50"
+                        class="scontrino"
                         src="/images/checkout-bg.svg"
                         alt="checkout-bg"
                     />
                     <img
-                        class="w-50"
-                        style="margin-left: -1px"
+                        class="scontrino"
                         src="/images/checkout-bg.svg"
                         alt="checkout-bg"
                     />
@@ -335,16 +413,14 @@
                                 <h2 class="pt-3 text-white text-shadow ps-3">
                                     Checkout
                                 </h2>
-                                <a href="javascript:void(0)"
+                                <a
+                                    href="javascript:void(0)"
                                     class="fa fa-solid fa-x pe-2 text-orange no-decoration"
                                     @click="hideCheckout()"
                                 ></a>
                             </div>
                             <!-- checkout form to save client information  -->
-                            <form
-                                @submit.prevent="submitNewOrder()"
-                                class="mt-3"
-                            >
+                            <form class="mt-3">
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group my-3">
@@ -439,15 +515,16 @@
                                     <div class="col-12">
                                         <div class="form-group my-3">
                                             <!-- braintree -->
+                                            <v-braintree
+                                                svg="none"
+                                                authorization="sandbox_g42y39zw_348pk9cgf3bgyw2b"
+                                                btnText="Conferma ordine"
+                                                btnClass="btn-primary mt-3"
+                                                locale="it_IT"
+                                                @success="onSuccess"
+                                                @error="onError"
+                                            ></v-braintree>
                                         </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <button
-                                            type="submit"
-                                            class="btn btn-primary"
-                                        >
-                                            Conferma ordine
-                                        </button>
                                     </div>
                                 </div>
                             </form>
@@ -689,6 +766,34 @@ export default {
             section.classList.replace("d-block", "d-none");
             button.classList.replace("d-none", "d-inline-block");
         },
+        showModalSuccess() {
+            const modal = document.getElementById("modal-success");
+            modal.classList.replace("d-none", "d-flex");
+        },
+        showModalFormErrorEmail() {
+            const modal = document.getElementById("modal-form-email-error");
+            modal.classList.replace("d-none", "d-flex");
+        },
+        closeModalFormErrorEmail() {
+            const modal = document.getElementById("modal-form-email-error");
+            modal.classList.replace("d-flex", "d-none");
+        },
+        showModalFormErrorNumber() {
+            const modal = document.getElementById("modal-form-phone-error");
+            modal.classList.replace("d-none", "d-flex");
+        },
+        closeModalFormErrorNumber() {
+            const modal = document.getElementById("modal-form-phone-error");
+            modal.classList.replace("d-flex", "d-none");
+        },
+        showModalFormErrorField() {
+            const modal = document.getElementById("modal-form-field-error");
+            modal.classList.replace("d-none", "d-flex");
+        },
+        closeModalFormErrorField() {
+            const modal = document.getElementById("modal-form-field-error");
+            modal.classList.replace("d-flex", "d-none");
+        },
         submitNewOrder() {
             let order_client = {
                 name: this.client.name,
@@ -722,6 +827,51 @@ export default {
                     console.log(error);
                 });
         },
+        onSuccess(payload) {
+            let nonce = payload.nonce;
+            // Do something great with the nonce...
+            // validate email format respect the regex
+            let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            let phoneRegex = /^([0-9]{2,4})?[-. ]?([0-9]{6,10})$/;
+
+            if (
+                this.client.name &&
+                this.client.surname &&
+                this.client.address &&
+                this.client.phone &&
+                this.client.email &&
+                //check if email is valid with regex
+                emailRegex.test(this.client.email) &&
+                phoneRegex.test(this.client.phone)
+            ) {
+                this.submitNewOrder();
+                window.scrollTo(0, 0);
+                return this.showModalSuccess();
+            } else if (
+                !this.client.name ||
+                !this.client.surname ||
+                !this.client.address ||
+                !this.client.phone ||
+                !this.client.email
+            ) {
+                this.showModalFormErrorField();
+                this.error = "Compila tutti i campi";
+            } else if (!emailRegex.test(this.client.email)) {
+                this.showModalFormErrorEmail();
+                this.error = "Email non valida";
+            } else if (!phoneRegex.test(this.client.phone)) {
+                this.showModalFormErrorNumber();
+                this.error = "Numero di telefono non valido";
+            }
+        },
+        onError(error) {
+            let message = error.message;
+            // Whoops, an error has occured while trying to get the nonce
+            console.log("error");
+        },
+        goAllRestaurantPage() {
+            window.location.href = "/";
+        },
     },
     mounted() {
         this.getRestaurant();
@@ -729,6 +879,7 @@ export default {
         this.partialTotal = JSON.parse(localStorage.getItem("partialTotal"));
         this.total = JSON.parse(localStorage.getItem("total"));
         this.CartSectionShow();
+        this.pay();
     },
 };
 </script>
@@ -806,6 +957,18 @@ p {
 
 //cart style
 
+.scontrino {
+    width: 50%;
+}
+
+@media screen and (max-width: 768px) {
+    .scontrino {
+        width: 100%;
+    }
+    .scontrino:first-child {
+        display: none;
+    }
+}
 .dish-container {
     //border of the container border
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
@@ -902,4 +1065,5 @@ p {
         background-color: var(--orange);
     }
 }
+
 </style>
