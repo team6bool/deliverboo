@@ -2,7 +2,12 @@
     <main>
         <div class="container text-start pt-3 pb-5 px-3">
             <router-link :to="{ name: 'search.index' }">
-                <a href="#" class="btn btn-secondary text-white my-btn">
+                <a
+                    data-aos="fade-right"
+                    data-aos-duration="500"
+                    href="#"
+                    class="btn btn-secondary text-white my-btn"
+                >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -165,18 +170,46 @@
             </div>
 
             <div class="text-center pt-4">
-                <h2 class="text-orange name">{{ restaurant.name }}</h2>
-                <h3 class="text-yellow">{{ restaurant.address }}</h3>
-                <p class="text-start pt-4 px-lg-5">
+                <h2
+                    class="text-orange name"
+                    data-aos="fade-up"
+                    data-aos-easing="ease-in-out"
+                    data-aos-duration="500"
+                    data-aos-delay="200"
+                >
+                    {{ restaurant.name }}
+                </h2>
+                <h3
+                    data-aos="fade-up"
+                    data-aos-easing="ease-in-out"
+                    data-aos-delay="600"
+                    class="text-yellow"
+                >
+                    {{ restaurant.address }}
+                </h3>
+                <p
+                    data-aos="fade-up"
+                    data-aos-easing="ease-in-out"
+                    data-aos-delay="700"
+                    class="text-start pt-4 px-lg-5"
+                >
                     {{ restaurant.description }}
                 </p>
             </div>
 
             <div class="pt-2 row pb-5">
-                <h2 class="text-yellow d-flex justify-content-center">
+                <h2
+                    data-aos="fade-right"
+                    data-aos-easing="ease-in-out"
+                    data-aos-delay="800"
+                    data-aos-duration="400"
+                    class="text-yellow d-flex justify-content-center"
+                >
                     I nostri piatti
                 </h2>
                 <div
+                    data-aos="fade-right"
+                    data-aos-easing="ease-in-out"
                     v-for="dish in restaurant.dishes"
                     :key="dish.id"
                     class="mt-4 col-12 col-md-6 col-lg-4"
@@ -268,12 +301,22 @@
             </div>
         </div>
 
-        <div id="cart" class="d-none">
+        <div
+            data-aos="fade-right"
+            data-aos-easing="ease-in-out"
+            id="cart"
+            class="d-none"
+        >
             <div class="container">
                 <div class="d-flex flex-column justify-content-center">
                     <!-- cart header with logo image, restaurant name and restaurant street -->
                     <div class="row">
-                        <div class="col cart-header text-center">
+                        <div
+                            data-aos="fade-right"
+                            data-aos-easing="ease-in-out"
+                            data-aos-delay="90"
+                            class="col cart-header text-center"
+                        >
                             <h2 class="text-orange pb-4">Carrello</h2>
                         </div>
                     </div>
@@ -290,6 +333,9 @@
                         v-for="dish in cart"
                         :key="dish.id"
                         class="row dish-container"
+                        data-aos="fade-right"
+                        data-aos-easing="ease-in-out"
+                        data-aos-delay="80"
                     >
                         <div class="col-3">
                             <div class="dish-image">
@@ -370,7 +416,14 @@
                             </div>
                             <div class="col-6">
                                 <div class="text-end fs-5 text-checkout-end">
-                                    € {{ (restaurant.delivery_price) ? (restaurant.delivery_price).toFixed(2) : 0 }}
+                                    €
+                                    {{
+                                        restaurant.delivery_price
+                                            ? restaurant.delivery_price.toFixed(
+                                                  2
+                                              )
+                                            : 0
+                                    }}
                                 </div>
                             </div>
                             <div class="col-6">
@@ -1065,5 +1118,4 @@ p {
         background-color: var(--orange);
     }
 }
-
 </style>
