@@ -138,7 +138,6 @@ export default {
             this.restaurants = [];
             this.selectedCategories = [];
         },
-
         clearCategory(category) {
             const index = this.selectedCategories.indexOf(category);
             this.selectedCategories.splice(index, 1);

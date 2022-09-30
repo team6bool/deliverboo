@@ -8,34 +8,11 @@
     <title>Laravel</title>
 
     <script src="{{ asset('js/frontend.js') }}" defer></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.1/js/bootstrap.bundle.min.js' integrity='sha512-1TK4hjCY5+E9H3r5+05bEGbKGyK506WaDPfPe1s/ihwRjr6OtL43zJLzOFQ+/zciONEd+sp7LwrfOCnyukPSsg==' crossorigin='anonymous'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.1/js/bootstrap.bundle.min.js'
+        integrity='sha512-1TK4hjCY5+E9H3r5+05bEGbKGyK506WaDPfPe1s/ihwRjr6OtL43zJLzOFQ+/zciONEd+sp7LwrfOCnyukPSsg=='
+        crossorigin='anonymous'></script>
 
     <script src="https://js.braintreegateway.com/web/dropin/1.10.0/js/dropin.js"></script>
-    <script>
-        var button = document.querySelector('#submit-button');
-
-        braintree.dropin.create({
-            authorization: 'sandbox_g42y39zw_348pk9cgf3bgyw2b',
-            selector: '#dropin-container'
-        }, function(err, instance) {
-            if (err) {
-                // An error in the create call is likely due to
-                // incorrect configuration values or network issues
-                return;
-            }
-
-            button.addEventListener('click', function() {
-                instance.requestPaymentMethod(function(err, payload) {
-                    if (err) {
-                        // An appropriate error will be shown in the UI
-                        return;
-                    }
-
-                    // Submit payload.nonce to your server
-                });
-            })
-        });
-    </script>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
@@ -43,7 +20,13 @@
         integrity='sha512-siwe/oXMhSjGCwLn+scraPOWrJxHlUgMBMZXdPe2Tnk3I0x3ESCoLz7WZ5NTH6SZrywMY+PB1cjyqJ5jAluCOg=='
         crossorigin='anonymous' />
 
-
+    <!-- Styles -->
+    <style>
+        .braintree-placeholder,
+        .braintree-heading {
+            color: #fd5f25;
+        }
+    </style>
 </head>
 
 <body>
