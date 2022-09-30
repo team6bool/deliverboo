@@ -370,7 +370,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="text-end fs-5 text-checkout-end">
-                                    € {{ restaurant.delivery_price }}
+                                    € {{ (restaurant.delivery_price) ? (restaurant.delivery_price).toFixed(2) : 0 }}
                                 </div>
                             </div>
                             <div class="col-6">
