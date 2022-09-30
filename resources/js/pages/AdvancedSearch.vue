@@ -6,7 +6,7 @@
             </div>
 
             <div class="dropdown dropdown-center mb-2">
-                <a class="btn btn-primary dropdown-toggle" href="javascript:void(0)" role="button"
+                <a class="btn btn-primary dropdown-toggle mb-2" href="javascript:void(0)" role="button"
                     data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-solid fa-search pe-3"></i> Seleziona una categoria
                 </a>
@@ -19,14 +19,14 @@
             </div>
 
             <div class="mx-auto">
-                <ul class="categories-container bg-white m-auto row gap-2 justify-content-evenly">
+                <ul class="categories-container text-start gap-2 justify-content-evenly">
                     <li v-for="(list, i) in selectedCategories" :key="list"
-                        class="list-unstyled d-inline col-4 bg-sand categories-style">{{list}}
-                        <span @click="clearCategory(list)" class="py-1">
+                        class="list-unstyled d-inline-block bg-sand categories-style px-3 py-1 me-1 mb-2 text-nowrap">{{list}}
+                        <span @click="clearCategory(list)" class="d-inline-block">
                             <i class="fa-solid fa-xmark"></i>
                         </span>
                     </li>
-                    <div class="btn btn-secondary my-2 w-75 " @click="clearRestaurants()">
+                    <div class="link" @click="clearRestaurants()">
                         <a href="javascript:void(0)" class="text-decoration-none">Cancella tutto</a>
                     </div>
                 </ul>
@@ -145,7 +145,11 @@ export default {
             const newCateg = [];
             this.selectedCategories.forEach(element => newCateg.push(element));
             this.clearRestaurants();
-            newCateg.forEach(elemento => this.addCategories(elemento));
+            // newCateg.forEach(elemento => this.addCategories(elemento));
+            for(let i = 0; i < newCateg.length; i++){
+                this.addCategories(newCateg[i]);
+                console.log(newCateg[i]);
+            }
             console.log(newCateg)
         },
 
@@ -228,12 +232,6 @@ export default {
         }
 
         .categories-container {
-            //border of the container border
-            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
-            border-radius: 15px;
-            padding: 0.5rem;
-            max-width: 400px;
-
             .categories-style {
                 border-radius: 15px;
                 color: white;
