@@ -4,6 +4,10 @@ import router from "./router";
 
 import vueBraintree from "vue-braintree";
 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+AOS.init();
+
 new Vue({
     el: "#app",
     render: (renderComponent) => renderComponent(App),

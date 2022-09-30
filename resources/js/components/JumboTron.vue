@@ -1,11 +1,11 @@
 <template>
     <div class="section bg-primary">
-        <div class="jumbotron">
+        <div data-aos="fade-down" data-aos-easing="zoom-in" data-aos-duration="800" class="jumbotron">
             <video src="/images/video/jumbo.mp4" autoplay loop muted></video>
         </div>
         <div class="container pt-5">
-            <h1>Cerca il tuo piatto preferito</h1>
-            <p>Nell'isola di Ponza ci sono più di mille ristoranti, scopri quello che più ti piace!</p>
+            <h1 data-aos="fade-down" data-aos-easing="ease-in-out" data-aos-delay="80">Cerca il tuo piatto preferito</h1>
+            <p data-aos="fade-down" data-aos-easing="ease-in-out" data-aos-delay="80">Nell'isola di Ponza ci sono più di mille ristoranti, scopri quello che più ti piace!</p>
         </div>
     </div>
 </template>

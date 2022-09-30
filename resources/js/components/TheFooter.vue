@@ -16,7 +16,10 @@
         <div class="section bg-dark">
             <div class="container text-start text-light">
                 <div class="px-3">
-                    <div class="d-xl-flex flex-xl-column align-items-xl-center">
+                    <div
+                        data-aos="fade-up"
+                        class="d-xl-flex flex-xl-column align-items-xl-center"
+                    >
                         <img
                             class="logo pb-5"
                             src="/images/DeliveBooLogo.png"
@@ -32,9 +35,15 @@
                             :key="link.title"
                             class="col-12 col-sm-6 col-md-3 col-xl-2"
                         >
-                            <h5 class="fw-bold pb-1">{{ link.title }}</h5>
+                            <h5 data-aos="fade-up" class="fw-bold pb-1">
+                                {{ link.title }}
+                            </h5>
                             <ul class="list-unstyled fw-light">
-                                <li v-for="item in link.subLinks" :key="item">
+                                <li
+                                    data-aos="fade-up"
+                                    v-for="item in link.subLinks"
+                                    :key="item"
+                                >
                                     <a href="#">{{ item }}</a>
                                 </li>
                             </ul>
@@ -43,6 +52,7 @@
                             class="d-flex align-items-xl-center flex-column gap-5 gap-sm-3 pb-4 col-12 col-sm-6 col-md-3"
                         >
                             <div
+                                data-aos="fade-up"
                                 class="d-flex justify-content-center align-items-xl-center gap-5 gap-sm-3 flex-row flex-sm-column download-box"
                             >
                                 <img
@@ -57,7 +67,7 @@
                                 />
                             </div>
 
-                            <ul class="list-unstyled fw-light">
+                            <ul data-aos="fade-up" class="list-unstyled fw-light">
                                 <li><a href="#">TERMINI E CONDIZIONI</a></li>
                                 <li><a href="#">PRIVACY POLICY</a></li>
                                 <li><a href="#">COOKIES POLICY</a></li>
@@ -65,8 +75,8 @@
                         </div>
                     </div>
                     <div class="copy py-4 fw-light text-sm-center">
-                        <em>Disegnato e sviluppato da:</em>
-                        <ul class="list-unstyled pt-3 fw-semibold">
+                        <em data-aos="fade-up">Disegnato e sviluppato da:</em>
+                        <ul data-aos="fade-up" class="list-unstyled pt-3 fw-semibold">
                             <li><a href="#">Arturo Arnò</a></li>
                             <li><a href="#">Luca Dercole</a></li>
                             <li><a href="#">Paolo Di Giovanni</a></li>

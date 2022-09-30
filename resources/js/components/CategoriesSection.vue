@@ -1,8 +1,8 @@
 <template>
     <div class="container">
-        <h3 class="text-start fw-bold">{{ title }}</h3>
+        <h3 data-aos="zoom-in-right" data-aos-delay="50" class="text-start fw-bold">{{ title }}</h3>
         <div class="categories row flex-wrap justify-content-around">
-            <a class="col-4 py-3 d-flex flex-column justify-content-center no-decoration" href="javascript:void(0)"
+            <a data-aos="flip-left" data-aos-delay="50"  class="col-4 py-3 d-flex flex-column justify-content-center no-decoration" href="javascript:void(0)"
                 :class="col"
                 v-for="category in categories" :key="category.id" @click="selectCategory(category.name)">
                 <div class="shadow rounded-circle ratio ratio-1x1 bg-dark">
@@ -11,9 +11,9 @@
                 <p class="shadow btn-primary text-uppercase rounded-pill p-1 mt-2">{{category.name}}</p>
             </a>
         </div>
-        <h5 class="link text-end pt-3 pe-1 ms-auto" :class="showAllBtn" @click="showAll()">Mostra tutte <i
+        <h5 data-aos="fade-up" data-aos-duration="300" class="link text-end pt-3 pe-1 ms-auto" :class="showAllBtn" @click="showAll()">Mostra tutte <i
                 class="fa fa-solid fa-arrow-down"></i></h5>
-        <h5 class="link text-end pt-3 pe-1 ms-auto" :class="backButton" @click="hide()">Nascondi <i
+        <h5 data-aos="fade-up" data-aos-duration="300" class="link text-end pt-3 pe-1 ms-auto" :class="backButton" @click="hide()">Nascondi <i
                 class="fa fa-solid fa-arrow-up"></i></h5>
     </div>
 </template>
