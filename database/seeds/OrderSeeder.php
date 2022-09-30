@@ -1,6 +1,10 @@
 <?php
 
 use App\Order;
+use App\User;
+use App\Dish;
+use Faker\Generator as Faker;
+use Illuminate\Support\Arr;
 use Illuminate\Database\Seeder;
 
 class OrderSeeder extends Seeder
@@ -10,7 +14,7 @@ class OrderSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(Faker $faker)
     {
         $orders = [
             [
@@ -204,6 +208,80 @@ class OrderSeeder extends Seeder
                 'created_at' => '2022-09-16 17:49:37',
             ],
         ];
+
+        $names = [
+            'Marco',
+            'Andrea',
+            'Giovanni',
+            'Alessio',
+            'Arturo',
+            'Luca',
+            'Paolo',
+            'Valentina',
+            'Giulia',
+            'Erica',
+            'Maria',
+            'Giovanna',
+            'Giorgio',
+            'Luigi',
+            'Francesco',
+            'Miriana',
+        ];
+
+        $lastnames = [
+            'Sedia',
+            'Della Ponza',
+            'Arnò',
+            'Dercole',
+            'Mazzella',
+            'Marzini',
+            'Motta',
+            'Ruggeri',
+            'De Falchi',
+            'Totti',
+            'Riga',
+            'Di Divani',
+            'Rosso',
+            'Carnasciali',
+            'Carrozzieri',
+            'Lupeni',
+        ];
+
+        $addresses = [
+            'Via Panoramica, 32',
+            'Via della Sedia, 71',
+            'Via Ponzese 74',
+            'Via Panoramica, 44',
+            'Via Verace 11',
+            'Via Celestina, 120',
+            'Via Panoramica, 55',
+            'Via Basilico, 33',
+            'Via Statteri, 1',
+            'Via Panoramica, 144',
+            'Via dei Giardinelli, 85',
+            'Via Valentini, 94',
+            'Via Panoramica, 11',
+            'Via Comasche, 22',
+            'Via Mazzelli, 105',
+    ];
+
+    for ($i = 0; $i < 100; $i++) {
+        $randomAddresses = Arr::random($addresses);
+        $randomNames = Arr::random($names);
+        $randomLastnames = Arr::random($lastnames);
+        $newOrder = new Order();
+        $newOrder->user_id = 1;
+        $newOrder->name = $randomNames;
+        $newOrder->lastname = $randomLastnames;
+        $newOrder->email = $faker->email();
+        $newOrder->address = $randomAddresses;
+        $newOrder->phone = $faker->e164PhoneNumber();
+        $newOrder->created_at = $faker->dateTimeBetween('-9 months', 'now');
+        // $newOrder->quantity = rand(1, 10);
+        $newOrder->total = rand(10,100);
+
+        $newOrder->save();
+    }
 
         foreach ($orders as $order) {
             Order::create([

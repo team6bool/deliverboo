@@ -119,7 +119,7 @@ footer {
     position: relative;
     z-index: 5;
     .wave {
-        width: 100vw;
+        width: 100%;
         height: 65px;
         margin-bottom: -3px;
     }

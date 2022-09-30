@@ -237,4 +237,12 @@ input {
         font-size: 1.2rem;
     }
 }
+
+@media (min-width: 992px){
+    .col-lg-2-5 {
+        flex: 0 0 auto !important;
+        width: 20% !important;
+    }
+} 
+
 </style>
