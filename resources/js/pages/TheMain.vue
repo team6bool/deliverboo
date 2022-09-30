@@ -1,7 +1,7 @@
 <template>
     <main>
         <JumboTron />
-        <div class="search-section bg-primary">
+        <div class="search-section bg-primary" id="categories-id">
             <div class="container py-3">
                 <button class="btn btn-secondary large">
                 <a @click="resetCategories()">

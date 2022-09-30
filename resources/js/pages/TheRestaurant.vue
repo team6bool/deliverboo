@@ -25,7 +25,7 @@
 
             <div
                 id="modal-cart"
-                style="z-index: 5"
+                style="z-index: 7"
                 tabindex="-1"
                 class="modal-bg position-fixed top-0 bottom-0 end-0 start-0 d-none align-items-center justify-content-center px-3"
             >
@@ -52,7 +52,7 @@
                             </button>
 
                             <button
-                                class="btn btn-danger mt-3"
+                                class="btn btn-danger ms-1"
                                 @click="removeAllFromSession()"
                             >
                                 Svuota carrello
@@ -203,7 +203,7 @@
                                         {{ dish.name | truncate(25) }}...
                                     </p>
                                     <p class="ps-1 price text-nowrap">
-                                        € {{ dish.price }}
+                                        € {{ dish.price.toFixed(2) }}
                                     </p>
                                 </div>
                                 <div
@@ -228,7 +228,7 @@
                         </div>
                         <div
                             :id="'modal-' + dish.id"
-                            style="z-index: 5"
+                            style="z-index: 7"
                             class="modal-bg position-fixed top-0 bottom-0 end-0 start-0 d-none align-items-center justify-content-center px-3"
                         >
                             <div
@@ -252,7 +252,7 @@
                                     {{ dish.name }}
                                 </h3>
                                 <h3 class="text-yellow fw-bold">
-                                    € {{ dish.price }}
+                                    € {{ dish.price.toFixed(2) }}
                                 </h3>
                                 <p>{{ dish.description }}</p>
                                 <button
@@ -382,7 +382,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="text-end text-checkout-end fs-5">
-                                    € {{ partialTotal }}
+                                    € {{ partialTotal.toFixed(2) }}
                                 </div>
                             </div>
                             <div class="total-line"></div>
@@ -395,7 +395,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="text-end text-checkout-end fs-2">
-                                    € {{ total }}
+                                    € {{ total.toFixed(2) }}
                                 </div>
                             </div>
                         </div>
