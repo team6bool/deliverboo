@@ -20,7 +20,7 @@ export default {};
 
 <style scoped lang="scss">
 header{
-    z-index: 9;
+    z-index: 6;
     .logo{
         img{
             max-height: 35px;
