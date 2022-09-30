@@ -652,7 +652,7 @@ export default {
             this.CartSectionShow();
         },
         checkCart() {
-            if (this.cart.length > 0) {
+            if (this.cart && this.cart.length > 0) {
                 if (this.cart[0].user_id != this.restaurant.id) {
                     let modal = document.getElementById("modal-cart");
                     modal.classList.replace("d-none", "d-flex");
@@ -702,7 +702,7 @@ export default {
                     2
                 );
                 localStorage.setItem("total", JSON.stringify(this.total));
-                if (this.cart.length == 0) {
+                if (this.cart && this.cart.length == 0) {
                     localStorage.removeItem("cart");
                     localStorage.removeItem("partialTotal");
                     localStorage.removeItem("total");
@@ -737,7 +737,7 @@ export default {
                 2
             );
             localStorage.setItem("total", JSON.stringify(this.total));
-            if (this.cart.length == 0) {
+            if (this.cart && this.cart.length == 0) {
                 localStorage.removeItem("cart");
                 localStorage.removeItem("partialTotal");
                 localStorage.removeItem("total");
@@ -748,7 +748,7 @@ export default {
         },
         CartSectionShow() {
             const cart = document.getElementById("cart");
-            if (this.cart.length > 0) {
+            if (this.cart && this.cart.length > 0) {
                 cart.classList.replace("d-none", "d-block");
             } else {
                 cart.classList.replace("d-block", "d-none");
