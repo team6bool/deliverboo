@@ -143,13 +143,19 @@ export default {
             this.selectedCategories.splice(index, 1);
             const newCateg = [];
             this.selectedCategories.forEach(element => newCateg.push(element));
-            this.clearRestaurants();
-            // newCateg.forEach(elemento => this.addCategories(elemento));
-            for(let i = 0; i < newCateg.length; i++){
-                this.addCategories(newCateg[i]);
-                console.log(newCateg[i]);
+            const newRestaurants = this.restaurants;
+            this.restaurants = [];
+            for(let i = 0; i < newRestaurants.length; i++){
+                for(let j = 0; j < newCateg.length; j++){
+                    for(let y = 0; y < newRestaurants[i].categories.length; y++){
+                        if(newRestaurants[i].categories[y].name === newCateg[j]){
+                            if(!this.restaurants.includes(newRestaurants[i])){
+                                this.restaurants.push(newRestaurants[i]);
+                            }
+                        }
+                    }
+                }
             }
-            console.log(newCateg)
         },
 
         categoryImageChange() {
