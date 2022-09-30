@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendOrderMailToRestaurant;
+use App\Mail\SendOrderMailToUser;
 use App\Order;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -61,6 +64,11 @@ class OrderController extends Controller
         {
             echo "Unfortunately, an error occured.";
         }
+
+        //mail section
+        Mail::to($newOrder->email)->send(new SendOrderMailToUser($newOrder));
+        $restaurant = User::find($newOrder->user_id);
+        Mail::to($restaurant->email)->send(new SendOrderMailToRestaurant($newOrder));
     }
 
     /**
