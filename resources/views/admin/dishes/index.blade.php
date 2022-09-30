@@ -52,7 +52,7 @@
             <a href="{{ route('admin.dishes.create') }}" class="btn btn-primary">Aggiungi piatto</a>
           </div>
         </div>
-        
+
         <table class="table">
           <thead>
             <tr>
@@ -103,7 +103,7 @@
                   <div class="position-fixed top-0 bottom-0 start-0 end-0 w-100 d-none align-items-center justify-content-center" style="background: rgba(0,0,0,0.5)" id="{{ "modal-" . $dish->id}}">
                     <div class="bg-white rounded p-4">
                       <h4 class="pb-4">Sicuro di voler eliminare "{{$dish->name}}"?</h4>
-  
+
                       <button class="btn btn-secondary me-3" onclick="hideModal({{$dish->id}})">No, indietro</button>
                       <button class="btn btn-primary" type="submit" onclick="hideModal({{$dish->id}}),showSuccess({{$dish->id}})">Sì, elimina</button>
                       <form id="{{"form-delete-" . $dish->id }}" class="d-inline-block" action="{{ route('admin.dishes.destroy', ['dish' => $dish->slug]) }}"
