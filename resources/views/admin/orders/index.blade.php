@@ -59,10 +59,23 @@
             $totalAmount = 0;
             $dates = [];
             foreach ($orders as $order) {
-                    array_push($dates, $order->created_at->format('d/m/Y'));
+                    array_push($dates, $order->created_at->format('m'));
                     $totalAmount += $order->total;
             }
-            $datesArrays = [];
+            $datesArrays = [
+              "01" => 0,
+              "02" => 0,
+              "03" => 0,
+              "04" => 0,
+              "05" => 0,
+              "06" => 0,
+              "07" => 0,
+              "08" => 0,
+              "09" => 0,
+              "10" => 0,
+              "11" => 0,
+              "12" => 0
+            ];
             foreach ($dates as $date) {
                 if (array_key_exists($date, $datesArrays)) {
                     $datesArrays[$date] += 1;
@@ -87,12 +100,12 @@
 @endsection
 
 @section('bottomscript')
-const orders = {!! json_encode($ordersDates) !!};
+const orders = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"];
 {{-- console.log(orders.reverse()); --}}
 const quantities = {!! json_encode($ordersQuantity) !!};
 {{-- console.log(quantities) --}}
 
-const labels = orders.reverse();
+const labels = orders;
 
   const data = {
     labels: labels,
