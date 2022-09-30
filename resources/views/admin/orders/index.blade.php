@@ -22,20 +22,16 @@
                         <th scope="col">Data e ora</th>
                         <th scope="col">Cliente</th>
                         <th scope="col">Indirizzo</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Telefono</th>
                         <th scope="col">Totale</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($orders as $order)
+                    @foreach ($paginateOrders as $order)
                         <tr>
                             <td scope="row">{{ date_format($order->created_at, 'd/m/Y H:i') }}</td>
                             <td scope="row">{{ $order->name }} {{ $order->lastname }}</td>
                             <td scope="row">{{ $order->address }}</td>
-                            <td scope="row">{{ $order->email }}</td>
-                            <td scope="row">{{ $order->phone }}</td>
                             <td scope="row">€{{ number_format($order->total, 2, '.', '') }}</td>
 
                             <td>
@@ -47,7 +43,8 @@
                         </tr>
                     @endforeach
                 </tbody>
-            </table>
+              </table>
+              {{ $paginateOrders->links() }}
         </div>
 
         <h1 class="pt-5">Statistiche</h1>
