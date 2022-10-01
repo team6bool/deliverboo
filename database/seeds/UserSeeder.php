@@ -2,6 +2,7 @@
 
 use App\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -27,7 +28,7 @@ class UserSeeder extends Seeder
                 'phone' => '0771820003',
                 'website' => 'ristorantediecimaggioponza.it',
                 'p_iva' =>  '02967100591',
-                'img' => '/tartara-di-tonno.jpg',
+                'img' => 'public/images/restaurants/friselle-gourmet-ricette-chef.jpg.webp',
                 'delivery_price' =>  1, 50,
             ],
             [
@@ -39,7 +40,7 @@ class UserSeeder extends Seeder
                 'phone' => '0771809951',
                 'website' => 'www.santadomitilla.com/ristorante-il-melograno/',
                 'p_iva' =>  '02967100787',
-                'img' => '/gnocchetti-artigianali.jpg',
+                'img' => 'public/images/restaurants/MG_2038.jpg',
                 'delivery_price' =>  3, 00,
             ],
             [
@@ -53,7 +54,7 @@ class UserSeeder extends Seeder
                 'phone' => '077180128',
                 'website' => 'gamberiecapperi.it',
                 'p_iva' =>  '02959435471',
-                'img' => '/veg.jpg',
+                'img' => 'public/images/restaurants/paccheri-scampi-gamberi.jpg',
                 'delivery_price' =>  2, 50,
             ],
             [
@@ -65,7 +66,7 @@ class UserSeeder extends Seeder
                 'phone' => '0771809892',
                 'website' => 'http://www.ilporticcioloponza.it/',
                 'p_iva' =>  '01902770591',
-                'img' => '/il-porticciolo.jpg',
+                'img' => 'public/images/restaurants/news-crudo_pesce-e1340692289431-2.jpg',
                 'delivery_price' =>  1, 50,
             ],
             [
@@ -78,7 +79,7 @@ class UserSeeder extends Seeder
                 'phone' => '0771809821',
                 'website' => 'www.hotelchiaiadiluna.com/ristorante-chiaia-di-luna',
                 'p_iva' =>  '00930631007',
-                'img' => '/terrazza-a-picco-sul.jpg',
+                'img' => 'public/images/restaurants/113608985-4ac44325-9c14-41fd-8ab5-5b63b6f93321.jpg',
                 'delivery_price' =>  2, 00,
             ],
             [
@@ -90,7 +91,7 @@ class UserSeeder extends Seeder
                 'phone' => '3481628611',
                 'website' => '',
                 'p_iva' => '00840156007',
-                'img' => '/img-20170823-185336-largejpg.jpg',
+                'img' => 'public/images/restaurants/web-labaguetteria-01.jpg',
                 'delivery_price' => 1, 50,
             ],
             [
@@ -102,7 +103,7 @@ class UserSeeder extends Seeder
                 'phone' => '',
                 'website' => '',
                 'p_iva' => '00856035400',
-                'img' => '/se-a-ponza-vai-di-gildo.jpg',
+                'img' => 'public/images/restaurants/se-a-ponza-vai-di-gildo.jpg',
                 'delivery_price' => 1, 50,
             ],
             [
@@ -114,7 +115,7 @@ class UserSeeder extends Seeder
                 'phone' => '',
                 'website' => '',
                 'p_iva' => '00565051900',
-                'img' => '/img-20170823-185336-largejpg.jpg',
+                'img' => 'public/images/restaurants/img-20170823-185336-largejpg.jpg',
                 'delivery_price' => 2, 50,
             ],
         ];
