@@ -20,7 +20,7 @@ class OrderController extends Controller
     public function index()
     {
         $orders = auth()->user()->orders()->orderBy('created_at', 'desc')->get();
-        $paginateOrders = auth()->user()->orders()->orderBy('created_at', 'desc')->paginate(4);
+        $paginateOrders = auth()->user()->orders()->orderBy('created_at', 'desc')->paginate(15);
 
         return view("admin.orders.index", [
             "orders" => $orders,

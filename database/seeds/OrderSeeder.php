@@ -250,9 +250,9 @@ class OrderSeeder extends Seeder
         $addresses = [
             'Via Panoramica, 32',
             'Via della Sedia, 71',
-            'Via Ponzese 74',
+            'Via Ponzese, 74',
             'Via Panoramica, 44',
-            'Via Verace 11',
+            'Via Verace, 11',
             'Via Celestina, 120',
             'Via Panoramica, 55',
             'Via Basilico, 33',
@@ -265,12 +265,12 @@ class OrderSeeder extends Seeder
             'Via Mazzelli, 105',
     ];
 
-    for ($i = 0; $i < 100; $i++) {
+    for ($i = 0; $i < 1700; $i++) {
         $randomAddresses = Arr::random($addresses);
         $randomNames = Arr::random($names);
         $randomLastnames = Arr::random($lastnames);
         $newOrder = new Order();
-        $newOrder->user_id = 1;
+        $newOrder->user_id = 3;
         $newOrder->name = $randomNames;
         $newOrder->lastname = $randomLastnames;
         $newOrder->email = $faker->email();
@@ -278,7 +278,7 @@ class OrderSeeder extends Seeder
         $newOrder->phone = $faker->e164PhoneNumber();
         $newOrder->created_at = $faker->dateTimeBetween('-9 months', 'now');
         // $newOrder->quantity = rand(1, 10);
-        $newOrder->total = rand(10,100);
+        $newOrder->total = rand(10,250);
 
         $newOrder->save();
     }

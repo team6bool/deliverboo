@@ -1,8 +1,6 @@
 @extends('layouts.app')
 @section('tagscript')
 <script src="{{ asset('chart.js/chart.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
-<script src="{{ asset('chartjs-zoom/chartjs-zoom.js') }}"></script>
 @endsection
 
 
@@ -48,12 +46,9 @@
         </div>
 
         <h1 class="pt-5">Statistiche</h1>
-        <p>Consiglio: <em>scrolla con il mouse sul grafico!</em></p>
-
         <div class="p-3 bg-soft shadow rounded">
             <canvas id="myChart"></canvas>
         </div>
-        <button class="btn btn-secondary mt-3" onclick="myChart.resetZoom(mode = 'active')">Resetta zoom</button>
     </div>
     @php
             $totalAmount = 0;
