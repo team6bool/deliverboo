@@ -62,7 +62,7 @@ transform: scale(80%);
               </div>
               <div class="d-flex flex-column px-3">
                 <div class="fs-5 fw-semibold">{{ $dish->name }}</div>
-                <div class="fs-5 pt-2">{{ $dish->price }}€</div>
+                <div class="fs-5 pt-2">{{ number_format($dish->price, 2) }} €</div>
               </div>
             </div>
 

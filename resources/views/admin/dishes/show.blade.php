@@ -66,7 +66,7 @@
                             <dt>Nome piatto</dt>
                             <dd>{{ $dish->name }}</dd>
                             <dt>Prezzo</dt>
-                            <dd>{{ $dish->price }}</dd>
+                            <dd>{{ number_format($dish->price, 2) }} €</dd>
                             <dt>Descrizione</dt>
                             <dd>{{ $dish->description }}</dd>
                         </dl>
