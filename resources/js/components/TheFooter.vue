@@ -77,7 +77,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="copy py-4 fw-light text-sm-center">
+                    <div class="copy py-4 fw-light text-center">
                         <em data-aos="fade-up">Disegnato e sviluppato da:</em>
                         <ul
                             data-aos="fade-up"
