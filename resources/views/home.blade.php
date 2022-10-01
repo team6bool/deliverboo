@@ -14,7 +14,7 @@
                             </div>
                         @endif
 
-                        {{ __('You are logged in!') }}
+                        {{ __('Ti sei loggato!') }}
                     </div>
                     <div class="d-flex gap-4 pb-3 ps-3">
                         <button class="btn btn-warning" type="button"

@@ -3,12 +3,16 @@
         <JumboTron />
         <div class="search-section bg-primary" id="categories-id">
             <div class="container py-3">
-                <button data-aos="fade-down" data-aos-easing="ease-in-out" data-aos-delay="100" class="btn btn-secondary large">
-                    <a @click="resetCategories()">
-                        <i class="fa fa-solid fa-search pe-2"></i> Cerca per
-                        categoria</a
-                    >
-                </button>
+                <a
+                    data-aos="fade-down"
+                    data-aos-easing="ease-in-out"
+                    data-aos-delay="100"
+                    class="btn btn-secondary large"
+                    @click="resetCategories()"
+                >
+                    <i class="fa fa-solid fa-search pe-2"></i> Cerca per
+                    categoria
+                </a>
             </div>
         </div>
         <div class="decoration position-relative upper">

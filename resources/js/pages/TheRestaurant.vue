@@ -43,14 +43,14 @@
                         </div>
                         <div class="modal-body">
                             <p>
-                                Per accedere ad altro ristorante bisogna
+                                Per accedere ad un altro ristorante bisogna
                                 svuotare il carrello.
                             </p>
                         </div>
                         <div class="modal-footer">
                             <!-- button to close the modal -->
                             <button
-                                class="btn btn-secondary"
+                                class="btn btn-secondary mb-3"
                                 @click="closeModalCart()"
                             >
                                 Continua sulla pagina
@@ -270,7 +270,11 @@
                             >
                                 <div
                                     class="rounded overflow-hidden mx-5 mb-3"
-                                    style="max-width: 400px; max-height: 200px; aspect-ratio: 4/3;"
+                                    style="
+                                        max-width: 400px;
+                                        max-height: 200px;
+                                        aspect-ratio: 4/3;
+                                    "
                                 >
                                     <img
                                         :src="
@@ -279,7 +283,7 @@
                                         "
                                         :alt="dish.name"
                                         class="w-100 h-100"
-                                        style="object-fit: cover;"
+                                        style="object-fit: cover"
                                     />
                                 </div>
                                 <h3 class="text-orange fw-bold">
@@ -436,7 +440,12 @@
                             </div>
                             <div class="col-6">
                                 <div class="text-end text-checkout-end fs-5">
-                                    € {{ partialTotal.toFixed(2) }}
+                                    €
+                                    {{
+                                        partialTotal
+                                            ? partialTotal.toFixed(2)
+                                            : 0
+                                    }}
                                 </div>
                             </div>
                             <div class="total-line"></div>
@@ -449,7 +458,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="text-end text-checkout-end fs-2">
-                                    € {{ total.toFixed(2) }}
+                                    € {{ total ? total.toFixed(2) : 0 }}
                                 </div>
                             </div>
                         </div>
@@ -848,6 +857,9 @@ export default {
             const modal = document.getElementById("modal-form-field-error");
             modal.classList.replace("d-flex", "d-none");
         },
+        scrollToTop() {
+            window.scrollTo(0, 0);
+        },
         submitNewOrder() {
             let order_client = {
                 name: this.client.name,
@@ -928,6 +940,7 @@ export default {
         },
     },
     mounted() {
+        this.scrollToTop();
         this.getRestaurant();
         this.cart = JSON.parse(localStorage.getItem("cart"));
         this.partialTotal = JSON.parse(localStorage.getItem("partialTotal"));

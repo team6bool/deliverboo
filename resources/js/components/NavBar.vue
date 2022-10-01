@@ -8,7 +8,7 @@
                 />
             </router-link>
             <div class="nav-buttons">
-                <button class="btn-secondary"><a href="/login">Accedi</a></button>
+                <a class="btn btn-secondary" href="/login">Accedi</a>
             </div>
         </div>
     </header>

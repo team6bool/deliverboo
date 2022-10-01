@@ -88,7 +88,7 @@ transform: scale(80%);
                 </svg>
               </button>
 
-              <div class="position-fixed top-0 bottom-0 start-0 end-0 w-100 d-none align-items-center justify-content-center" style="background: rgba(0,0,0,0.5)" id="{{ "modal-" . $dish->id}}">
+              <div class="position-fixed top-0 bottom-0 start-0 end-0 w-100 d-none align-items-center justify-content-center" style="background: rgba(0,0,0,0.5); z-index: 10;" id="{{ "modal-" . $dish->id}}">
                 <div class="bg-white rounded p-4">
                   <h4 class="pb-4">Sicuro di voler eliminare "{{$dish->name}}"?</h4>
 
@@ -103,7 +103,7 @@ transform: scale(80%);
             </div>
 
 
-            <div class="position-fixed top-0 bottom-0 start-0 end-0 w-100 d-none align-items-center justify-content-center" style="background: rgba(0,0,0,0.5)" id="success-modal">
+            <div class="position-fixed top-0 bottom-0 start-0 end-0 w-100 d-none align-items-center justify-content-center" style="background: rgba(0,0,0,0.5); z-index: 11;" id="success-modal">
               <div class="bg-white rounded p-4">
                 <h4>Prodotto eliminato correttamente! <i class="fa-solid fa-check text-success position-relative ms-3 fs-4"></i></h4>
               </div>
