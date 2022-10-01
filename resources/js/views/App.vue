@@ -59,6 +59,15 @@ export default {
     }
 }
 
+.hover-scale {
+    transition: transform 0.2s ease-in-out;
+
+    &:hover {
+        transform: scale(1.30);
+    }
+}
+
+
 .bg-primary {
     background-color: var(--yellow) !important;
 }
@@ -243,6 +252,6 @@ input {
         flex: 0 0 auto !important;
         width: 20% !important;
     }
-} 
+}
 
 </style>

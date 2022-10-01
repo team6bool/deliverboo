@@ -67,7 +67,10 @@
                                 />
                             </div>
 
-                            <ul data-aos="fade-up" class="list-unstyled fw-light">
+                            <ul
+                                data-aos="fade-up"
+                                class="list-unstyled fw-light"
+                            >
                                 <li><a href="#">TERMINI E CONDIZIONI</a></li>
                                 <li><a href="#">PRIVACY POLICY</a></li>
                                 <li><a href="#">COOKIES POLICY</a></li>
@@ -76,11 +79,104 @@
                     </div>
                     <div class="copy py-4 fw-light text-sm-center">
                         <em data-aos="fade-up">Disegnato e sviluppato da:</em>
-                        <ul data-aos="fade-up" class="list-unstyled pt-3 fw-semibold">
-                            <li><a href="#">Arturo Arnò</a></li>
-                            <li><a href="#">Luca Dercole</a></li>
-                            <li><a href="#">Paolo Di Giovanni</a></li>
-                            <li><a href="#">Alessio Mazzella</a></li>
+                        <ul
+                            data-aos="fade-up"
+                            class="list-unstyled pt-3 fw-semibold"
+                        >
+                            <li>
+                                <div class="d-flex">
+                                    <div class="col text-end">
+                                        <a
+                                            class="no-decoration"
+                                            href="https://www.linkedin.com/in/fonzhousefonzie/"
+                                            ><i
+                                                class="fa-brands fa-linkedin hover-scale"
+                                            ></i
+                                        ></a>
+                                        <a
+                                            class="no-decoration"
+                                            href="https://github.com/fonzhousefonzie"
+                                            ><i
+                                                class="fa-brands fa-github ms-3 hover-scale"
+                                            ></i
+                                        ></a>
+                                    </div>
+                                    <div class="col-6 ms-4 text-start">
+                                        <a href="https://fonzhousefonzie.com/"
+                                            >Arturo Arnò</a
+                                        >
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="d-flex">
+                                    <div class="col text-end">
+                                        <a
+                                            class="no-decoration"
+                                            href="https://www.linkedin.com/in/luca-dercole-34282424b/"
+                                            ><i
+                                                class="fa-brands fa-linkedin hover-scale"
+                                            ></i
+                                        ></a>
+                                        <a
+                                            class="no-decoration"
+                                            href="https://github.com/Spud97"
+                                            ><i
+                                                class="fa-brands fa-github ms-3 hover-scale"
+                                            ></i
+                                        ></a>
+                                    </div>
+                                    <div class="col-6 ms-4 text-start">
+                                        <a href="http://">Luca Dercole</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="d-flex">
+                                    <div class="col text-end">
+                                        <a
+                                            class="no-decoration"
+                                            href="https://www.linkedin.com/in/paolo-di-giovanni-4a4409250/"
+                                            ><i
+                                                class="fa-brands fa-linkedin hover-scale"
+                                            ></i
+                                        ></a>
+                                        <a
+                                            class="no-decoration"
+                                            href="https://github.com/SeanBitter"
+                                            ><i
+                                                class="fa-brands fa-github ms-3 hover-scale"
+                                            ></i
+                                        ></a>
+                                    </div>
+                                    <div class="col-6 ms-4 text-start">
+                                        <a href="http://">Paolo Di Giovanni</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="d-flex">
+                                    <div class="col text-end">
+                                        <a
+                                            class="no-decoration"
+                                            href="https://www.linkedin.com/in/alessio-mazzella/"
+                                            ><i
+                                                class="fa-brands fa-linkedin hover-scale"
+                                            ></i
+                                        ></a>
+                                        <a
+                                            class="no-decoration"
+                                            href="https://github.com/Al-E-00"
+                                            ><i
+                                                class="fa-brands fa-github ms-3 hover-scale"
+                                            ></i
+                                        ></a>
+                                    </div>
+                                    <div class="col-6 ms-4 text-start">
+                                        <a href="http://">Alessio Mazzella</a>
+                                    </div>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </div>
