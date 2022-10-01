@@ -476,10 +476,10 @@
                             <!-- checkout form to save client information  -->
                             <form class="mt-3">
                                 <div class="row">
-                                    <div class="col-12">
+                                    <div class="col-12 col-md-6 text-start">
                                         <div class="form-group my-3">
                                             <label
-                                                class="fw-semibold text-orange fs-5 pb-1"
+                                                class="fw-semibold text-orange fs-5 pb-1 ps-1"
                                                 for="name"
                                                 >Nome*</label
                                             >
@@ -494,10 +494,10 @@
                                             />
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-12 col-md-6 text-start">
                                         <div class="form-group my-3">
                                             <label
-                                                class="fw-semibold text-orange fs-5 pb-1"
+                                                class="fw-semibold text-orange fs-5 pb-1 ps-1"
                                                 for="surname"
                                                 >Cognome*</label
                                             >
@@ -512,10 +512,10 @@
                                             />
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-12 col-md-6 text-start">
                                         <div class="form-group my-3">
                                             <label
-                                                class="fw-semibold text-orange fs-5 pb-1"
+                                                class="fw-semibold text-orange fs-5 pb-1 ps-1"
                                                 for="email"
                                                 >Email*</label
                                             >
@@ -530,10 +530,10 @@
                                             />
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-12 col-md-6 text-start">
                                         <div class="form-group my-3">
                                             <label
-                                                class="fw-semibold text-orange fs-5 pb-1"
+                                                class="fw-semibold text-orange fs-5 pb-1 ps-1"
                                                 for="phone"
                                                 >Telefono*</label
                                             >
@@ -548,10 +548,10 @@
                                             />
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-12 col-md-6 text-start">
                                         <div class="form-group my-3">
                                             <label
-                                                class="fw-semibold text-orange fs-5 pb-1"
+                                                class="fw-semibold text-orange fs-5 pb-1 ps-1"
                                                 for="address"
                                                 >Indirizzo*</label
                                             >
@@ -566,7 +566,7 @@
                                             />
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-12 col-md-6 text-start">
                                         <div class="form-group my-3">
                                             <!-- braintree -->
                                             <v-braintree
