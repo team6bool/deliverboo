@@ -243,7 +243,7 @@
                                     class="d-flex justify-content-end px-2 flex-row"
                                 >
                                     <a
-                                        href="#"
+                                        href="javascript:void(0)"
                                         class="btn btn-secondary show-btn text-small me-3"
                                         @click="showDetails(dish.id)"
                                     >
@@ -270,7 +270,7 @@
                             >
                                 <div
                                     class="rounded overflow-hidden mx-5 mb-3"
-                                    style="max-width: 400px"
+                                    style="max-width: 400px; max-height: 200px; aspect-ratio: 4/3;"
                                 >
                                     <img
                                         :src="
@@ -278,7 +278,8 @@
                                             dish.img
                                         "
                                         :alt="dish.name"
-                                        class="w-100"
+                                        class="w-100 h-100"
+                                        style="object-fit: cover;"
                                     />
                                 </div>
                                 <h3 class="text-orange fw-bold">
