@@ -71,15 +71,13 @@
                         </span>
                     </li>
                     <div
-                        data-aos="fade-up"
-                        data-aos-easing="ease-in-out"
-                        data-aos-delay="900"
-                        class="link"
+                        id="deleteAllBtn"
+                        class="link d-none"
                         @click="clearRestaurants()"
                     >
                         <a
                             href="javascript:void(0)"
-                            class="text-decoration-none"
+                            class="text-decoration-none text-orange"
                             >Cancella tutto</a
                         >
                     </div>
@@ -198,6 +196,10 @@ export default {
                     }
                 }
             });
+            const deleteAllBtn = document.getElementById("deleteAllBtn");
+            if(this.selectedCategories.length >= 1){
+                deleteAllBtn.classList.replace("d-none", "d-block");
+            }
         },
 
         fetchCategories() {
@@ -212,6 +214,10 @@ export default {
             this.selectedCategory = value;
             this.fetchRestaurants();
             this.arrCategories();
+            const deleteAllBtn = document.getElementById("deleteAllBtn");
+            if(this.selectedCategories.length >= 1){
+                deleteAllBtn.classList.replace("d-none", "d-block");
+            }
         },
 
         arrCategories() {
@@ -222,6 +228,12 @@ export default {
         clearRestaurants() {
             this.restaurants = [];
             this.selectedCategories = [];
+            const deleteAllBtn = document.getElementById("deleteAllBtn");
+            if(this.selectedCategories.length >= 1){
+                deleteAllBtn.classList.replace("d-none", "d-block");
+            } else {
+                deleteAllBtn.classList.replace("d-block", "d-none");
+            }
         },
         clearCategory(category) {
             const index = this.selectedCategories.indexOf(category);
@@ -248,6 +260,12 @@ export default {
                         }
                     }
                 }
+            }
+            const deleteAllBtn = document.getElementById("deleteAllBtn");
+            if(this.selectedCategories.length >= 1){
+                deleteAllBtn.classList.replace("d-none", "d-block");
+            } else {
+                deleteAllBtn.classList.replace("d-block", "d-none");
             }
         },
 
